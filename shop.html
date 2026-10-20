@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Каталог оригінальних гаджетів і аксесуарів із гарантією до 12 місяців. Доставка Новою Поштою та самовивіз у Калинівці.">
+    <meta name="theme-color" content="#0a1020">
+    <title>Магазин оригінальних гаджетів — MobiKOR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+</head>
+
+<body data-page="shop">
+    <header>
+        <a href="index.html" aria-label="MobiKOR — на головну">
+            <img id="logo" src="assets/MobiKOR%20Logo%20Horizontal.png" alt="MobiKOR">
+        </a>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="repair.html">Ремонт</a></li>
+                <li><a href="shop.html" aria-current="page">Магазин</a></li>
+                <li><a href="index.html#about">Про нас</a></li>
+                <li><a href="#footer-contacts">Контакти</a></li>
+            </ul>
+        </nav>
+        <a class="header-btn" href="account.html"><i class="bi bi-person"></i> Увійти</a>
+        <button type="button" id="theme-toggle" aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
+    </header>
+
+    <main class="page" id="main">
+        <nav class="breadcrumbs" aria-label="Хлібні крихти">
+            <ol>
+                <li><a href="index.html">Головна</a></li>
+                <li aria-current="page">Магазин</li>
+            </ol>
+        </nav>
+        <header class="page-head">
+            <h1>Каталог оригінальних гаджетів та аксесуарів</h1>
+            <p>Великий каталог оригінальної техніки, чохлів та зарядних пристроїв із гарантією до 12 місяців. Швидка доставка по Україні та самовивіз. Обирайте!</p>
+        </header>
+
+        <section aria-label="Пошук і фільтри">
+            <form class="card filters" id="catalog-filters" role="search" aria-label="Пошук у каталозі">
+                <div>
+                    <label for="q">Пошук у каталозі</label>
+                    <div class="filters__search">
+                        <input id="q" name="q" type="search" placeholder="Назва товару, модель або артикул" autocomplete="off">
+                        <button class="btn btn-secondary" type="submit">Знайти товари</button>
+                    </div>
+                </div>
+                <details class="filters__more" open>
+                    <summary>Фільтри</summary>
+                    <div class="filters__body">
+                        <div class="filters__row">
+                            <label class="visually-hidden" for="brand">Бренд</label>
+                            <select id="brand" name="brand">
+                                <option value="">Бренд: усі</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Baseus">Baseus</option>
+                                <option value="Sony">Sony</option>
+                            </select>
+                            <fieldset class="chips">
+                                <legend class="visually-hidden">Категорія</legend>
+                                <label class="chip"><input type="radio" name="category" value="" checked><span>Усі категорії</span></label>
+                                <label class="chip"><input type="radio" name="category" value="Зарядні пристрої"><span>Зарядні пристрої</span></label>
+                                <label class="chip"><input type="radio" name="category" value="Чохли"><span>Чохли</span></label>
+                                <label class="chip"><input type="radio" name="category" value="Кабелі"><span>Кабелі</span></label>
+                                <label class="chip"><input type="radio" name="category" value="Аудіо"><span>Аудіо</span></label>
+                            </fieldset>
+                        </div>
+                        <div class="filters__row">
+                            <div class="range">
+                                <label for="price">Ціна до: <output id="price-out" for="price">7 000 ₴</output></label>
+                                <input id="price" name="price" type="range" min="0" max="7000" step="100" value="7000">
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" name="stock" role="switch">
+                                <span class="switch__track" aria-hidden="true"></span>
+                                Тільки в наявності
+                            </label>
+                            <button class="link-btn" type="reset">Скинути фільтри</button>
+                        </div>
+                    </div>
+                </details>
+            </form>
+        </section>
+
+        <section id="catalog" aria-labelledby="catalog-title">
+            <div class="results-head">
+                <div>
+                    <h2 id="catalog-title">Гаджети та аксесуари з гарантією</h2>
+                    <p class="results-head__note" data-results-count>8 товарів · Демонстраційний асортимент і ціни. Не є підтвердженням реальної наявності.</p>
+                </div>
+                <div class="sort">
+                    <label for="sort">Сортування</label>
+                    <select id="sort" name="sort" form="catalog-filters">
+                        <option value="pop">За популярністю</option>
+                        <option value="price-asc">Від дешевих до дорогих</option>
+                        <option value="price-desc">Від дорогих до дешевих</option>
+                        <option value="name">За назвою</option>
+                    </select>
+                </div>
+            </div>
+            <ul class="product-grid" data-product-grid>
+                <li data-name="silicone case для iphone 14 pro midnight · силікон case-14pro" data-brand="Apple" data-category="Чохли" data-price="1490" data-stock="1" data-pop="1">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-phone-flip" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3><a href="product.html">Silicone Case для iPhone 14 Pro</a></h3>
+                        <p class="product-card__meta">Midnight · силікон</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">1 490 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="case-14pro" data-name="Silicone Case для iPhone 14 Pro" data-price="1490" data-icon="bi-phone-flip">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="зарядний пристрій usb-c 20 вт apple · power delivery · usb-c charger-20w" data-brand="Apple" data-category="Зарядні пристрої" data-price="690" data-stock="1" data-pop="2">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-lightning-charge" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3>Зарядний пристрій USB-C 20 Вт</h3>
+                        <p class="product-card__meta">Apple · Power Delivery · USB-C</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">690 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="charger-20w" data-name="Зарядний пристрій USB-C 20 Вт" data-price="690" data-icon="bi-lightning-charge">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="кабель usb-c / lightning apple · 1 м · білий cable-usbc-lightning" data-brand="Apple" data-category="Кабелі" data-price="490" data-stock="1" data-pop="3">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-usb-c" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3>Кабель USB-C / Lightning</h3>
+                        <p class="product-card__meta">Apple · 1 м · білий</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">490 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="cable-usbc-lightning" data-name="Кабель USB-C / Lightning" data-price="490" data-icon="bi-usb-c">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="airpods 3 з футляром apple · бездротові · lightning airpods-3" data-brand="Apple" data-category="Аудіо" data-price="6490" data-stock="1" data-pop="4">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-earbuds" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3>AirPods 3 з футляром</h3>
+                        <p class="product-card__meta">Apple · бездротові · Lightning</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">6 490 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="airpods-3" data-name="AirPods 3 з футляром" data-price="6490" data-icon="bi-earbuds">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="power bank 10 000 ма·год baseus · usb-c · 20 вт powerbank-10k" data-brand="Baseus" data-category="Зарядні пристрої" data-price="1890" data-stock="1" data-pop="5">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-battery-charging" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3>Power Bank 10 000 мА·год</h3>
+                        <p class="product-card__meta">Baseus · USB-C · 20 Вт</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">1 890 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="powerbank-10k" data-name="Power Bank 10 000 мА·год" data-price="1890" data-icon="bi-battery-charging">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="clear case для iphone 14 pro apple · прозорий · magsafe case-clear-14pro" data-brand="Apple" data-category="Чохли" data-price="990" data-stock="1" data-pop="6">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-phone" aria-hidden="true"></i>
+                            <span class="badge">В наявності</span>
+                        </div>
+                        <h3>Clear Case для iPhone 14 Pro</h3>
+                        <p class="product-card__meta">Apple · прозорий · MagSafe</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">990 ₴</p>
+                        <button class="btn btn-primary" type="button" data-add data-id="case-clear-14pro" data-name="Clear Case для iPhone 14 Pro" data-price="990" data-icon="bi-phone">До кошика</button>
+                    </article>
+                </li>
+                <li data-name="бездротові навушники sony · bluetooth · чорні headphones-sony" data-brand="Sony" data-category="Аудіо" data-price="2990" data-stock="0" data-pop="7">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-headphones" aria-hidden="true"></i>
+                            <span class="badge badge--out">Немає в наявності</span>
+                        </div>
+                        <h3>Бездротові навушники</h3>
+                        <p class="product-card__meta">Sony · Bluetooth · чорні</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">2 990 ₴</p>
+                        <button class="btn btn-secondary" type="button" data-notify>Повідомити про наявність</button>
+                    </article>
+                </li>
+                <li data-name="адаптер usb-c 35 вт apple · два порти usb-c adapter-35w" data-brand="Apple" data-category="Зарядні пристрої" data-price="1690" data-stock="0" data-pop="8">
+                    <article class="product-card">
+                        <div class="product-card__media">
+                            <i class="bi bi-plug" aria-hidden="true"></i>
+                            <span class="badge badge--out">Немає в наявності</span>
+                        </div>
+                        <h3>Адаптер USB-C 35 Вт</h3>
+                        <p class="product-card__meta">Apple · два порти USB-C</p>
+                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price">1 690 ₴</p>
+                        <button class="btn btn-secondary" type="button" data-notify>Повідомити про наявність</button>
+                    </article>
+                </li>
+            </ul>
+            <p class="empty" data-empty hidden>Нічого не знайдено. Спробуйте змінити пошуковий запит або скинути фільтри.</p>
+            <p class="results-note" data-results-note>Показано 8 із 8 демотоварів</p>
+        </section>
+
+        <section class="split" aria-label="Умови замовлення та кошик">
+            <div>
+                <p class="eyebrow">Магазин гаджетів MobiKOR</p>
+                <h2>Зручне замовлення. Зрозумілі умови.</h2>
+                <ul class="benefit-list">
+                    <li>
+                        <i class="bi bi-truck" aria-hidden="true"></i>
+                        <h3>Доставка по Україні</h3>
+                        <p>Нова Пошта за тарифами перевізника. Дані відправлення — в особистому кабінеті.</p>
+                    </li>
+                    <li>
+                        <i class="bi bi-geo-alt" aria-hidden="true"></i>
+                        <h3>Самовивіз у Калинівці</h3>
+                        <p>Вул. Незалежності 49, автовокзал. Узгодьте готовність замовлення з менеджером.</p>
+                    </li>
+                    <li>
+                        <i class="bi bi-shield-check" aria-hidden="true"></i>
+                        <h3>Гарантія до 12 місяців</h3>
+                        <p>Умови для конкретного товару вказані в картці. Збережіть документ про покупку.</p>
+                    </li>
+                </ul>
+            </div>
+            <aside class="card cart" id="cart" aria-labelledby="cart-title">
+                <h2 id="cart-title">Кошик · <span data-cart-count>0 товарів</span></h2>
+                <p class="cart__hint">Попередній перегляд відкритого кошика</p>
+                <ul class="cart__items" data-cart-list></ul>
+                <p class="cart__empty" data-cart-empty hidden>Кошик порожній. Додайте товари з каталогу.</p>
+                <div data-cart-summary>
+                    <p class="cart__sum" data-cart-sum></p>
+                    <p class="cart__total"><span>Разом</span> <strong data-cart-total>0 ₴</strong></p>
+                    <p class="cart__note">Доставка не включена. Остаточні умови — під час оформлення.</p>
+                    <button class="btn btn-primary btn-block" type="button" data-checkout>Перейти до оформлення</button>
+                    <p class="cart__note" role="status" data-checkout-note hidden>Це демо-версія: оформлення замовлення ще не підключене.</p>
+                    <a class="btn btn-ghost btn-block" href="#catalog">Продовжити покупки</a>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <footer>
+        <section aria-labelledby="footer-brand">
+            <h2 id="footer-brand">MobiKOR</h2>
+            <p>Сервісний центр та магазин оригінальної техніки</p>
+            <address>Калинівка, Вінницька обл., вул. Незалежності, 49, автовокзал</address>
+            <a
+                href="https://www.google.com/maps/place/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD+MobiKOR+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D1%82%D0%B0+%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6+%D0%BC%D0%BE%D0%B1%D1%96%D0%BB%D1%8C%D0%BD%D0%B8%D1%85+%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D1%96%D0%B2+%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD%D1%96%D0%B2%D0%BA%D0%B0+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D0%BA%D0%BE%D0%BC%D0%BF%D1%8E%D1%82%D0%B5%D1%80%D1%96%D0%B2/@49.4517449,28.5219571,17z/data=!3m1!4b1!4m6!3m5!1s0x472d1562dd1456b5:0x5cbb80b00bb0fbf2!8m2!3d49.4517449!4d28.524532!16s%2Fg%2F11gjxcx8g0?hl=uk-UA&entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D">Переглянути
+                на Google Maps <i class="bi bi-arrow-up-right"></i></a>
+        </section>
+        <nav aria-labelledby="footer-navigation">
+            <h2 id="footer-navigation">Навігація</h2>
+            <ul>
+                <li><a href="repair.html">Послуги ремонту</a></li>
+                <li><a href="index.html#contacts">Політика конфіденційності</a></li>
+                <li><a href="shop.html">Магазин техніки</a></li>
+                <li><a href="tracker.html">Відстежити квитанцію</a></li>
+            </ul>
+        </nav>
+        <section aria-labelledby="footer-contacts">
+            <h2 id="footer-contacts">Контакти</h2>
+            <p><a href="tel:+380983964147">Телефон: +38 (098) 396-41-47</a></p>
+            <ul>
+                <li><a href="https://www.instagram.com/mobikor.ua?cplk=ODJndXF0dzQ3ZXZu" target="_blank"
+                        rel="noopener noreferrer">Instagram <i class="bi bi-arrow-up-right"></i></a></li>
+                <li><a href="https://www.tiktok.com/@mobikor?_r=1&amp;_t=ZS-9AdCAi2yNQg" target="_blank"
+                        rel="noopener noreferrer">TikTok <i class="bi bi-arrow-up-right"></i></a></li>
+                <li><a href="https://www.facebook.com/share/1DXXqAekvH/" target="_blank"
+                        rel="noopener noreferrer">Facebook <i class="bi bi-arrow-up-right"></i></a></li>
+            </ul>
+        </section>
+        <section aria-labelledby="footer-working-hours">
+            <h2 id="footer-working-hours">Графік роботи</h2>
+            <ul>
+                <li>Пн–Пт: 09:00–18:00</li>
+                <li>Сб: 09:00–18:00</li>
+                <li>Нд: вихідний</li>
+            </ul>
+        </section>
+        <small>MobiKOR © All rights reserved.</small>
+    </footer>
+
+    <script src="script.js" defer></script>
+    <script src="pages.js" defer></script>
+</body>
+
+</html>

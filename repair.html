@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk" data-theme="dark">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Безкоштовна діагностика та ремонт смартфонів, ноутбуків і планшетів. Калькулятор вартості, гарантія 3–12 місяців, ремонт Новою Поштою.">
+    <meta name="theme-color" content="#0a1020">
+    <title>Сервісний центр з онлайн-розрахунком — MobiKOR</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+</head>
+ 
+<body data-page="repair">
+    <header>
+        <a href="index.html" aria-label="MobiKOR — на головну">
+            <img id="logo" src="assets/MobiKOR%20Logo%20Horizontal.png" alt="MobiKOR">
+        </a>
+        <nav aria-label="Головна навігація">
+            <ul>
+                <li><a href="index.html">Головна</a></li>
+                <li><a href="repair.html" aria-current="page">Ремонт</a></li>
+                <li><a href="shop.html">Магазин</a></li>
+                <li><a href="index.html#about">Про нас</a></li>
+                <li><a href="#footer-contacts">Контакти</a></li>
+            </ul>
+        </nav>
+        <a class="header-btn" href="account.html"><i class="bi bi-person"></i> Увійти</a>
+        <button type="button" id="theme-toggle" aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
+    </header>
+ 
+    <main class="page" id="main">
+        <nav class="breadcrumbs" aria-label="Хлібні крихти">
+            <ol>
+                <li><a href="index.html">Головна</a></li>
+                <li aria-current="page">Сервісний центр</li>
+            </ol>
+        </nav>
+        <header class="page-head">
+            <h1>Сервісний центр з онлайн-розрахунком та гарантією</h1>
+            <p>Безкоштовна діагностика та терміновий ремонт смартфонів, ноутбуків і планшетів. Розрахуйте орієнтовну вартість у калькуляторі та запишіться онлайн!</p>
+        </header>
+ 
+        <section aria-label="Переваги сервісу">
+            <ul class="chips-row">
+                <li><i class="bi bi-upc-scan" aria-hidden="true"></i> Безкоштовна діагностика</li>
+                <li><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 3–12 місяців</li>
+                <li><i class="bi bi-truck" aria-hidden="true"></i> Ремонт Новою Поштою</li>
+            </ul>
+        </section>
+ 
+        <section class="card calc" id="repair-calc" aria-labelledby="calc-title">
+            <h2 id="calc-title">Розрахуйте вартість ремонту</h2>
+            <p class="calc__intro">Оберіть пристрій та послугу — дізнайтеся ціну до візиту.</p>
+            <p class="calc__flow">Категорія → Бренд → Модель → Тип пошкодження</p>
+            <form class="calc__fields" aria-label="Калькулятор вартості ремонту">
+                <div>
+                    <label for="calc-category">Категорія</label>
+                    <select id="calc-category" name="category">
+                        <option value="Смартфон">Смартфон</option>
+                        <option value="Ноутбук">Ноутбук</option>
+                        <option value="Планшет">Планшет</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="calc-brand">Бренд</label>
+                    <select id="calc-brand" name="brand"><option value="Apple">Apple</option></select>
+                </div>
+                <div>
+                    <label for="calc-model">Модель</label>
+                    <select id="calc-model" name="model"><option value="iPhone 14 Pro">iPhone 14 Pro</option></select>
+                </div>
+                <div>
+                    <label for="calc-damage">Тип пошкодження</label>
+                    <select id="calc-damage" name="damage"><option value="Заміна екрана">Заміна екрана</option></select>
+                </div>
+            </form>
+            <div class="calc__result" aria-live="polite">
+                <div>
+                    <h3 data-calc-title>Заміна екрана · iPhone 14 Pro</h3>
+                    <p class="calc__note">Попередня ціна за вибрану послугу. Без прихованих робіт.</p>
+                    <a href="index.html#contacts">Не знайшли свою модель?</a>
+                </div>
+                <div>
+                    <p class="calc__price" data-calc-price>1 800 ₴</p>
+                    <p class="calc__time"><i class="bi bi-clock" aria-hidden="true"></i> <span data-calc-time>45 хв</span></p>
+                </div>
+                <div>
+                    <a class="btn btn-primary btn-block" href="index.html#contacts">Записатися на ремонт</a>
+                    <p class="calc__note" style="margin-top: 10px;">Остаточний кошторис погодимо після безкоштовної діагностики.</p>
+                </div>
+            </div>
+            <p class="calc__disclaimer">Ціна в онлайн калькуляторі — попередня. Майстер перевірить стан пристрою та доступність деталей. Ремонт починається лише після вашого погодження фінальної ціни й терміну.</p>
+        </section>
+ 
+        <section class="service" aria-label="Як працює сервіс">
+            <div>
+                <h2>Сервісний центр, що ближче, ніж здається</h2>
+                <p class="service__text">Ремонт телефонів, ноутбуків і планшетів у Калинівці або з будь-якого міста України — через Нову Пошту.</p>
+                <figure>
+                    <img src="#assets/photo4.jpg" alt="Майстер MobiKOR ремонтує пристрій у майстерні" loading="lazy">
+                </figure>
+            </div>
+            <div>
+                <h2>Як надіслати пристрій Новою Поштою</h2>
+                <ol class="steps-list">
+                    <li>
+                        <h3>Узгодьте відправлення</h3>
+                        <p>Напишіть у Telegram або зателефонуйте <a href="tel:+380983964147">098 396 41 47</a>. Отримайте дані одержувача й рекомендації щодо пакування.</p>
+                    </li>
+                    <li>
+                        <h3>Ми безкоштовно діагностуємо</h3>
+                        <p>Надішліть добре запакований пристрій. Після отримання надамо квитанцію та кошторис в онлайн-трекері.</p>
+                    </li>
+                    <li>
+                        <h3>Погодьте ремонт і отримайте гаджет</h3>
+                        <p>Підтвердьте ціну онлайн. Після перевірки повернемо пристрій Новою Поштою; доставку оплачує клієнт за тарифами перевізника.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+ 
+        <section aria-labelledby="stats-title">
+            <h2 class="visually-hidden" id="stats-title">Переваги сервісу в цифрах</h2>
+            <ul class="stats">
+                <li class="card">
+                    <p class="stat__value">0 ₴</p>
+                    <h3>Діагностика</h3>
+                    <p class="stat__text">Визначаємо несправність безкоштовно. Ви вирішуєте, чи продовжувати ремонт.</p>
+                </li>
+                <li class="card">
+                    <p class="stat__value">3–12 міс.</p>
+                    <h3>Гарантія на ремонт</h3>
+                    <p class="stat__text">Термін залежить від послуги та встановлених деталей. Умови фіксуємо у квитанції.</p>
+                </li>
+                <li class="card">
+                    <p class="stat__value">100%</p>
+                    <h3>Контроль кошторису</h3>
+                    <p class="stat__text">Жодних додаткових робіт без погодження. Фото та статус ремонту — онлайн.</p>
+                </li>
+            </ul>
+        </section>
+ 
+        <section aria-labelledby="faq-title">
+            <h2 id="faq-title">Питання перед ремонтом</h2>
+            <div class="faq">
+                <details open>
+                    <summary>Як працює ремонт з доставкою?</summary>
+                    <p class="faq__answer">Узгодьте відправлення з сервісом, запакуйте пристрій і надішліть Новою Поштою. Після діагностики отримайте кошторис та погодьте його онлайн. Відремонтований гаджет повернемо після перевірки; доставка — за тарифами перевізника.</p>
+                </details>
+                <details>
+                    <summary>Чи справді діагностика безкоштовна?</summary>
+                    <p class="faq__answer">Так. Ми визначаємо несправність безкоштовно, а ви вирішуєте, чи продовжувати ремонт. Оплата — лише за погоджені роботи та деталі.</p>
+                </details>
+                <details>
+                    <summary>Чи зміниться ціна після розрахунку?</summary>
+                    <p class="faq__answer">Ціна в калькуляторі попередня. Після діагностики майстер надішле остаточний кошторис, і ремонт почнеться лише після вашого погодження ціни й терміну.</p>
+                </details>
+                <details>
+                    <summary>Яка гарантія на послуги та деталі?</summary>
+                    <p class="faq__answer">Гарантія 3–12 місяців залежно від послуги та встановлених деталей. Конкретний термін фіксуємо у квитанції.</p>
+                </details>
+            </div>
+        </section>
+ 
+        <section class="card cta-banner" aria-labelledby="cta-title">
+            <div>
+                <h2 id="cta-title">Пристрій уже в сервісі?</h2>
+                <p class="cta-banner__text">Перевіряйте статус ремонту за квитанцією, дивіться фото та погоджуйте кошторис без дзвінків.</p>
+            </div>
+            <a class="btn btn-outline" href="tracker.html">Відстежити квитанцію</a>
+        </section>
+    </main>
+ 
+    <footer>
+        <section aria-labelledby="footer-brand">
+            <h2 id="footer-brand">MobiKOR</h2>
+            <p>Сервісний центр та магазин оригінальної техніки</p>
+            <address>Калинівка, Вінницька обл., вул. Незалежності, 49, автовокзал</address>
+            <a
+                href="https://www.google.com/maps/place/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD+MobiKOR+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D1%82%D0%B0+%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6+%D0%BC%D0%BE%D0%B1%D1%96%D0%BB%D1%8C%D0%BD%D0%B8%D1%85+%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D1%96%D0%B2+%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD%D1%96%D0%B2%D0%BA%D0%B0+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D0%BA%D0%BE%D0%BC%D0%BF%D1%8E%D1%82%D0%B5%D1%80%D1%96%D0%B2/@49.4517449,28.5219571,17z/data=!3m1!4b1!4m6!3m5!1s0x472d1562dd1456b5:0x5cbb80b00bb0fbf2!8m2!3d49.4517449!4d28.524532!16s%2Fg%2F11gjxcx8g0?hl=uk-UA&entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D">Переглянути
+                на Google Maps <i class="bi bi-arrow-up-right"></i></a>
+        </section>
+        <nav aria-labelledby="footer-navigation">
+            <h2 id="footer-navigation">Навігація</h2>
+            <ul>
+                <li><a href="repair.html">Послуги ремонту</a></li>
+                <li><a href="index.html#contacts">Політика конфіденційності</a></li>
+                <li><a href="shop.html">Магазин техніки</a></li>
+                <li><a href="tracker.html">Відстежити квитанцію</a></li>
+            </ul>
+        </nav>
+        <section aria-labelledby="footer-contacts">
+            <h2 id="footer-contacts">Контакти</h2>
+            <p><a href="tel:+380983964147">Телефон: +38 (098) 396-41-47</a></p>
+            <ul>
+                <li><a href="https://www.instagram.com/mobikor.ua?cplk=ODJndXF0dzQ3ZXZu" target="_blank"
+                        rel="noopener noreferrer">Instagram <i class="bi bi-arrow-up-right"></i></a></li>
+                <li><a href="https://www.tiktok.com/@mobikor?_r=1&amp;_t=ZS-9AdCAi2yNQg" target="_blank"
+                        rel="noopener noreferrer">TikTok <i class="bi bi-arrow-up-right"></i></a></li>
+                <li><a href="https://www.facebook.com/share/1DXXqAekvH/" target="_blank"
+                        rel="noopener noreferrer">Facebook <i class="bi bi-arrow-up-right"></i></a></li>
+            </ul>
+        </section>
+        <section aria-labelledby="footer-working-hours">
+            <h2 id="footer-working-hours">Графік роботи</h2>
+            <ul>
+                <li>Пн–Пт: 09:00–18:00</li>
+                <li>Сб: 09:00–18:00</li>
+                <li>Нд: вихідний</li>
+            </ul>
+        </section>
+        <small>MobiKOR © All rights reserved.</small>
+    </footer>
+ 
+    <script src="script.js" defer></script>
+    <script src="pages.js" defer></script>
+</body>
+ 
+</html>
