@@ -238,6 +238,7 @@ main > .hero {
   display: flex;
   align-items: center;
   min-height: clamp(480px, 52vw, 640px);
+  padding-inline: var(--layout-gutter);
   color: var(--color-text);
   background: var(--color-page);
 }
