@@ -8,42 +8,65 @@
         content="MobiKOR — сервісний центр і магазин оригінальних гаджетів. Прозорий ремонт, онлайн-відстеження та перевірена техніка.">
     <meta name="theme-color" content="#0a1020">
     <title>MobiKOR — сервісний центр і магазин оригінальних гаджетів</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
 
-<body>
+<body class="min-h-screen bg-[var(--color-page)] text-[var(--color-text)]" data-page="home">
     <header>
         <a href="#home" aria-label="MobiKOR — на головну">
             <img id="logo" src="assets/MobiKOR%20Logo%20Horizontal.png" alt="MobiKOR">
         </a>
-        <nav aria-label="Головна навігація">
-            <ul>
-                <li><a href="#home">Головна</a></li>
-                <li><a href="#about">Про нас</a></li>
-                <li><a href="shop.html">Магазин</a></li>
-                <li><a href="repair.html">Ремонт</a></li>
-                <li><a href="#footer-contacts">Контакти</a></li>
+        <button type="button" id="menu-toggle"
+            class="inline-flex min-h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] min-[901px]:hidden"
+            aria-controls="primary-navigation" aria-expanded="false" aria-label="Відкрити меню">
+            <i class="bi bi-list text-xl" aria-hidden="true"></i>
+        </button>
+        <nav id="primary-navigation"
+            class="absolute left-0 right-0 top-full z-50 hidden rounded-b-xl border border-[var(--color-border)] bg-[var(--color-header)] p-4 shadow-xl min-[901px]:static min-[901px]:block min-[901px]:border-0 min-[901px]:bg-transparent min-[901px]:p-0 min-[901px]:shadow-none"
+            aria-label="Головна навігація">
+            <ul class="!flex-col !gap-2 !whitespace-normal min-[901px]:!flex-row min-[901px]:!gap-7">
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1"
+                        href="#home" aria-current="page">Головна</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1"
+                        href="#about">Про нас</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1"
+                        href="shop.html">Магазин</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1"
+                        href="repair.html">Ремонт</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1"
+                        href="#footer-contacts">Контакти</a></li>
             </ul>
         </nav>
-        <button type="button">Увійти <i class="bi bi-person"></i></button>
-        <button type="button" id="theme-toggle" aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
+        <button type="button"
+            class="hidden min-h-10 items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 text-[var(--color-text)] min-[901px]:inline-flex">Увійти
+            <i class="bi bi-person"></i></button>
+        <button type="button" id="theme-toggle"
+            class="min-h-10 w-10 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-text)]"
+            aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
     </header>
 
-    <main id="home">
-        <header class="hero">
-            <article id="hero-text">
-                <h1 id="hero-title">Сервісний центр та магазин оригінальних гаджетів MobiKOR</h1>
-                <p>Зручний розрахунок ціни до візиту, онлайн-трекінг стану ремонту в реальному часі та великий каталог
+    <main id="home" class="text-[var(--color-text)]">
+        <header
+            class="hero relative isolate flex min-h-[clamp(480px,52vw,640px)] items-center overflow-hidden bg-[var(--color-hero-background)] px-5 py-12 text-[var(--color-hero-text)] lg:px-[max(20px,calc((100vw-1200px)/2))]">
+            <article id="hero-text" class="hero__content relative z-10 max-w-2xl">
+                <h1 class="text-4xl font-bold leading-tight tracking-tight sm:text-5xl" id="hero-title">Сервісний центр
+                    та магазин оригінальних гаджетів MobiKOR</h1>
+                <p class="hero__description max-w-[52ch] text-lg text-[var(--color-hero-muted)]">Зручний розрахунок ціни
+                    до візиту, онлайн-трекінг стану ремонту в реальному часі та великий каталог
                     товарів.</p>
                 <nav aria-label="Швидкі дії">
-                    <ul>
-                        <li><a href="#">Розрахувати вартість <i class="bi bi-arrow-right"></i></a></li>
-                        <li><a href="#">Перейти до магазину <i class="bi bi-arrow-right"></i></a></li>
-                        <li><a href="#">Відстежити квитанцію <i class="bi bi-arrow-right"></i></a></li>
+                    <ul class="grid max-w-[480px] grid-cols-1 gap-3 sm:grid-cols-2">
+                        <li><a class="button button--primary" href="#">Розрахувати вартість <i
+                                    class="bi bi-arrow-right"></i></a></li>
+                        <li><a class="button button--primary" href="#">Перейти до магазину <i
+                                    class="bi bi-arrow-right"></i></a></li>
+                        <li class="hero__action--wide"><a class="button button--secondary" href="#">Відстежити квитанцію
+                                <i class="bi bi-arrow-right"></i></a></li>
                     </ul>
                 </nav>
-                <p class="hero-tags">Смартфони / Ноутбуки / Аудіогаджети</p>
+                <p class="hero-tags text-sm text-[var(--color-hero-muted)]">Смартфони / Ноутбуки / Аудіогаджети</p>
             </article>
             <figure>
                 <video autoplay muted loop playsinline aria-label="Відео діагностики пристрою">
@@ -54,9 +77,12 @@
             </figure>
         </header>
 
-        <section id="about" aria-labelledby="about-title">
-            <h2 id="about-title">Про нас</h2>
-            <h3>Чому MobiKOR?</h3>
+        <section id="about"
+            class="grid grid-cols-1 gap-x-12 gap-y-4 bg-[var(--color-section)] px-5 py-12 lg:grid-cols-2 lg:px-[max(20px,calc((100vw-1200px)/2))] lg:py-20"
+            data-surface="alternate" aria-labelledby="about-title">
+            <h2 class="text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-accent-text)]" id="about-title">
+                Про нас</h2>
+            <h3 class="section-title text-3xl font-bold text-[var(--color-text)]">Чому MobiKOR?</h3>
             <p>Ми створили MobiKOR, щоб позбавити вас стресу під час ремонту техніки. Найбільше дратує невизначеність:
                 скільки це коштуватиме, чи не з'являться приховані платежі та скільки разів доведеться телефонувати, щоб
                 дізнатися стан пристрою.</p>
@@ -66,11 +92,15 @@
             <p>Жодних нав'язливих дзвінків чи очікування на лінії. Ви можете переглянути діагностичні фотографії майстра
                 та підтвердити деталі ремонту онлайн в особистому кабінеті. Поєднуючи якісний сервіс із магазином
                 перевірених гаджетів та аксесуарів, ми робимо турботу про вашу техніку простою та зрозумілою.</p>
-            <section id="shop-photo" aria-label="Фото майстерні MobiKOR">
-                <img src="assets/photo1.jpg" alt="Майстри ремонтують електроніку в майстерні">
-                <img src="assets/photo2.jpg" alt="Робоче місце сервісного центру">
-                <img src="assets/photo3.jpg" alt="Інженери MobiKOR діагностують пристрій">
-                <img src="assets/photo4.jpg" alt="Обладнання для ремонту гаджетів">
+            <section id="shop-photo" class="grid grid-cols-2 gap-3" aria-label="Фото майстерні MobiKOR">
+                <img class="aspect-[4/3] w-full rounded-xl border border-[var(--color-border)] object-cover"
+                    src="assets/photo1.jpg" alt="Майстри ремонтують електроніку в майстерні">
+                <img class="aspect-[4/3] w-full rounded-xl border border-[var(--color-border)] object-cover"
+                    src="assets/photo2.jpg" alt="Робоче місце сервісного центру">
+                <img class="aspect-[4/3] w-full rounded-xl border border-[var(--color-border)] object-cover"
+                    src="assets/photo3.jpg" alt="Інженери MobiKOR діагностують пристрій">
+                <img class="aspect-[4/3] w-full rounded-xl border border-[var(--color-border)] object-cover"
+                    src="assets/photo4.jpg" alt="Обладнання для ремонту гаджетів">
             </section>
             <aside aria-label="Наші переваги">
                 <article>
@@ -84,39 +114,38 @@
             </aside>
         </section>
 
-        <section id="repair" aria-labelledby="repair-title">
-            <h2 id="repair-title">Як ми працюємо?</h2>
-            <h3>4 етапи ремонту</h3>
-            <p>Зрозумілий процес: ви знаєте, що відбувається на кожному етапі.</p>
-            <ol>
+        <section id="repair" class="px-5 py-12 lg:px-[max(20px,calc((100vw-1200px)/2))] lg:py-20"
+            aria-labelledby="repair-title">
+            <h2 class="text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-accent-text)]" id="repair-title">
+                Як ми працюємо?</h2>
+            <h3 class="section-title text-3xl font-bold text-[var(--color-text)]">4 етапи ремонту</h3>
+            <p class="max-w-[60ch] text-[var(--color-text-muted)]">Зрозумілий процес: ви знаєте, що відбувається на
+                кожному етапі.</p>
+            <ol class="my-7 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <li>
                     <article>
-                        <img src="assets/icons/01.png"
-                            alt="" aria-hidden="true">
+                        <img src="assets/icons/01.png" alt="" aria-hidden="true">
                         <h4>Прийом</h4>
                         <p>Описуєте пристрій і проблему онлайн або в сервісі.</p>
                     </article>
                 </li>
                 <li>
                     <article>
-                        <img src="assets/icons/02.png"
-                            alt="" aria-hidden="true">
+                        <img src="assets/icons/02.png" alt="" aria-hidden="true">
                         <h4>Діагностика</h4>
                         <p>Майстер визначає несправність і потрібні роботи.</p>
                     </article>
                 </li>
                 <li>
                     <article>
-                        <img src="assets/icons/03.png"
-                            alt="" aria-hidden="true">
+                        <img src="assets/icons/03.png" alt="" aria-hidden="true">
                         <h4>Ремонт</h4>
                         <p>Погоджуєте ціну та термін онлайн до початку робіт.</p>
                     </article>
                 </li>
                 <li>
                     <article>
-                        <img src="assets/icons/04.png"
-                            alt="" aria-hidden="true">
+                        <img src="assets/icons/04.png" alt="" aria-hidden="true">
                         <h4>Видача</h4>
                         <p>Отримуєте перевірений пристрій і документи.</p>
                     </article>
@@ -127,32 +156,28 @@
                 <ul>
                     <li>
                         <article>
-                            <img src="assets/icons/05.png"
-                                alt="" aria-hidden="true">
+                            <img src="assets/icons/05.png" alt="" aria-hidden="true">
                             <h4>Прозора вартість</h4>
                             <p>Перелік робіт і деталей — у погодженому кошторисі.</p>
                         </article>
                     </li>
                     <li>
                         <article>
-                            <img src="assets/icons/06.png"
-                                alt="" aria-hidden="true">
+                            <img src="assets/icons/06.png" alt="" aria-hidden="true">
                             <h4>Статус без дзвінків</h4>
                             <p>Номер квитанції — для перевірки етапу замовлення.</p>
                         </article>
                     </li>
                     <li>
                         <article>
-                            <img src="assets/icons/07.png"
-                                alt="" aria-hidden="true">
+                            <img src="assets/icons/07.png" alt="" aria-hidden="true">
                             <h4>Гарантія 3–12 міс.</h4>
                             <p>Покриття: погоджені роботи та деталі. Термін залежить від послуги.</p>
                         </article>
                     </li>
                     <li>
                         <article>
-                            <img src="assets/icons/08.png"
-                                alt="" aria-hidden="true">
+                            <img src="assets/icons/08.png" alt="" aria-hidden="true">
                             <h4>Якість комплектуючих</h4>
                             <p>Оригінальні деталі та прозоре ціноутворення.</p>
                         </article>
@@ -161,20 +186,22 @@
             </aside>
         </section>
 
-        <section aria-labelledby="quick-actions-title">
+        <section data-section="quick-actions" data-surface="alternate" aria-labelledby="quick-actions-title">
             <h2 id="quick-actions-title">Два швидкі способи отримати потрібну інформацію</h2>
             <p>Перейдіть до калькулятора послуг або перевірте статус ремонту.</p>
-            <article id="calculator">
+            <article id="calculator" data-card="calculator">
                 <i class="bi bi-calculator"></i>
                 <h3>Калькулятор послуг</h3>
                 <p>Оберіть пристрій і послугу для попередньої оцінки вартості.</p>
-                <a href="#contacts">Перейти до калькулятора <i class="bi bi-arrow-right"></i></a>
+                <a class="button button--primary" href="#contacts">Перейти до калькулятора <i
+                        class="bi bi-arrow-right"></i></a>
             </article>
-            <article id="tracker">
+            <article id="tracker" data-card="tracker">
                 <i class="bi bi-check2-square"></i>
                 <h3>Трекер квитанцій</h3>
                 <p>Перевірте поточний етап ремонту за номером замовлення.</p>
-                <a href="#contacts">Перейти до трекера <i class="bi bi-arrow-right"></i></a>
+                <a class="button button--primary" href="#contacts">Перейти до трекера <i
+                        class="bi bi-arrow-right"></i></a>
             </article>
         </section>
 
@@ -185,71 +212,74 @@
                     <p>Перевірена техніка та аксесуари з гарантією.</p>
                 </div>
                 <div class="carousel-controls">
-                    <button type="button" id="shop-prev" aria-label="Попередні товари"><i class="bi bi-chevron-left"></i></button>
-                    <button type="button" id="shop-next" aria-label="Наступні товари"><i class="bi bi-chevron-right"></i></button>
+                    <button type="button" id="shop-prev" aria-label="Попередні товари"><i
+                            class="bi bi-chevron-left"></i></button>
+                    <button type="button" id="shop-next" aria-label="Наступні товари"><i
+                            class="bi bi-chevron-right"></i></button>
                 </div>
             </header>
             <ul class="products" aria-label="Популярні товари" tabindex="0">
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-phone-flip"></i></div>
                         <h3>Чохол Silicone Case iPhone 14 Pro</h3>
-                        <p class="in-stock">В наявності</p>
-                        <p>890 грн</p>
+                        <p class="product-status in-stock">В наявності</p>
+                        <p class="product-price">890 грн</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-lightning-charge"></i></div>
                         <h3>Зарядний пристрій GaN 65W</h3>
-                        <p class="in-stock">В наявності</p>
-                        <p>1 450 грн</p>
+                        <p class="product-status in-stock">В наявності</p>
+                        <p class="product-price">1 450 грн</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-phone"></i></div>
                         <h3>Смартфон A</h3>
-                        <p>Умови уточнюються</p>
-                        <p>Ціна: — ₴</p>
+                        <p class="product-status">Умови уточнюються</p>
+                        <p class="product-price">Ціна: — ₴</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-laptop"></i></div>
                         <h3>Ноутбук B</h3>
-                        <p>Умови уточнюються</p>
-                        <p>Ціна: — ₴</p>
+                        <p class="product-status">Умови уточнюються</p>
+                        <p class="product-price">Ціна: — ₴</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-headphones"></i></div>
                         <h3>Навушники C</h3>
-                        <p>Умови уточнюються</p>
-                        <p>Ціна: — ₴</p>
+                        <p class="product-status">Умови уточнюються</p>
+                        <p class="product-price">Ціна: — ₴</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
                 <li>
-                    <article>
+                    <article class="product-card">
                         <div class="product-media" aria-hidden="true"><i class="bi bi-smartwatch"></i></div>
                         <h3>Смарт-годинник D</h3>
-                        <p>Умови уточнюються</p>
-                        <p>Ціна: — ₴</p>
+                        <p class="product-status">Умови уточнюються</p>
+                        <p class="product-price">Ціна: — ₴</p>
                         <button type="button">Переглянути товар</button>
                     </article>
                 </li>
             </ul>
             <p class="carousel-status" aria-live="polite">Товар 1 із 6</p>
-            <p><a href="#shop">Переглянути весь каталог <i class="bi bi-arrow-right"></i></a></p>
+            <p class="catalog-link"><a class="button button--secondary" href="#shop">Переглянути весь каталог <i
+                        class="bi bi-arrow-right"></i></a></p>
         </section>
- 
-        <section id="contacts" aria-labelledby="contact-title">
+
+        <section id="contacts" data-surface="alternate" aria-labelledby="contact-title">
             <header>
                 <h2 id="contact-title">Маєш питання?<br>Напиши нам</h2>
                 <p>Залиште заявку на ремонт, купівлю або гарантійне звернення.</p>
@@ -257,7 +287,7 @@
                     вашого запиту.</p>
             </header>
             <form>
-                <p>
+                <p class="form-field--responsive-full">
                     <label for="request-type">Тип звернення *</label>
                     <select id="request-type" name="request-type" required>
                         <option value="">Оберіть тип звернення</option>
@@ -273,19 +303,19 @@
                 <p>
                     <label for="phone">Телефон *</label>
                     <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                        placeholder="+380 __ ___ __ __" required
-                        pattern="^\+380[\s\(\)\-]*(\d[\s\(\)\-]*){9}$"
+                        placeholder="+380 __ ___ __ __" required pattern="^\+380[\s\(\)\-]*(\d[\s\(\)\-]*){9}$"
                         title="Номер у форматі +380XXXXXXXXX">
                     <small>Вкажіть номер у форматі +380...</small>
                 </p>
-                <p class="full">
+                <p class="form-field--full">
                     <label for="message">Опис проблеми</label>
                     <textarea id="message" name="message" placeholder="Модель пристрою та що трапилося"></textarea>
                 </p>
                 <div class="form-footer">
                     <p class="consent">
                         <input type="checkbox" id="consent" name="consent" required>
-                        <label for="consent">Погоджуюся з обробкою персональних даних відповідно до <a href="#">політики конфіденційності</a>.</label>
+                        <label for="consent">Погоджуюся з обробкою персональних даних відповідно до <a href="#">політики
+                                конфіденційності</a>.</label>
                     </p>
                     <button type="submit">Надіслати заявку</button>
                 </div>
@@ -294,7 +324,8 @@
         </section>
     </main>
 
-    <footer>
+    <footer
+        class="grid !grid-cols-1 gap-8 border-t border-[var(--color-border)] bg-[var(--color-section)] px-5 py-12 text-sm md:!grid-cols-2 min-[901px]:!grid-cols-4 min-[901px]:justify-items-end min-[901px]:!pl-24 [&_h2]:mb-3 [&_h2]:text-xs [&_h2]:font-semibold [&_h2]:uppercase [&_h2]:tracking-widest [&_h2]:text-[var(--color-text-muted)] [&_p]:mb-2 [&_p]:text-[var(--color-text-muted)] [&_ul]:grid [&_ul]:gap-2 [&_a]:text-[var(--color-link)] [&_a:hover]:text-[var(--color-accent-text)] [&_address]:mb-2 [&_address]:not-italic [&_address]:text-[var(--color-text-muted)] [&>small]:col-span-full [&>small]:border-t [&>small]:border-[var(--color-border)] [&>small]:pt-5 [&>small]:text-[var(--color-text-muted)] [&>section]:min-w-0 [&>nav]:min-w-0 [&_a]:[overflow-wrap:anywhere]">
         <section aria-labelledby="footer-brand">
             <h2 id="footer-brand">MobiKOR</h2>
             <p>Сервісний центр та магазин оригінальної техніки</p>

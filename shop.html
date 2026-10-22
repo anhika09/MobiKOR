@@ -7,70 +7,85 @@
     <meta name="description" content="Каталог оригінальних гаджетів і аксесуарів із гарантією до 12 місяців. Доставка Новою Поштою та самовивіз у Калинівці.">
     <meta name="theme-color" content="#0a1020">
     <title>Магазин оригінальних гаджетів — MobiKOR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
 
-<body data-page="shop">
+<body class="min-h-screen bg-[var(--color-page)] text-[var(--color-text)]" data-page="shop">
     <header>
         <a href="index.html" aria-label="MobiKOR — на головну">
             <img id="logo" src="assets/MobiKOR%20Logo%20Horizontal.png" alt="MobiKOR">
         </a>
-        <nav aria-label="Головна навігація">
-            <ul>
-                <li><a href="index.html">Головна</a></li>
-                <li><a href="repair.html">Ремонт</a></li>
-                <li><a href="shop.html" aria-current="page">Магазин</a></li>
-                <li><a href="index.html#about">Про нас</a></li>
-                <li><a href="#footer-contacts">Контакти</a></li>
+        <button
+            type="button"
+            id="menu-toggle"
+            class="inline-flex min-h-10 w-10 items-center justify-center rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text)] min-[901px]:hidden"
+            aria-controls="primary-navigation"
+            aria-expanded="false"
+            aria-label="Відкрити меню"
+        >
+            <i class="bi bi-list text-xl" aria-hidden="true"></i>
+        </button>
+        <nav
+            id="primary-navigation"
+            class="absolute left-0 right-0 top-full z-50 hidden rounded-b-xl border border-[var(--color-border)] bg-[var(--color-header)] p-4 shadow-xl min-[901px]:static min-[901px]:block min-[901px]:border-0 min-[901px]:bg-transparent min-[901px]:p-0 min-[901px]:shadow-none"
+            aria-label="Головна навігація"
+        >
+            <ul class="!flex-col !gap-2 !whitespace-normal min-[901px]:!flex-row min-[901px]:!gap-7">
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1" href="index.html">Головна</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1" href="repair.html">Ремонт</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1" href="shop.html" aria-current="page">Магазин</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1" href="index.html#about">Про нас</a></li>
+                <li><a class="block rounded-lg !px-3 !py-2 hover:text-[var(--color-accent-text)] min-[901px]:!px-0 min-[901px]:!py-1" href="#footer-contacts">Контакти</a></li>
             </ul>
         </nav>
-        <a class="header-btn" href="account.html"><i class="bi bi-person"></i> Увійти</a>
-        <button type="button" id="theme-toggle" aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
+        <a class="header-btn inline-flex min-h-10 items-center gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] px-4 text-[var(--color-text)]" href="account.html"><i class="bi bi-person"></i> Увійти</a>
+        <button type="button" id="theme-toggle" class="min-h-10 w-10 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-0 text-[var(--color-text)]" aria-label="Змінити тему"><i class="bi bi-sun"></i></button>
     </header>
 
-    <main class="page" id="main">
-        <nav class="breadcrumbs" aria-label="Хлібні крихти">
-            <ol>
-                <li><a href="index.html">Головна</a></li>
+    <main class="page mx-auto max-w-6xl space-y-8 px-5 py-10" id="main">
+        <nav class="breadcrumbs text-sm text-[var(--color-text-muted)]" aria-label="Хлібні крихти">
+            <ol class="flex flex-wrap items-center gap-2">
+                <li><a class="text-[var(--color-accent-text)] hover:underline" href="index.html">Головна</a></li>
                 <li aria-current="page">Магазин</li>
             </ol>
         </nav>
-        <header class="page-head">
-            <h1>Каталог оригінальних гаджетів та аксесуарів</h1>
-            <p>Великий каталог оригінальної техніки, чохлів та зарядних пристроїв із гарантією до 12 місяців. Швидка доставка по Україні та самовивіз. Обирайте!</p>
+        <header class="page-head rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6 md:p-10">
+            <h1 class="mb-3 text-3xl font-bold tracking-tight text-[var(--color-text)] md:text-4xl">Каталог оригінальних гаджетів та аксесуарів</h1>
+            <p class="mb-0 max-w-3xl text-[var(--color-text-muted)]">Великий каталог оригінальної техніки, чохлів та зарядних пристроїв із гарантією до 12 місяців. Швидка доставка по Україні та самовивіз. Обирайте!</p>
         </header>
 
-        <section aria-label="Пошук і фільтри">
-            <form class="card filters" id="catalog-filters" role="search" aria-label="Пошук у каталозі">
-                <div>
+        <section class="!p-0" aria-label="Пошук і фільтри">
+            <form class="card filters space-y-5 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-5" id="catalog-filters" role="search" aria-label="Пошук у каталозі">
+                <div class="space-y-2">
                     <label for="q">Пошук у каталозі</label>
-                    <div class="filters__search">
+                    <div class="filters__search flex flex-col gap-3 sm:flex-row">
                         <input id="q" name="q" type="search" placeholder="Назва товару, модель або артикул" autocomplete="off">
-                        <button class="btn btn-secondary" type="submit">Знайти товари</button>
+                        <button class="btn btn-secondary shrink-0 rounded-lg border border-[var(--color-outline)] px-5 py-2 font-semibold text-[var(--color-text)] hover:border-[var(--color-accent-text)]" type="submit">Знайти товари</button>
                     </div>
                 </div>
-                <details class="filters__more" open>
-                    <summary>Фільтри</summary>
-                    <div class="filters__body">
-                        <div class="filters__row">
-                            <label class="visually-hidden" for="brand">Бренд</label>
+                <details class="filters__more space-y-4" open>
+                    <summary class="cursor-pointer font-semibold text-[var(--color-text)]">Фільтри</summary>
+                    <div class="filters__body space-y-4 pt-2">
+                        <div class="filters__row flex flex-col gap-4 lg:flex-row lg:items-center">
+                            <label class="sr-only" for="brand">Бренд</label>
                             <select id="brand" name="brand">
                                 <option value="">Бренд: усі</option>
                                 <option value="Apple">Apple</option>
                                 <option value="Baseus">Baseus</option>
                                 <option value="Sony">Sony</option>
                             </select>
-                            <fieldset class="chips">
-                                <legend class="visually-hidden">Категорія</legend>
-                                <label class="chip"><input type="radio" name="category" value="" checked><span>Усі категорії</span></label>
-                                <label class="chip"><input type="radio" name="category" value="Зарядні пристрої"><span>Зарядні пристрої</span></label>
-                                <label class="chip"><input type="radio" name="category" value="Чохли"><span>Чохли</span></label>
-                                <label class="chip"><input type="radio" name="category" value="Кабелі"><span>Кабелі</span></label>
-                                <label class="chip"><input type="radio" name="category" value="Аудіо"><span>Аудіо</span></label>
+                            <fieldset class="chips flex flex-wrap gap-2">
+                                <legend class="sr-only">Категорія</legend>
+                                <label class="chip flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3 py-2 text-sm"><input type="radio" name="category" value="" checked><span>Усі категорії</span></label>
+                                <label class="chip flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3 py-2 text-sm"><input type="radio" name="category" value="Зарядні пристрої"><span>Зарядні пристрої</span></label>
+                                <label class="chip flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3 py-2 text-sm"><input type="radio" name="category" value="Чохли"><span>Чохли</span></label>
+                                <label class="chip flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3 py-2 text-sm"><input type="radio" name="category" value="Кабелі"><span>Кабелі</span></label>
+                                <label class="chip flex cursor-pointer items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface-raised)] px-3 py-2 text-sm"><input type="radio" name="category" value="Аудіо"><span>Аудіо</span></label>
                             </fieldset>
                         </div>
-                        <div class="filters__row">
+                        <div class="filters__row flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                             <div class="range">
                                 <label for="price">Ціна до: <output id="price-out" for="price">7 000 ₴</output></label>
                                 <input id="price" name="price" type="range" min="0" max="7000" step="100" value="7000">
@@ -87,13 +102,13 @@
             </form>
         </section>
 
-        <section id="catalog" aria-labelledby="catalog-title">
-            <div class="results-head">
+        <section class="!p-0" id="catalog" aria-labelledby="catalog-title">
+            <div class="results-head mb-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                    <h2 id="catalog-title">Гаджети та аксесуари з гарантією</h2>
-                    <p class="results-head__note" data-results-count>8 товарів · Демонстраційний асортимент і ціни. Не є підтвердженням реальної наявності.</p>
+                    <h2 class="mb-2 text-2xl font-bold text-[var(--color-text)]" id="catalog-title">Гаджети та аксесуари з гарантією</h2>
+                    <p class="results-head__note mb-0 text-sm text-[var(--color-text-muted)]" data-results-count>8 товарів · Демонстраційний асортимент і ціни. Не є підтвердженням реальної наявності.</p>
                 </div>
-                <div class="sort">
+                <div class="sort flex items-center gap-3">
                     <label for="sort">Сортування</label>
                     <select id="sort" name="sort" form="catalog-filters">
                         <option value="pop">За популярністю</option>
@@ -103,109 +118,109 @@
                     </select>
                 </div>
             </div>
-            <ul class="product-grid" data-product-grid>
+            <ul class="product-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4" data-product-grid>
                 <li data-name="silicone case для iphone 14 pro midnight · силікон case-14pro" data-brand="Apple" data-category="Чохли" data-price="1490" data-stock="1" data-pop="1">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-phone-flip" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3><a href="product.html">Silicone Case для iPhone 14 Pro</a></h3>
-                        <p class="product-card__meta">Midnight · силікон</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">1 490 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="case-14pro" data-name="Silicone Case для iPhone 14 Pro" data-price="1490" data-icon="bi-phone-flip">До кошика</button>
+                        <h3 class="mb-2 font-semibold"><a class="text-[var(--color-text)] hover:text-[var(--color-accent-text)]" href="product.html">Silicone Case для iPhone 14 Pro</a></h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Midnight · силікон</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">1 490 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="case-14pro" data-name="Silicone Case для iPhone 14 Pro" data-price="1490" data-icon="bi-phone-flip">До кошика</button>
                     </article>
                 </li>
                 <li data-name="зарядний пристрій usb-c 20 вт apple · power delivery · usb-c charger-20w" data-brand="Apple" data-category="Зарядні пристрої" data-price="690" data-stock="1" data-pop="2">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-lightning-charge" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3>Зарядний пристрій USB-C 20 Вт</h3>
-                        <p class="product-card__meta">Apple · Power Delivery · USB-C</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">690 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="charger-20w" data-name="Зарядний пристрій USB-C 20 Вт" data-price="690" data-icon="bi-lightning-charge">До кошика</button>
+                        <h3 class="mb-2 font-semibold">Зарядний пристрій USB-C 20 Вт</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Apple · Power Delivery · USB-C</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">690 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="charger-20w" data-name="Зарядний пристрій USB-C 20 Вт" data-price="690" data-icon="bi-lightning-charge">До кошика</button>
                     </article>
                 </li>
                 <li data-name="кабель usb-c / lightning apple · 1 м · білий cable-usbc-lightning" data-brand="Apple" data-category="Кабелі" data-price="490" data-stock="1" data-pop="3">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-usb-c" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3>Кабель USB-C / Lightning</h3>
-                        <p class="product-card__meta">Apple · 1 м · білий</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">490 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="cable-usbc-lightning" data-name="Кабель USB-C / Lightning" data-price="490" data-icon="bi-usb-c">До кошика</button>
+                        <h3 class="mb-2 font-semibold">Кабель USB-C / Lightning</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Apple · 1 м · білий</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">490 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="cable-usbc-lightning" data-name="Кабель USB-C / Lightning" data-price="490" data-icon="bi-usb-c">До кошика</button>
                     </article>
                 </li>
                 <li data-name="airpods 3 з футляром apple · бездротові · lightning airpods-3" data-brand="Apple" data-category="Аудіо" data-price="6490" data-stock="1" data-pop="4">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-earbuds" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3>AirPods 3 з футляром</h3>
-                        <p class="product-card__meta">Apple · бездротові · Lightning</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">6 490 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="airpods-3" data-name="AirPods 3 з футляром" data-price="6490" data-icon="bi-earbuds">До кошика</button>
+                        <h3 class="mb-2 font-semibold">AirPods 3 з футляром</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Apple · бездротові · Lightning</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">6 490 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="airpods-3" data-name="AirPods 3 з футляром" data-price="6490" data-icon="bi-earbuds">До кошика</button>
                     </article>
                 </li>
                 <li data-name="power bank 10 000 ма·год baseus · usb-c · 20 вт powerbank-10k" data-brand="Baseus" data-category="Зарядні пристрої" data-price="1890" data-stock="1" data-pop="5">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-battery-charging" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3>Power Bank 10 000 мА·год</h3>
-                        <p class="product-card__meta">Baseus · USB-C · 20 Вт</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">1 890 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="powerbank-10k" data-name="Power Bank 10 000 мА·год" data-price="1890" data-icon="bi-battery-charging">До кошика</button>
+                        <h3 class="mb-2 font-semibold">Power Bank 10 000 мА·год</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Baseus · USB-C · 20 Вт</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">1 890 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="powerbank-10k" data-name="Power Bank 10 000 мА·год" data-price="1890" data-icon="bi-battery-charging">До кошика</button>
                     </article>
                 </li>
                 <li data-name="clear case для iphone 14 pro apple · прозорий · magsafe case-clear-14pro" data-brand="Apple" data-category="Чохли" data-price="990" data-stock="1" data-pop="6">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-phone" aria-hidden="true"></i>
-                            <span class="badge">В наявності</span>
+                            <span class="badge absolute left-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-xs font-semibold text-white">В наявності</span>
                         </div>
-                        <h3>Clear Case для iPhone 14 Pro</h3>
-                        <p class="product-card__meta">Apple · прозорий · MagSafe</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">990 ₴</p>
-                        <button class="btn btn-primary" type="button" data-add data-id="case-clear-14pro" data-name="Clear Case для iPhone 14 Pro" data-price="990" data-icon="bi-phone">До кошика</button>
+                        <h3 class="mb-2 font-semibold">Clear Case для iPhone 14 Pro</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Apple · прозорий · MagSafe</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">990 ₴</p>
+                        <button class="btn btn-primary mt-auto rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white transition hover:bg-[var(--color-accent-hover)]" type="button" data-add data-id="case-clear-14pro" data-name="Clear Case для iPhone 14 Pro" data-price="990" data-icon="bi-phone">До кошика</button>
                     </article>
                 </li>
                 <li data-name="бездротові навушники sony · bluetooth · чорні headphones-sony" data-brand="Sony" data-category="Аудіо" data-price="2990" data-stock="0" data-pop="7">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-headphones" aria-hidden="true"></i>
-                            <span class="badge badge--out">Немає в наявності</span>
+                            <span class="badge badge--out absolute left-3 top-3 rounded-full bg-slate-600 px-3 py-1 text-xs font-semibold text-white">Немає в наявності</span>
                         </div>
-                        <h3>Бездротові навушники</h3>
-                        <p class="product-card__meta">Sony · Bluetooth · чорні</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">2 990 ₴</p>
-                        <button class="btn btn-secondary" type="button" data-notify>Повідомити про наявність</button>
+                        <h3 class="mb-2 font-semibold">Бездротові навушники</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Sony · Bluetooth · чорні</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">2 990 ₴</p>
+                        <button class="btn btn-secondary mt-auto rounded-lg border border-[var(--color-outline)] px-4 py-3 font-semibold text-[var(--color-text)] hover:border-[var(--color-accent-text)]" type="button" data-notify>Повідомити про наявність</button>
                     </article>
                 </li>
                 <li data-name="адаптер usb-c 35 вт apple · два порти usb-c adapter-35w" data-brand="Apple" data-category="Зарядні пристрої" data-price="1690" data-stock="0" data-pop="8">
-                    <article class="product-card">
-                        <div class="product-card__media">
+                    <article class="product-card flex h-full flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4 transition hover:-translate-y-1 hover:border-[var(--color-accent-text)]">
+                        <div class="product-card__media relative mb-4 flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-[var(--color-surface-raised)] text-5xl text-[var(--color-accent-text)]">
                             <i class="bi bi-plug" aria-hidden="true"></i>
-                            <span class="badge badge--out">Немає в наявності</span>
+                            <span class="badge badge--out absolute left-3 top-3 rounded-full bg-slate-600 px-3 py-1 text-xs font-semibold text-white">Немає в наявності</span>
                         </div>
-                        <h3>Адаптер USB-C 35 Вт</h3>
-                        <p class="product-card__meta">Apple · два порти USB-C</p>
-                        <p class="product-card__warranty"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
-                        <p class="product-card__price">1 690 ₴</p>
-                        <button class="btn btn-secondary" type="button" data-notify>Повідомити про наявність</button>
+                        <h3 class="mb-2 font-semibold">Адаптер USB-C 35 Вт</h3>
+                        <p class="product-card__meta mb-2 text-sm text-[var(--color-text-muted)]">Apple · два порти USB-C</p>
+                        <p class="product-card__warranty mb-2 text-sm text-[var(--color-text-muted)]"><i class="bi bi-shield-check" aria-hidden="true"></i> Гарантія 12 місяців</p>
+                        <p class="product-card__price mb-4 text-xl font-bold text-[var(--color-accent-text)]">1 690 ₴</p>
+                        <button class="btn btn-secondary mt-auto rounded-lg border border-[var(--color-outline)] px-4 py-3 font-semibold text-[var(--color-text)] hover:border-[var(--color-accent-text)]" type="button" data-notify>Повідомити про наявність</button>
                     </article>
                 </li>
             </ul>
@@ -213,46 +228,46 @@
             <p class="results-note" data-results-note>Показано 8 із 8 демотоварів</p>
         </section>
 
-        <section class="split" aria-label="Умови замовлення та кошик">
-            <div>
-                <p class="eyebrow">Магазин гаджетів MobiKOR</p>
-                <h2>Зручне замовлення. Зрозумілі умови.</h2>
-                <ul class="benefit-list">
+        <section class="split !p-0 grid gap-6 lg:grid-cols-2" aria-label="Умови замовлення та кошик">
+            <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+                <p class="eyebrow mb-2 text-xs font-bold uppercase tracking-widest text-[var(--color-accent-text)]">Магазин гаджетів MobiKOR</p>
+                <h2 class="mb-5 text-2xl font-bold text-[var(--color-text)]">Зручне замовлення. Зрозумілі умови.</h2>
+                <ul class="benefit-list space-y-3">
                     <li>
-                        <i class="bi bi-truck" aria-hidden="true"></i>
-                        <h3>Доставка по Україні</h3>
-                        <p>Нова Пошта за тарифами перевізника. Дані відправлення — в особистому кабінеті.</p>
+                        <i class="bi bi-truck text-xl text-[var(--color-accent-text)]" aria-hidden="true"></i>
+                        <h3 class="font-semibold text-[var(--color-text)]">Доставка по Україні</h3>
+                        <p class="text-sm text-[var(--color-text-muted)]">Нова Пошта за тарифами перевізника. Дані відправлення — в особистому кабінеті.</p>
                     </li>
                     <li>
-                        <i class="bi bi-geo-alt" aria-hidden="true"></i>
-                        <h3>Самовивіз у Калинівці</h3>
-                        <p>Вул. Незалежності 49, автовокзал. Узгодьте готовність замовлення з менеджером.</p>
+                        <i class="bi bi-geo-alt text-xl text-[var(--color-accent-text)]" aria-hidden="true"></i>
+                        <h3 class="font-semibold text-[var(--color-text)]">Самовивіз у Калинівці</h3>
+                        <p class="text-sm text-[var(--color-text-muted)]">Вул. Незалежності 49, автовокзал. Узгодьте готовність замовлення з менеджером.</p>
                     </li>
                     <li>
-                        <i class="bi bi-shield-check" aria-hidden="true"></i>
-                        <h3>Гарантія до 12 місяців</h3>
-                        <p>Умови для конкретного товару вказані в картці. Збережіть документ про покупку.</p>
+                        <i class="bi bi-shield-check text-xl text-[var(--color-accent-text)]" aria-hidden="true"></i>
+                        <h3 class="font-semibold text-[var(--color-text)]">Гарантія до 12 місяців</h3>
+                        <p class="text-sm text-[var(--color-text-muted)]">Умови для конкретного товару вказані в картці. Збережіть документ про покупку.</p>
                     </li>
                 </ul>
             </div>
-            <aside class="card cart" id="cart" aria-labelledby="cart-title">
-                <h2 id="cart-title">Кошик · <span data-cart-count>0 товарів</span></h2>
-                <p class="cart__hint">Попередній перегляд відкритого кошика</p>
-                <ul class="cart__items" data-cart-list></ul>
-                <p class="cart__empty" data-cart-empty hidden>Кошик порожній. Додайте товари з каталогу.</p>
+            <aside class="card cart rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-6" id="cart" aria-labelledby="cart-title">
+                <h2 class="mb-2 text-xl font-bold text-[var(--color-text)]" id="cart-title">Кошик · <span data-cart-count>0 товарів</span></h2>
+                <p class="cart__hint text-sm text-[var(--color-text-muted)]">Попередній перегляд відкритого кошика</p>
+                <ul class="cart__items space-y-3" data-cart-list></ul>
+                <p class="cart__empty text-sm text-[var(--color-text-muted)]" data-cart-empty hidden>Кошик порожній. Додайте товари з каталогу.</p>
                 <div data-cart-summary>
-                    <p class="cart__sum" data-cart-sum></p>
-                    <p class="cart__total"><span>Разом</span> <strong data-cart-total>0 ₴</strong></p>
-                    <p class="cart__note">Доставка не включена. Остаточні умови — під час оформлення.</p>
-                    <button class="btn btn-primary btn-block" type="button" data-checkout>Перейти до оформлення</button>
-                    <p class="cart__note" role="status" data-checkout-note hidden>Це демо-версія: оформлення замовлення ще не підключене.</p>
-                    <a class="btn btn-ghost btn-block" href="#catalog">Продовжити покупки</a>
+                    <p class="cart__sum text-sm text-[var(--color-text-muted)]" data-cart-sum></p>
+                    <p class="cart__total flex justify-between border-t border-[var(--color-border)] py-4 text-lg"><span>Разом</span> <strong data-cart-total>0 ₴</strong></p>
+                    <p class="cart__note text-xs text-[var(--color-text-muted)]">Доставка не включена. Остаточні умови — під час оформлення.</p>
+                    <button class="btn btn-primary mb-3 w-full rounded-lg bg-[var(--color-accent)] px-4 py-3 font-semibold text-white hover:bg-[var(--color-accent-hover)]" type="button" data-checkout>Перейти до оформлення</button>
+                    <p class="cart__note text-sm text-[var(--color-text-muted)]" role="status" data-checkout-note hidden>Це демо-версія: оформлення замовлення ще не підключене.</p>
+                    <a class="btn btn-ghost block w-full rounded-lg border border-[var(--color-outline)] px-4 py-3 text-center font-semibold text-[var(--color-text)] hover:border-[var(--color-accent-text)]" href="#catalog">Продовжити покупки</a>
                 </div>
             </aside>
         </section>
     </main>
 
-    <footer>
+    <footer class="grid !grid-cols-1 gap-8 border-t border-[var(--color-border)] bg-[var(--color-section)] px-5 py-12 text-sm md:!grid-cols-2 min-[901px]:!grid-cols-4 min-[901px]:justify-items-end min-[901px]:!pl-24 [&_h2]:mb-3 [&_h2]:text-xs [&_h2]:font-semibold [&_h2]:uppercase [&_h2]:tracking-widest [&_h2]:text-[var(--color-text-muted)] [&_p]:mb-2 [&_p]:text-[var(--color-text-muted)] [&_ul]:grid [&_ul]:gap-2 [&_a]:text-[var(--color-link)] [&_a:hover]:text-[var(--color-accent-text)] [&_address]:mb-2 [&_address]:not-italic [&_address]:text-[var(--color-text-muted)] [&>small]:col-span-full [&>small]:border-t [&>small]:border-[var(--color-border)] [&>small]:pt-5 [&>small]:text-[var(--color-text-muted)] [&>section]:min-w-0 [&>nav]:min-w-0 [&_a]:[overflow-wrap:anywhere]">
         <section aria-labelledby="footer-brand">
             <h2 id="footer-brand">MobiKOR</h2>
             <p>Сервісний центр та магазин оригінальної техніки</p>

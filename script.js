@@ -20,6 +20,48 @@
     try { localStorage.setItem('theme', next); } catch (e) { /* приватний режим */ }
   });
 })();
+// ---------- Mobile navigation ----------
+(function () {
+  var toggle = document.getElementById('menu-toggle');
+  var navigation = document.getElementById('primary-navigation');
+  if (!toggle || !navigation) return;
+
+  var icon = toggle.querySelector('i');
+
+  function closeMenu() {
+    navigation.classList.add('hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Відкрити меню');
+    if (icon) {
+      icon.classList.remove('bi-x-lg');
+      icon.classList.add('bi-list');
+    }
+  }
+
+  toggle.addEventListener('click', function () {
+    var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    navigation.classList.toggle('hidden', isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Відкрити меню' : 'Закрити меню');
+    if (icon) {
+      icon.classList.toggle('bi-list', isOpen);
+      icon.classList.toggle('bi-x-lg', !isOpen);
+    }
+  });
+
+  navigation.addEventListener('click', function (event) {
+    if (event.target.closest('a')) closeMenu();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+
+  window.matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
+})();
 // ---------- Карусель товарів ----------
 (function () {
   var track = document.querySelector('#shop .products');
