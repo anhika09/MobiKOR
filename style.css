@@ -1,712 +1,178 @@
-/* ---------- 1. Токени (темна тема за замовчуванням) ---------- */
+/* ==========================================================================
+   MobiKOR — Core Theme Tokens & Custom Utilities
+   ========================================================================== */
+
 :root {
   color-scheme: dark;
 
-  /* Кольори сторінки, поверхонь, тексту, акцентів і статусів */
-  --color-page: #0a1020; /* Основний фон сторінки */
-  --color-section: #0d1528; /* Фон чергованих секцій */
-  --color-surface: #131c30; /* Фон карток і панелей */
-  --color-surface-raised: #19243c; /* Піднята поверхня полів та елементів */
-  --color-border: #243250; /* Межі компонентів */
-  --color-text: #e8edf7; /* Основний текст */
-  --color-text-muted: #9aa8c3; /* Другорядний текст */
-  --color-accent: #c4631a; /* Фон основних кнопок */
-  --color-accent-hover: #d97424; /* Фон основних кнопок при наведенні */
-  --color-accent-text: #f0953f; /* Акцентний текст і посилання */
-  --color-on-accent: #ffffff; /* Текст на акцентних кнопках */
-  --color-outline: #3d6fb5; /* Контури вторинних кнопок */
-  --color-success: #3ecf8e; /* Колір успішного статусу */
-  --color-link: #367ab6; /* Посилання у нижньому колонтитулі */
-  --color-header: #1C3658;
+  /* Theme color tokens (перша ітерація) */
+  --color-page: #0a1020;
+  --color-section: #0d1528;
+  --color-surface: #131c30;
+  --color-surface-raised: #19243c;
+  --color-border: #243250;
+  --color-text: #e8edf7;
+  --color-text-muted: #9aa8c3;
+  --color-accent: #c4631a;
+  --color-accent-hover: #d97424;
+  --color-accent-text: #f0953f;
+  --color-on-accent: #ffffff;
+  --color-outline: #3d6fb5;
+  --color-success: #3ecf8e;
+  --color-link: #367ab6; /* Оригінальний синій колір для посилань у футері */
+  --color-header: #1c3658;
   --color-text-header: #9ca7bd;
 
-  /* Кольори hero зберігають контраст тексту поверх відео в обох темах */
-  --color-hero-background: #0a1020; /* Непрозорий фон і градієнт hero */
-  --color-hero-text: #e8edf7; /* Основний текст hero */
-  --color-hero-muted: #9aa8c3; /* Другорядний текст hero */
+  /* Картки етапів та переваг (світлий контрастний фон з першої ітерації) */
+  --color-step-surface: #eaf0fa;
+  --color-step-text: #0f1a2e;
+  --color-step-text-muted: #4a5a78;
+  --color-step-border: #cfd9ec;
 
-  /* Світлі картки етапів зберігають контраст у темній темі */
-  --color-step-surface: #eaf0fa; /* Фон карток етапів ремонту */
-  --color-step-text: #0f1a2e; /* Основний текст карток етапів */
-  --color-step-text-muted: #4a5a78; /* Другорядний текст карток етапів */
-  --color-step-border: #cfd9ec; /* Межі карток етапів */
-
-  /* Шкала відступів і загальні розміри компонентів */
-  --spacing-1-5: 6px; /* Малий відступ */
-  --spacing-2: 8px; /* Компактний відступ */
-  --spacing-2-5: 10px; /* Відступ усередині елементів керування */
-  --spacing-3: 12px; /* Відступ між дрібними елементами */
-  --spacing-3-5: 14px; /* Середній внутрішній відступ */
-  --spacing-4: 16px; /* Базовий відступ */
-  --spacing-4-5: 18px; /* Збільшений відступ */
-  --spacing-5: 20px; /* Відступ між картками */
-  --spacing-6: 24px; /* Внутрішній відступ великих карток */
-  --spacing-7: 28px; /* Великий інтервал */
-  --spacing-10: 40px; /* Розмір кнопок керування каруселлю */
-  --control-height: 44px; /* Мінімальна висота кнопок і полів */
-  --border-width: 1px; /* Товщина стандартної межі */
-
-  /* Типографіка, заокруглення та ширина макета */
-  --font-family-base: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; /* Основний шрифт сайту */
-  --font-size-label: 0.85rem; /* Розмір підписів і компактного тексту */
-  --radius-card: 14px; /* Заокруглення карток */
-  --radius-control: 10px; /* Заокруглення кнопок і полів */
-  --layout-gutter: max(20px, calc((100vw - 1200px) / 2)); /* Боковий відступ і центрування контенту */
-  --section-spacing: clamp(48px, 7vw, 84px); /* Вертикальний відступ секцій */
+  --font-family-base: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --layout-gutter: max(20px, calc((100vw - 1200px) / 2));
 }
 
-/* Палітра теми винесена окремо: для перемикання достатньо змінити data-theme на html. */
 :root[data-theme="light"] {
   color-scheme: light;
-
-  --color-page: #d0d9ea; /* Світлий фон сторінки */
-  --color-section: #eaeff8; /* Світлий фон чергованих секцій */
-  --color-surface: #ffffff; /* Фон карток і панелей */
-  --color-surface-raised: #f0f4fb; /* Піднята поверхня полів та елементів */
-  --color-border: #d5dded; /* Межі компонентів */
-  --color-text: #0f1a2e; /* Основний текст */
-  --color-text-muted: #52617f; /* Другорядний текст */
-  --color-accent-hover: #ad5415; /* Фон основних кнопок при наведенні */
-  --color-accent-text: #b4560f; /* Акцентний текст і посилання */
-  --color-outline: #2f5fa5; /* Контури вторинних кнопок */
-  --color-success: #12875a; /* Колір успішного статусу */
-
-  --color-step-surface: #ffffff; /* Фон карток етапів ремонту */
-  --color-step-text: #0f1a2e; /* Основний текст карток етапів */
-  --color-step-text-muted: #52617f; /* Другорядний текст карток етапів */
-  --color-step-border: #d5dded; /* Межі карток етапів */
-  --color-header: #1C3658;
-  --color-text-header: #E8EDF7;
+  --color-page: #d0d9ea;
+  --color-section: #eaeff8;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f0f4fb;
+  --color-border: #d5dded;
+  --color-text: #0f1a2e;
+  --color-text-muted: #52617f;
+  --color-accent-hover: #ad5415;
+  --color-accent-text: #b4560f;
+  --color-outline: #2f5fa5;
+  --color-success: #12875a;
+  --color-link: #2b6cb0;
+  --color-step-surface: #ffffff;
+  --color-step-text: #0f1a2e;
+  --color-step-text-muted: #52617f;
+  --color-step-border: #d5dded;
+  --color-header: #1c3658;
+  --color-text-header: #e8edf7;
 }
 
-/* ---------- 2. База ---------- */
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-
+/* Base resets */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 86px; }
 body {
   margin: 0;
   font-family: var(--font-family-base);
-  font-size: 1rem;
-  line-height: 1.6;
   color: var(--color-text);
-  background: var(--color-page);
+  background-color: var(--color-page);
+  padding-top: 76px;
   transition: background-color 0.25s, color 0.25s;
+  -webkit-font-smoothing: antialiased;
 }
-
 img, video { max-width: 100%; display: block; }
 
-h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 0.6em; }
-p { margin: 0 0 1em; }
-ul, ol { margin: 0; padding: 0; list-style: none; }
-a { color: var(--color-accent-text); text-decoration: none; }
-a:hover { text-decoration: underline; }
+/* Посилання в хедері: НЕ підкреслювати при наведенні, лише оранжевий колір */
+header a,
+header nav a,
+.header-btn {
+  text-decoration: none !important;
+}
+header a:hover,
+header nav a:hover,
+.header-btn:hover {
+  text-decoration: none !important;
+  color: var(--color-accent-text) !important;
+}
+
+/* Посилання у футері: оригінальний синій колір (#367ab6) з першої ітерації */
+footer a,
+.footer a,
+#footer-contacts a,
+.text-link {
+  color: var(--color-link) !important;
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+footer a:hover,
+.footer a:hover,
+#footer-contacts a:hover,
+.text-link:hover {
+  color: var(--color-accent-text) !important;
+  text-decoration: underline !important;
+}
 
 :focus-visible {
   outline: 3px solid var(--color-accent-text);
   outline-offset: 3px;
-  border-radius: var(--spacing-1-5);
+  border-radius: 6px;
 }
 
-/* ---------- 3. Кнопки ---------- */
-button,
-.button {
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: var(--radius-control);
-  transition: background-color 0.2s, border-color 0.2s, transform 0.15s;
-}
-
-/* основна (оранжева) */
-main form button[type="submit"],
-.button--primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--control-height);
-  padding: var(--spacing-2-5) var(--spacing-5);
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-  border: var(--border-width) solid transparent;
-}
-main form button[type="submit"]:hover,
-.button--primary:hover {
-  background: var(--color-accent-hover);
-  text-decoration: none;
-}
-
-/* другорядна (контурна, синя рамка як у макеті) */
-.button--secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: var(--control-height);
-  padding: var(--spacing-2-5) var(--spacing-5);
-  color: var(--color-text);
-  background: transparent;
-  border: var(--border-width) solid var(--color-outline);
-}
-.button--secondary:hover {
-  border-color: var(--color-accent-text);
-  text-decoration: none;
-}
-.hero .button--secondary { color: var(--color-hero-text); }
-
-/* ---------- 4. Header ---------- */
-body > header {
-  position: fixed;
-  top: 0;
-  inset-inline: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-4);
-  padding: var(--spacing-3) var(--layout-gutter);
-  background: color-mix(in srgb, var(--color-header) 88%, transparent);
-  -webkit-backdrop-filter: blur(var(--spacing-3));
-  backdrop-filter: blur(var(--spacing-3));
-  border-bottom: var(--border-width) solid var(--color-border);
-}
-
-body[data-page] { padding-top: 76px; }
-
-#logo { height: 52px; width: auto; }
-
-body > header nav { margin-inline: auto; }
-body > header nav ul { display: flex; gap: var(--spacing-7); }
-body > header nav a {
-  position: relative;
-  color: var(--color-text-header);
-  font-weight: 500;
-  padding: 14px 2px;
-  transition: color 0.2s;
-}
-body > header nav a:hover,
-body > header nav a[aria-current="page"] {
-  color: var(--color-accent-text);
-  text-decoration: none;
-}
-body > header nav a[aria-current="page"]::after {
-  position: absolute;
-  right: 0;
-  bottom: -13px;
-  left: 0;
-  height: 2px;
-  background: var(--color-accent-text);
-  content: "";
-}
-
-body > header > button {
-  min-height: var(--spacing-10);
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-}
-body > header > button:hover { border-color: var(--color-accent-text); }
-body > header > button:not(#theme-toggle) {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-2);
-  padding: 0 var(--spacing-4-5);
-}
-#theme-toggle { width: var(--spacing-10); padding: 0; font-size: 1.1rem; line-height: 1; }
-
-/* ---------- 5. Секції ---------- */
-main > section {
-  padding: var(--section-spacing) var(--layout-gutter);
-}
-body[data-page="home"] main > [data-surface="alternate"] { background: var(--color-section); }
-
-/* Eyebrow-підписи й основні заголовки розділів. */
-#about > h2,
-#repair > h2 {
-  margin-bottom: 0.4em;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent-text);
-}
-#about > .section-title,
-#repair > .section-title,
-#shop header h2,
-#contacts header h2,
-main > [data-section="quick-actions"] > h2 {
-  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
-}
-
-section > p,
-#shop header p,
-#contacts header p { color: var(--color-text-muted); }
-
-/* ----- Hero: відео як фон ----- */
-main > .hero {
-  position: relative;
-  isolation: isolate;          /* щоб z-index:-1 відео не пішов під фон body */
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  min-height: clamp(480px, 52vw, 640px);
-  padding-inline: var(--layout-gutter);
-  color: var(--color-hero-text);
-  background: var(--color-hero-background);
-}
-main > .hero > .hero__content {
-  position: relative;
-  max-width: 640px;
-}
-main > .hero h1 {
-  font-size: clamp(2rem, 4.2vw, 3rem);
-  letter-spacing: -0.01em;
-}
-main > .hero .hero__description {
-  font-size: 1.05rem;
-  max-width: 52ch;
-  color: var(--color-hero-muted);
-}
-
-/* Кнопки hero: дві основні в ряд + контурна на всю ширину під ними */
-main > .hero nav ul {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--spacing-3);
-  max-width: 480px;
-  margin: var(--spacing-6) 0;
-}
-main > .hero nav .hero__action--wide { grid-column: 1 / -1; }
-main > .hero nav li a {
-  width: 100%;
-  gap: var(--spacing-2);
-  padding: var(--spacing-2-5) var(--spacing-3-5);
-  font-size: 0.92rem;
-}
-.hero-tags {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--color-hero-muted);
-}
-
-/* Відео на весь фон секції + прозорий градієнт поверх нього */
-main > .hero figure {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  margin: 0;
-}
-main > .hero video {
+/* Hero: фонове відео з градієнтом, який захищає зону тексту зліва (безпечно від червоної лінії) */
+.hero video {
   width: 100%;
   height: 100%;
-  max-width: none;
   object-fit: cover;
-  object-position: right center;
+  object-position: 80% center;
 }
-main > .hero figure::after {
+.hero figure::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, var(--color-hero-background) 0%, color-mix(in srgb, var(--color-hero-background) 80%, transparent) 38%, transparent 75%),
-    linear-gradient(0deg, var(--color-hero-background) 0%, transparent 25%);
+    linear-gradient(90deg, var(--color-page) 0%, var(--color-page) 44%, color-mix(in srgb, var(--color-page) 82%, transparent) 58%, transparent 78%),
+    linear-gradient(0deg, var(--color-page) 0%, transparent 28%);
 }
-/* підпис лишається для доступності, але візуально прихований */
-main > .hero figcaption {
+
+/* Карусель фото у розділі "Про нас" */
+.about-carousel__slide {
   position: absolute;
-  width: var(--border-width);
-  height: var(--border-width);
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(1.02);
+}
+.about-carousel__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+.about-carousel__dot.is-active {
+  width: 22px !important;
+  background-color: var(--color-accent) !important;
 }
 
-/* ----- Про нас: текст зліва, фото справа ----- */
-#about {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  column-gap: clamp(var(--spacing-7), 5vw, 64px);
-  align-content: start;
+/* Динаміка карток на десктопі та мобільних пристроях (:active / .is-touch-active) */
+.card-hover,
+.step-card-hover,
+.badge-advantage-hover {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1), border-color 0.2s ease, background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
-#about > h2,
-#about > h3 { grid-column: 1 / -1; }
-#about > p,
-#about > aside { grid-column: 1; }
-#about > #shop-photo {
-  grid-column: 2;
-  grid-row: 3 / span 4;       /* від першого абзацу до блоку переваг */
-  align-self: start;
+.card-hover:hover,
+.card-hover:active,
+.card-hover.is-touch-active {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-text) !important;
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.45);
 }
-#shop-photo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-3);
+.step-card-hover:hover,
+.step-card-hover:active,
+.step-card-hover.is-touch-active {
+  transform: translateY(-4px);
+  border-color: var(--color-accent-text) !important;
+  box-shadow: 0 16px 30px -8px rgba(0, 0, 0, 0.35);
 }
-#shop-photo img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-radius: var(--radius-control);
-  border: var(--border-width) solid var(--color-border);
-}
-#about aside {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-4);
-  margin-top: var(--spacing-2);
-}
-#about aside article {
-  padding: var(--spacing-4) var(--spacing-4-5);
-  background: color-mix(in srgb, var(--color-success) 10%, var(--color-surface));
-  border: var(--border-width) solid color-mix(in srgb, var(--color-success) 40%, var(--color-border));
-  border-radius: var(--radius-control);
-}
-#about aside h3 {
-  margin-bottom: 0.3em;
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-success);
-}
-#about aside p { margin: 0; font-size: 0.9rem; color: var(--color-text); }
-
-/* ----- Як ми працюємо ----- */
-#repair > p { max-width: 60ch; }
-
-#repair > ol {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-4);
-  margin: var(--spacing-7) 0 var(--spacing-10);
-  counter-reset: step;
-}
-#repair > ol > li { counter-increment: step; display: flex; }
-
-#repair article {
-  position: relative;
-  width: 100%;
-  padding: var(--spacing-5);
-  color: var(--color-step-text);
-  background: var(--color-step-surface);
-  border: var(--border-width) solid var(--color-step-border);
-  border-radius: var(--radius-card);
-}
-#repair article p { margin: 0; font-size: 0.92rem; color: var(--color-step-text-muted); }
-#repair article h4 { margin-bottom: 0.3em; font-size: 1.1rem; }
-#repair article img { width: 56px; height: 56px; object-fit: contain; margin-bottom: var(--spacing-3); }
-
-#repair > ol article::before {
-  content: counter(step);
-  position: absolute;
-  top: var(--spacing-4);
-  right: var(--spacing-4);
-  display: grid;
-  place-items: center;
-  width: var(--spacing-7);
-  height: var(--spacing-7);
-  font-size: var(--font-size-label);
-  font-weight: 700;
-  color: var(--color-on-accent);
-  background: var(--color-accent);
-  border-radius: 50%;
+.badge-advantage-hover:hover,
+.badge-advantage-hover:active,
+.badge-advantage-hover.is-touch-active {
+  transform: translateY(-3px) scale(1.02);
+  background-color: rgba(62, 207, 142, 0.25) !important;
+  border-color: var(--color-success) !important;
+  box-shadow: 0 12px 24px -6px rgba(62, 207, 142, 0.4);
 }
 
-#repair aside h3 { font-size: 1.25rem; margin-bottom: var(--spacing-4); }
-#repair aside ul {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-4);
-}
-#repair aside li { display: flex; }
-
-/* ----- Швидкі дії (тизери з іконками) ----- */
-main > [data-section="quick-actions"] {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-5);
-}
-main > [data-section="quick-actions"] > h2,
-main > [data-section="quick-actions"] > p {
-  grid-column: 1 / -1;
-  margin-bottom: 0;
-}
-main > [data-section="quick-actions"] > p { margin-bottom: 4px; }
-
-[data-card="calculator"],
-[data-card="tracker"] {
-  display: grid;
-  grid-template-columns: var(--control-height) 1fr;
-  column-gap: var(--spacing-3-5);
-  align-content: start;
-  padding: var(--spacing-6);
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-card);
-}
-[data-card="calculator"] > i,
-[data-card="tracker"] > i {
-  grid-row: 1 / span 2;
-  display: grid;
-  place-items: center;
-  width: var(--control-height);
-  height: var(--control-height);
-  font-size: 1.25rem;
-  color: var(--color-accent-text);
-  background: color-mix(in srgb, var(--color-accent-text) 14%, var(--color-surface-raised));
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-control);
-}
-[data-card="calculator"] h3,
-[data-card="tracker"] h3 { grid-column: 2; margin: 0 0 4px; font-size: 1.1rem; }
-[data-card="calculator"] p,
-[data-card="tracker"] p { grid-column: 2; margin: 0 0 var(--spacing-5); font-size: 0.9rem; color: var(--color-text-muted); }
-[data-card="calculator"] a,
-[data-card="tracker"] a { grid-column: 1 / -1; align-self: end; width: 100%; gap: var(--spacing-2); }
-
-/* ----- Магазин: карусель ----- */
-#shop > header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--spacing-4);
-  margin-bottom: var(--spacing-6);
-}
-#shop > header h2 { margin-bottom: 0.3em; }
-#shop > header p { margin: 0; }
-
-.carousel-controls { display: flex; gap: var(--spacing-2); flex: none; }
-.carousel-controls button {
-  display: grid;
-  place-items: center;
-  width: var(--spacing-10);
-  height: var(--spacing-10);
-  padding: 0;
-  font-size: 1rem;
-  color: var(--color-text);
-  background: color-mix(in srgb, var(--color-outline) 22%, var(--color-surface));
-  border: var(--border-width) solid var(--color-outline);
-}
-.carousel-controls button:hover:not(:disabled) { border-color: var(--color-accent-text); }
-.carousel-controls button:disabled { opacity: 0.4; cursor: default; }
-
-.products {
-  display: flex;
-  gap: var(--spacing-5);
-  padding-bottom: var(--spacing-2);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-}
-.products::-webkit-scrollbar { display: none; }
-.products > li {
-  flex: 0 0 calc((100% - 3 * var(--spacing-5)) / 4);
-  scroll-snap-align: start;
-  display: flex;
-}
-
-#shop .product-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: var(--spacing-4);
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-card);
-  transition: transform 0.2s, border-color 0.2s;
-}
-#shop .product-card:hover { transform: translateY(-3px); border-color: var(--color-accent-text); }
-
-/* Візуальна заглушка товару до додавання фотографій. */
-.product-media {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  margin-bottom: var(--spacing-3-5);
-  overflow: hidden;
-  font-size: 3rem;
-  color: var(--color-accent-text);
-  background:
-    radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--color-accent) 22%, transparent), transparent 65%),
-    var(--color-surface-raised);
-  border-radius: var(--radius-control);
-}
-#shop .product-card h3 { font-size: 1rem; margin-bottom: 0.4em; }
-#shop .product-card p { margin: 0 0 var(--spacing-1-5); }
-#shop .product-status { font-size: 0.82rem; color: var(--color-text-muted); }
-#shop .product-status::before { content: "● "; }
-#shop .product-status.in-stock { color: var(--color-success); }
-#shop .product-price { margin-bottom: var(--spacing-3-5); font-size: 1.15rem; font-weight: 700; color: var(--color-accent-text); }
-
-#shop .product-card button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: var(--control-height);
-  margin-top: auto;
-  padding: var(--spacing-2-5) var(--spacing-4);
-  color: var(--color-text);
-  background: var(--color-surface-raised);
-  border: var(--border-width) solid var(--color-border);
-}
-#shop .product-card button:hover { border-color: var(--color-accent-text); }
-
-.carousel-status { display: none; margin: var(--spacing-3) 0 0; text-align: center; font-size: var(--font-size-label); }
-#shop > .catalog-link { margin: var(--spacing-5) 0 0; text-align: right; }
-
-/* ----- Контакти ----- */
-#contacts {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: clamp(var(--spacing-6), 5vw, 64px);
-  align-items: start;
-}
-#contacts form {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr;
-  gap: var(--spacing-4);
-  padding: clamp(var(--spacing-4-5), 3vw, var(--spacing-7));
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-card);
-}
-#contacts form p { margin: 0; }
-#contacts form .form-field--full,
-#contacts form .form-footer,
-#contacts form > small { grid-column: 1 / -1; }
-#contacts form small { display: block; margin-top: var(--spacing-1-5); font-size: 0.75rem; color: var(--color-text-muted); }
-#contacts form > small { margin-top: 0; }
-
-.form-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--spacing-4);
-}
-.consent { display: flex; align-items: center; gap: var(--spacing-2-5); flex: 1 1 280px; }
-.consent label { margin: 0; font-size: 0.8rem; font-weight: 400; }
-
-label { display: block; margin-bottom: var(--spacing-1-5); font-size: var(--font-size-label); font-weight: 600; color: var(--color-text-muted); }
-
-input, select, textarea {
-  width: 100%;
-  min-height: var(--control-height);
-  padding: var(--spacing-2-5) var(--spacing-3);
-  font: inherit;
-  color: var(--color-text);
-  background: var(--color-page);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius-control);
-}
-input[type="checkbox"] {
-  width: var(--spacing-4-5);
-  height: var(--spacing-4-5);
-  min-height: 0;
-  flex: none;
-  accent-color: var(--color-accent);
-}
-textarea { min-height: 120px; resize: vertical; }
-input:focus, select:focus, textarea:focus { outline: 2px solid var(--color-accent-text); outline-offset: var(--border-width); border-color: transparent; }
-
-/* ---------- 6. Footer ---------- */
-body > footer {
-  min-width: 0;
-}
-body > footer #footer-brand { font-size: 1.4rem; letter-spacing: 0; text-transform: none; color: var(--color-text); }
-
-/* ==========================================================================
-   7. Адаптив
-   ========================================================================== */
-
-/* Планшет */
-@media (max-width: 1024px) {
-  #repair > ol,
-  #repair aside ul { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Планшет вертикально / великий телефон */
-@media (max-width: 900px) {
-  #about,
-  #contacts { grid-template-columns: 1fr; }
-
-  #about > h2,
-  #about > h3,
-  #about > p,
-  #about > aside,
-  #about > #shop-photo { grid-column: 1; grid-row: auto; }
-  #about > #shop-photo { margin: var(--spacing-4) 0 var(--spacing-6); }
-
-  #contacts form { grid-template-columns: 1fr 1fr; }
-  #contacts form > .form-field--responsive-full { grid-column: 1 / -1; }
-
-  .products > li { flex-basis: calc((100% - var(--spacing-5)) / 2); }
-
-  /* Hero: текст поверх відео, затемнення рівномірне */
-  main > .hero > .hero__content { max-width: none; }
-  main > .hero video { object-position: 70% center; }
-  main > .hero figure::after {
-    background: linear-gradient(180deg,
-      color-mix(in srgb, var(--color-hero-background) 55%, transparent) 0%,
-      color-mix(in srgb, var(--color-hero-background) 92%, transparent) 70%,
-      var(--color-hero-background) 100%);
-  }
-
-  body > header { flex-wrap: nowrap; row-gap: 0; }
-  body[data-page] > header > a:first-child { order: 1; margin-right: auto; }
-  body > header nav {
-    order: 3;
-    width: 100%;
-    margin: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  body > header nav ul { gap: var(--spacing-5); white-space: nowrap; }
-
-  body[data-page] > header nav { overflow: visible; }
-  body[data-page] > header > #theme-toggle { order: 4; flex: none; }
-  body[data-page] > header > #menu-toggle { order: 5; display: inline-flex; flex: none; }
-  body[data-page] > header > .header-btn,
-  body[data-page="home"] > header > button:not(#theme-toggle):not(#menu-toggle) { display: none; }
-}
-
-@media (min-width: 901px) {
-  body[data-page] > header > #menu-toggle { display: none; }
-  body[data-page] > header > .header-btn,
-  body[data-page="home"] > header > button:not(#theme-toggle):not(#menu-toggle) { display: inline-flex; }
-}
-
-/* Телефон */
-@media (max-width: 600px) {
-  :root {
-    --layout-gutter: var(--spacing-4); /* Боковий відступ контенту на телефоні */
-  }
-
-  #logo { height: 44px; }
-  body > header nav a[aria-current="page"]::after { bottom: 0; }
-
-  main > .hero nav ul { grid-template-columns: 1fr; max-width: none; }
-  main > .hero nav .hero__action--wide { grid-column: auto; }
-
-  #about aside,
-  #repair > ol,
-  #repair aside ul,
-  main > [data-section="quick-actions"],
-  #contacts form { grid-template-columns: 1fr; }
-
-  #contacts form > .form-field--responsive-full { grid-column: auto; }
-  .form-footer { flex-direction: column; align-items: stretch; }
-
-  .products > li { flex-basis: 100%; }
-  .carousel-status { display: block; }
-  #shop > .catalog-link { text-align: left; }
-  #shop > .catalog-link a { width: 100%; }
-}
-
-/* Повага до налаштувань користувача */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .products { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
