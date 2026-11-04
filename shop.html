@@ -6,86 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Каталог оригінальних гаджетів і аксесуарів із гарантією до 12 місяців. Доставка Новою Поштою та самовивіз у Калинівці.">
     <meta name="theme-color" content="#0a1020">
+    <script>
+        try {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.setAttribute('data-theme', savedTheme);
+        } catch (error) {
+            console.warn('Theme preference could not be read.', error);
+        }
+    </script>
     <title>Магазин оригінальних гаджетів — MobiKOR</title>
     <!-- Tailwind CSS CDN + Config -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: ['class', '[data-theme="dark"]'],
-            theme: {
-                extend: {
-                    colors: {
-                        page: 'var(--color-page)',
-                        section: 'var(--color-section)',
-                        surface: 'var(--color-surface)',
-                        'surface-raised': 'var(--color-surface-raised)',
-                        border: 'var(--color-border)',
-                        text: 'var(--color-text)',
-                        'text-muted': 'var(--color-text-muted)',
-                        accent: 'var(--color-accent)',
-                        'accent-hover': 'var(--color-accent-hover)',
-                        'accent-text': 'var(--color-accent-text)',
-                        success: 'var(--color-success)',
-                        outline: 'var(--color-outline)',
-                        header: 'var(--color-header)',
-                        link: 'var(--color-link)',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/tailwind-config.js"></script>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
 
-<body class="bg-page text-text min-h-screen" data-page="shop">
+<body class="bg-page text-text min-h-dvh" data-page="shop">
     <!-- Header: Логотип зліва, кошик + авторизація + зміна теми + бургер згруповані справа -->
-    <header class="fixed top-0 inset-x-0 z-50 flex items-center justify-between gap-3 px-4 py-3 border-b border-border bg-[#1c3658]/95 backdrop-blur-md lg:px-[max(20px,calc((100vw-1200px)/2))]">
-        <a href="index.html" aria-label="MobiKOR — на головну" class="flex-shrink-0">
-            <img id="logo" class="h-10 md:h-12 w-auto transition-transform hover:scale-105" src="assets/MobiKOR%20Logo%20Horizontal.png" alt="MobiKOR">
-        </a>
+    <div id="site-header"></div>
 
-        <!-- Навігація десктоп + дропдаун мобільний -->
-        <nav id="primary-navigation" class="max-[900px]:hidden max-[900px]:absolute max-[900px]:top-full max-[900px]:left-0 max-[900px]:right-0 max-[900px]:bg-header max-[900px]:p-5 max-[900px]:border-b max-[900px]:border-border max-[900px]:shadow-2xl" aria-label="Головна навігація">
-            <ul class="flex flex-col min-[901px]:flex-row items-stretch min-[901px]:items-center gap-2 min-[901px]:gap-7 m-0 p-0 list-none">
-                <li><a class="block py-2 px-3 rounded-lg text-gray-200 hover:text-accent-text transition no-underline" href="index.html#home">Головна</a></li>
-                <li><a class="block py-2 px-3 rounded-lg text-gray-200 hover:text-accent-text transition no-underline" href="index.html#about">Про нас</a></li>
-                <li><a class="block py-2 px-3 rounded-lg text-accent-text font-semibold no-underline" href="shop.html" aria-current="page">Магазин</a></li>
-                <li><a class="block py-2 px-3 rounded-lg text-gray-200 hover:text-accent-text transition no-underline" href="repair.html">Ремонт</a></li>
-                <li><a class="block py-2 px-3 rounded-lg text-gray-200 hover:text-accent-text transition no-underline" href="#footer-contacts">Контакти</a></li>
-            </ul>
-        </nav>
-
-        <!-- Блок справа: Кошик + Авторизація + Зміна теми + Бургер -->
-        <div class="flex items-center gap-2">
-            <!-- Кнопка кошика -->
-            <button type="button" id="cart-open-btn" class="relative inline-flex items-center gap-2 h-10 px-3 rounded-xl border border-border bg-surface text-sm font-semibold text-text hover:border-accent-text transition" aria-label="Кошик">
-                <i class="bi bi-cart3 text-base text-accent-text" aria-hidden="true"></i>
-                <span class="hidden sm:inline">Кошик</span>
-                <span id="cart-badge" class="w-5 h-5 rounded-full bg-accent text-white text-[11px] font-bold flex items-center justify-center">0</span>
-            </button>
-
-            <!-- Авторизація -->
-            <a class="h-10 px-3 flex items-center justify-center gap-1.5 rounded-xl border border-border bg-surface text-sm font-semibold text-text hover:border-accent-text hover:text-accent-text transition no-underline" href="account.html" aria-label="Особистий кабінет">
-                <i class="bi bi-person text-lg" aria-hidden="true"></i>
-                <span class="hidden sm:inline">Увійти</span>
-            </a>
-
-            <!-- Зміна теми -->
-            <button type="button" id="theme-toggle" class="w-10 h-10 flex items-center justify-center rounded-xl border border-border bg-surface text-text hover:border-accent-text transition" aria-label="Змінити тему">
-                <i class="bi bi-sun" aria-hidden="true"></i>
-            </button>
-
-            <!-- Бургер меню -->
-            <button type="button" id="menu-toggle" class="min-[901px]:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-border bg-surface text-text hover:border-accent-text" aria-controls="primary-navigation" aria-expanded="false" aria-label="Відкрити меню">
-                <i class="bi bi-list text-2xl" aria-hidden="true"></i>
-            </button>
-        </div>
-    </header>
-
-    <main class="site-section max-w-[1200px] mx-auto" id="main">
+    <main class="site-section" id="main">
         <!-- Breadcrumbs -->
-        <nav class="text-xs text-text-muted mb-4" aria-label="Хлібні крихти">
+        <nav class="text-sm text-text-muted mb-4" aria-label="Хлібні крихти">
             <ol class="flex items-center gap-1.5 p-0 list-none m-0">
                 <li><a class="hover:text-accent-text transition no-underline" href="index.html">Головна</a></li>
                 <li>/</li>
@@ -95,7 +39,7 @@
 
         <!-- Page Header -->
         <header class="mb-6">
-            <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">Каталог оригінальних гаджетів та аксесуарів</h1>
+            <h1 class="text-h1 font-bold tracking-tight text-text mb-2">Каталог оригінальних гаджетів та аксесуарів</h1>
             <p class="text-base text-text-muted max-w-3xl leading-relaxed m-0">Перевірена техніка, оригінальні чохли та зарядні пристрої з офіційною гарантією до 12 місяців. Швидка відправка по Україні Новою Поштою.</p>
         </header>
 
@@ -104,7 +48,7 @@
             <div class="relative flex flex-col sm:flex-row gap-2.5 p-3 rounded-2xl border border-border bg-surface shadow-md">
                 <div class="relative flex-grow">
                     <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-base" aria-hidden="true"></i>
-                    <input id="catalog-search" type="search" placeholder="Я шукаю... (наприклад, чохол iPhone 14, GaN зарядка, навушники)" class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-border bg-page text-sm text-text placeholder:text-text-muted focus:border-accent-text" autocomplete="off">
+                    <input id="catalog-search" type="search" placeholder="Я шукаю... (наприклад, чохол iPhone 14, GaN зарядка, навушники)" class="field" autocomplete="off">
                 </div>
                 <button type="button" id="btn-search-trigger" class="button button--primary px-6 py-2.5 text-sm font-semibold rounded-xl shrink-0">
                     Знайти <i class="bi bi-arrow-right" aria-hidden="true"></i>
@@ -115,52 +59,54 @@
         <!-- Швидкі теги категорій (Pills) -->
         <section class="mb-8 overflow-x-auto scrollbar-none pb-2" aria-label="Швидкі категорії">
             <div class="flex items-center gap-2 whitespace-nowrap">
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-semibold border border-accent bg-accent/15 text-accent-text transition" data-tag="all">Усі товари</button>
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="smartphone">Смартфони</button>
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="chargers">Зарядні пристрої</button>
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="cases">Чохли та захист</button>
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="audio">Аудіотехніка</button>
-                <button type="button" class="tag-pill px-4 py-2 rounded-xl text-xs font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="wearable">Смарт-годинники</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-semibold border border-accent bg-accent/15 text-accent-text transition" data-tag="all">Усі товари</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="smartphone">Смартфони</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="chargers">Зарядні пристрої</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="cases">Чохли та захист</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="audio">Аудіотехніка</button>
+                <button type="button" class="button tag-pill px-4 py-2 rounded-xl text-sm font-medium border border-border bg-surface text-text hover:border-accent-text transition" data-tag="wearable">Смарт-годинники</button>
             </div>
         </section>
 
         <!-- Головна сітка: Лівий блок фільтрів + Правий каталог товарів -->
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+        <div class="grid grid-cols-1 gap-6 items-start lg:grid-cols-4 lg:gap-8">
             <!-- Сайдбар фільтрів (Rozetka / AliExpress Style) -->
-            <aside class="lg:col-span-1 p-5 rounded-2xl border border-border bg-surface space-y-6 sticky top-24" aria-label="Фільтри каталогу">
+            <details id="catalog-filters" class="filter-details mb-6 lg:mb-0 lg:contents" open>
+                <summary class="button button--secondary mb-4 flex w-full justify-between lg:hidden">Фільтри <span class="filter-active-count rounded-full bg-accent px-2 py-0.5 text-xs text-white">0</span></summary>
+                <aside class="lg:col-span-1 p-5 rounded-2xl border border-border bg-surface space-y-6 lg:sticky lg:top-24" aria-label="Фільтри каталогу">
                 <div class="flex items-center justify-between pb-3 border-b border-border">
-                    <h2 class="font-bold text-base text-white flex items-center gap-2">
+                    <h2 class="text-h3 font-bold text-text flex items-center gap-2">
                         <i class="bi bi-funnel text-accent-text" aria-hidden="true"></i> Фільтри
                     </h2>
-                    <button type="button" id="btn-reset-filters" class="text-xs text-accent-text hover:underline font-medium">Скинути всі</button>
+                    <button type="button" id="btn-reset-filters" class="button text-sm text-accent-text hover:underline font-medium">Скинути всі</button>
                 </div>
 
                 <!-- Фільтр 1: Ціна (діапазон + повзунок) -->
                 <div>
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-3">Ціна (₴)</h3>
+                    <h3 class="text-h3 font-bold uppercase tracking-wider text-text-muted mb-3">Ціна (₴)</h3>
                     <div class="grid grid-cols-2 gap-2 mb-3">
                         <div>
-                            <span class="text-[11px] text-text-muted block mb-1">Від:</span>
-                            <input type="number" id="price-min" value="0" min="0" max="100000" class="h-9 text-xs px-2.5">
+                            <span class="text-sm text-text-muted block mb-1">Від:</span>
+                            <input type="number" id="price-min" value="0" min="0" max="100000" class="field">
                         </div>
                         <div>
-                            <span class="text-[11px] text-text-muted block mb-1">До:</span>
-                            <input type="number" id="price-max" value="7000" min="0" max="100000" class="h-9 text-xs px-2.5">
+                            <span class="text-sm text-text-muted block mb-1">До:</span>
+                            <input type="number" id="price-max" value="7000" min="0" max="100000" class="field">
                         </div>
                     </div>
                     <input type="range" id="price-range" min="500" max="15000" step="100" value="7000" class="w-full accent-accent cursor-pointer">
-                    <div class="flex justify-between items-center text-[11px] text-text-muted mt-1">
+                    <div class="flex justify-between items-center text-sm text-text-muted mt-1">
                         <span>від 0 ₴</span>
                         <span id="price-range-val" class="font-semibold text-accent-text">до 7 000 ₴</span>
                     </div>
-                    <button type="button" id="btn-price-apply" class="button button--secondary w-full text-xs min-h-[34px] py-1.5 mt-3">
+                    <button type="button" id="btn-price-apply" class="button button--secondary w-full text-sm min-h-[34px] py-1.5 mt-3">
                         Застосувати ціну
                     </button>
                 </div>
 
                 <!-- Фільтр 2: Наявність -->
                 <div class="pt-2 border-t border-border">
-                    <label class="flex items-center gap-2.5 cursor-pointer text-xs font-medium text-text">
+                    <label class="flex items-center gap-2.5 cursor-pointer text-sm font-medium text-text">
                         <input type="checkbox" id="stock-only" name="stock-only">
                         <span>Тільки в наявності</span>
                     </label>
@@ -168,8 +114,8 @@
 
                 <!-- Фільтр 3: Категорія -->
                 <div class="pt-2 border-t border-border">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-3">Категорія</h3>
-                    <div class="space-y-2 text-xs">
+                    <h3 class="text-h3 font-bold uppercase tracking-wider text-text-muted mb-3">Категорія</h3>
+                    <div class="space-y-2 text-sm">
                         <label class="flex items-center gap-2 cursor-pointer hover:text-accent-text transition">
                             <input type="checkbox" name="cat" value="cases"> Чохли (iPhone / Samsung)
                         </label>
@@ -190,8 +136,8 @@
 
                 <!-- Фільтр 4: Бренд -->
                 <div class="pt-2 border-t border-border">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-text-muted mb-3">Бренд</h3>
-                    <div class="space-y-2 text-xs">
+                    <h3 class="text-h3 font-bold uppercase tracking-wider text-text-muted mb-3">Бренд</h3>
+                    <div class="space-y-2 text-sm">
                         <label class="flex items-center gap-2 cursor-pointer hover:text-accent-text transition">
                             <input type="checkbox" name="brand" value="Apple"> Apple
                         </label>
@@ -210,17 +156,18 @@
                     </div>
                 </div>
             </aside>
+            </details>
 
             <!-- Основна панель товарів -->
             <div class="lg:col-span-3 space-y-6">
                 <!-- Панель керування сортуванням та лічильник -->
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-border bg-surface">
-                    <div class="text-xs text-text-muted">
-                        Знайдено товарів: <span id="product-count" class="font-bold text-white">6</span>
+                    <div class="text-sm text-text-muted">
+                        Знайдено товарів: <span id="product-count" class="font-bold text-text">6</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <label for="sort-select" class="text-xs text-text-muted whitespace-nowrap">Сортувати:</label>
-                        <select id="sort-select" class="h-9 text-xs py-1 px-3 w-auto min-w-[190px]">
+                        <label for="sort-select" class="block text-sm font-medium text-text mb-2 whitespace-nowrap">Сортувати:</label>
+                        <select id="sort-select" class="field min-w-[190px]">
                             <option value="pop">За популярністю</option>
                             <option value="price-asc">Від дешевих до дорогих</option>
                             <option value="price-desc">Від дорогих до дешевих</option>
@@ -232,130 +179,130 @@
                 <!-- Каталог товарів (Сітка карток однакового розміру з динамікою підйому) -->
                 <div id="products-catalog-list" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                     <!-- Товар 1 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="cases" data-brand="Apple" data-price="890" data-stock="1" data-pop="10" data-name="Чохол Silicone Case iPhone 14 Pro">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-phone-flip" aria-hidden="true"></i>
-                                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-accent text-white text-[10px] font-bold uppercase">Хіт</span>
+                                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-accent text-white text-sm font-bold uppercase">Хіт</span>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Apple</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Чохол Silicone Case iPhone 14 Pro</h3>
-                            <p class="text-xs text-success font-medium mb-2">● В наявності</p>
+                            <span class="text-sm font-semibold text-text-muted">Apple</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Чохол Silicone Case iPhone 14 Pro</h3>
+                            <p class="text-sm text-success font-medium mb-2">● В наявності</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">890 ₴</span>
-                                <span class="text-xs text-text-muted line-through">1 050 ₴</span>
+                                <span class="text-sm text-text-muted line-through">1 050 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--primary w-full text-xs min-h-[38px] py-2" data-id="1" data-name="Чохол Silicone Case iPhone 14 Pro" data-price="890">
+                            <button type="button" class="btn-add-to-cart button button--primary w-full text-sm py-2" data-id="1" data-name="Чохол Silicone Case iPhone 14 Pro" data-price="890">
                                 <i class="bi bi-cart-plus" aria-hidden="true"></i> В кошик
                             </button>
                         </div>
                     </article>
 
                     <!-- Товар 2 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="chargers" data-brand="Baseus" data-price="1450" data-stock="1" data-pop="9" data-name="Зарядний пристрій GaN 65W Baseus">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-lightning-charge" aria-hidden="true"></i>
-                                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-success/20 text-success text-[10px] font-bold uppercase border border-success/30">Швидка 65W</span>
+                                <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-success/20 text-success text-sm font-bold uppercase border border-success/30">Швидка 65W</span>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Baseus</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Зарядний пристрій GaN 65W Baseus (3 порти)</h3>
-                            <p class="text-xs text-success font-medium mb-2">● В наявності</p>
+                            <span class="text-sm font-semibold text-text-muted">Baseus</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Зарядний пристрій GaN 65W Baseus (3 порти)</h3>
+                            <p class="text-sm text-success font-medium mb-2">● В наявності</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">1 450 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--primary w-full text-xs min-h-[38px] py-2" data-id="2" data-name="Зарядний пристрій GaN 65W Baseus" data-price="1450">
+                            <button type="button" class="btn-add-to-cart button button--primary w-full text-sm py-2" data-id="2" data-name="Зарядний пристрій GaN 65W Baseus" data-price="1450">
                                 <i class="bi bi-cart-plus" aria-hidden="true"></i> В кошик
                             </button>
                         </div>
                     </article>
 
                     <!-- Товар 3 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="audio" data-brand="Apple" data-price="5890" data-stock="1" data-pop="8" data-name="Бездротові навушники AirPods 3">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-headphones" aria-hidden="true"></i>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Apple</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Бездротові навушники AirPods 3 (Lightning)</h3>
-                            <p class="text-xs text-success font-medium mb-2">● В наявності</p>
+                            <span class="text-sm font-semibold text-text-muted">Apple</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Бездротові навушники AirPods 3 (Lightning)</h3>
+                            <p class="text-sm text-success font-medium mb-2">● В наявності</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">5 890 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--primary w-full text-xs min-h-[38px] py-2" data-id="3" data-name="AirPods 3" data-price="5890">
+                            <button type="button" class="btn-add-to-cart button button--primary w-full text-sm py-2" data-id="3" data-name="AirPods 3" data-price="5890">
                                 <i class="bi bi-cart-plus" aria-hidden="true"></i> В кошик
                             </button>
                         </div>
                     </article>
 
                     <!-- Товар 4 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="chargers" data-brand="Anker" data-price="620" data-stock="1" data-pop="7" data-name="Кабель Anker PowerLine III Type-C to Lightning">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-usb-c" aria-hidden="true"></i>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Anker</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Кабель Anker PowerLine III (1.8m, плетений)</h3>
-                            <p class="text-xs text-success font-medium mb-2">● В наявності</p>
+                            <span class="text-sm font-semibold text-text-muted">Anker</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Кабель Anker PowerLine III (1.8m, плетений)</h3>
+                            <p class="text-sm text-success font-medium mb-2">● В наявності</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">620 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--primary w-full text-xs min-h-[38px] py-2" data-id="4" data-name="Кабель Anker PowerLine III" data-price="620">
+                            <button type="button" class="btn-add-to-cart button button--primary w-full text-sm py-2" data-id="4" data-name="Кабель Anker PowerLine III" data-price="620">
                                 <i class="bi bi-cart-plus" aria-hidden="true"></i> В кошик
                             </button>
                         </div>
                     </article>
 
                     <!-- Товар 5 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="wearable" data-brand="Xiaomi" data-price="1790" data-stock="1" data-pop="6" data-name="Фітнес-браслет Xiaomi Smart Band 8">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-smartwatch" aria-hidden="true"></i>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Xiaomi</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Фітнес-браслет Xiaomi Smart Band 8 (Global)</h3>
-                            <p class="text-xs text-success font-medium mb-2">● В наявності</p>
+                            <span class="text-sm font-semibold text-text-muted">Xiaomi</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Фітнес-браслет Xiaomi Smart Band 8 (Global)</h3>
+                            <p class="text-sm text-success font-medium mb-2">● В наявності</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">1 790 ₴</span>
-                                <span class="text-xs text-text-muted line-through">1 990 ₴</span>
+                                <span class="text-sm text-text-muted line-through">1 990 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--primary w-full text-xs min-h-[38px] py-2" data-id="5" data-name="Xiaomi Smart Band 8" data-price="1790">
+                            <button type="button" class="btn-add-to-cart button button--primary w-full text-sm py-2" data-id="5" data-name="Xiaomi Smart Band 8" data-price="1790">
                                 <i class="bi bi-cart-plus" aria-hidden="true"></i> В кошик
                             </button>
                         </div>
                     </article>
 
                     <!-- Товар 6 -->
-                    <article class="card-lift product-item p-4 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
+                    <article class="card-lift product-item p-5 sm:p-6 rounded-2xl border border-border bg-surface flex flex-col justify-between min-h-[400px]"
                         data-category="smartphone" data-brand="Samsung" data-price="11490" data-stock="0" data-pop="5" data-name="Смартфон Samsung Galaxy A54 5G">
                         <div>
                             <div class="relative aspect-square rounded-xl bg-surface-raised flex items-center justify-center text-5xl text-accent-text mb-3 overflow-hidden">
                                 <i class="bi bi-phone" aria-hidden="true"></i>
                             </div>
-                            <span class="text-xs font-semibold text-text-muted">Samsung</span>
-                            <h3 class="font-semibold text-sm text-white mt-1 mb-1.5 leading-snug">Смартфон Samsung Galaxy A54 5G 8/128GB</h3>
-                            <p class="text-xs text-text-muted font-medium mb-2">○ Очікується постачання</p>
+                            <span class="text-sm font-semibold text-text-muted">Samsung</span>
+                            <h3 class="text-h3 font-semibold text-text mt-1 mb-1.5 leading-snug">Смартфон Samsung Galaxy A54 5G 8/128GB</h3>
+                            <p class="text-sm text-text-muted font-medium mb-2">○ Очікується постачання</p>
                         </div>
                         <div class="pt-3 border-t border-border/60">
                             <div class="flex items-baseline justify-between mb-3">
                                 <span class="text-xl font-bold text-accent-text">11 490 ₴</span>
                             </div>
-                            <button type="button" class="btn-add-to-cart button button--secondary w-full text-xs min-h-[38px] py-2" data-id="6" data-name="Samsung Galaxy A54" data-price="11490">
+                            <button type="button" class="btn-add-to-cart button button--secondary w-full text-sm py-2" data-id="6" data-name="Samsung Galaxy A54" data-price="11490">
                                 <i class="bi bi-bell" aria-hidden="true"></i> Повідомити
                             </button>
                         </div>
@@ -365,9 +312,9 @@
                 <!-- Блок "Нічого не знайдено" -->
                 <div id="no-products" class="hidden p-12 text-center rounded-2xl border border-border bg-surface">
                     <i class="bi bi-search text-4xl text-text-muted block mb-3" aria-hidden="true"></i>
-                    <h3 class="text-base font-bold text-white mb-1">Товарів за вашими параметрами не знайдено</h3>
-                    <p class="text-xs text-text-muted max-w-sm mx-auto mb-4">Спробуйте змінити критерії фільтрації або пошуковий запит.</p>
-                    <button type="button" id="btn-reset-empty" class="button button--secondary text-xs">
+                    <h3 class="text-h3 font-bold text-text mb-1">Товарів за вашими параметрами не знайдено</h3>
+                    <p class="text-sm text-text-muted max-w-sm mx-auto mb-4">Спробуйте змінити критерії фільтрації або пошуковий запит.</p>
+                    <button type="button" id="btn-reset-empty" class="button button--secondary text-sm">
                         Скинути всі фільтри
                     </button>
                 </div>
@@ -375,88 +322,12 @@
         </div>
     </main>
 
-    <!-- Інтерактивна висувна корзина (Slide-over Cart Drawer) -->
-    <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end" aria-labelledby="cart-title" role="dialog" aria-modal="true">
-        <div class="w-full max-w-md bg-surface border-l border-border h-full flex flex-col p-6 shadow-2xl animate-in slide-in-from-right duration-300">
-            <div class="flex items-center justify-between pb-4 border-b border-border">
-                <h2 id="cart-title" class="font-bold text-lg text-white flex items-center gap-2">
-                    <i class="bi bi-cart3 text-accent-text" aria-hidden="true"></i> Ваш кошик
-                </h2>
-                <button type="button" id="cart-close-btn" class="w-8 h-8 rounded-lg text-text-muted hover:text-white flex items-center justify-center text-lg" aria-label="Закрити кошик">
-                    <i class="bi bi-x-lg" aria-hidden="true"></i>
-                </button>
-            </div>
+    <div id="site-footer"></div>
 
-            <!-- Список товарів у кошику -->
-            <div id="cart-items-container" class="flex-grow overflow-y-auto py-4 space-y-3">
-                <p class="text-sm text-text-muted text-center py-8">Кошик порожній. Оберіть потрібні товари з каталогу.</p>
-            </div>
-
-            <!-- Разом і оформлення -->
-            <div class="pt-4 border-t border-border space-y-4">
-                <div class="flex items-center justify-between">
-                    <span class="text-sm text-text-muted">Загальна сума:</span>
-                    <span id="cart-total-price" class="text-xl font-bold text-accent-text">0 ₴</span>
-                </div>
-                <button type="button" class="button button--primary w-full" onclick="alert('Замовлення оформлено! Наш менеджер зателефонує вам для підтвердження доставки.'); document.getElementById('cart-drawer').classList.add('hidden');">
-                    Оформити замовлення <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                </button>
-                <small class="block text-center text-[11px] text-text-muted">Безкоштовна доставка у відділення сервісу в Калинівці</small>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer: Сині посилання (#367ab6) з помаранчевим підкресленням при наведенні + HR на всю ширину -->
-    <footer id="footer-contacts" class="footer border-t border-border bg-section px-5 py-12 lg:px-[max(20px,calc((100vw-1200px)/2))]">
-        <div class="max-w-[1200px] mx-auto w-full">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h2 class="text-xl font-bold text-text mb-3" id="footer-brand">MobiKOR</h2>
-                    <p class="text-sm text-text-muted mb-2">Сервісний центр та магазин оригінальної техніки</p>
-                    <address class="not-italic text-sm text-text-muted mb-3">Калинівка, Вінницька обл., вул. Незалежності, 49, автовокзал</address>
-                    <a href="https://www.google.com/maps/place/%D0%9C%D0%B0%D0%B3%D0%B0%D0%B7%D0%B8%D0%BD+MobiKOR+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D1%82%D0%B0+%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6+%D0%BC%D0%BE%D0%B1%D1%96%D0%BB%D1%8C%D0%BD%D0%B8%D1%85+%D1%82%D0%B5%D0%BB%D0%B5%D1%84%D0%BE%D0%BD%D1%96%D0%B2+%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD%D1%96%D0%B2%D0%BA%D0%B0+%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82+%D0%BA%D0%BE%D0%BC%D0%BF%D1%8E%D1%82%D0%B5%D1%80%D1%96%D0%B2/@49.4517449,28.5219571,17z/data=!3m1!4b1!4m6!3m5!1s0x472d1562dd1456b5:0x5cbb80b00bb0fbf2!8m2!3d49.4517449!4d28.524532!16s%2Fg%2F11gjxcx8g0?hl=uk-UA&entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="text-sm text-link hover:text-accent-text inline-flex items-center gap-1">
-                        Переглянути на Google Maps <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
-                    </a>
-                </div>
-                <div>
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Навігація</h2>
-                    <ul class="space-y-2.5 text-sm p-0 list-none">
-                        <li><a href="repair.html" class="text-link hover:text-accent-text">Послуги ремонту</a></li>
-                        <li><a href="shop.html" class="text-link hover:text-accent-text font-medium">Магазин техніки</a></li>
-                        <li><a href="account.html" class="text-link hover:text-accent-text">Відстежити квитанцію</a></li>
-                        <li><a href="#footer-contacts" class="text-link hover:text-accent-text">Контакти / Зворотний зв'язок</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Контакти</h2>
-                    <p class="mb-3"><a href="tel:+380983964147" class="text-sm text-link hover:text-accent-text font-medium">+38 (098) 396-41-47</a></p>
-                    <ul class="space-y-2 text-sm p-0 list-none">
-                        <li><a href="https://www.instagram.com/mobikor.ua?cplk=ODJndXF0dzQ3ZXZu" target="_blank" rel="noopener noreferrer" class="text-link hover:text-accent-text inline-flex items-center gap-1">Instagram <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.tiktok.com/@mobikor?_r=1&amp;_t=ZS-9AdCAi2yNQg" target="_blank" rel="noopener noreferrer" class="text-link hover:text-accent-text inline-flex items-center gap-1">TikTok <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></li>
-                        <li><a href="https://www.facebook.com/share/1DXXqAekvH/" target="_blank" rel="noopener noreferrer" class="text-link hover:text-accent-text inline-flex items-center gap-1">Facebook <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h2 class="text-xs font-bold uppercase tracking-widest text-text-muted mb-4">Графік роботи</h2>
-                    <ul class="space-y-2 text-sm text-text-muted p-0 list-none">
-                        <li>Пн–Пт: 09:00–18:00</li>
-                        <li>Сб: 09:00–18:00</li>
-                        <li>Нд: вихідний</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Нижня лінія HR на всю ширину блоку інформації -->
-            <hr class="footer-divider">
-
-            <div class="flex items-center justify-between text-xs text-text-muted">
-                <small>MobiKOR © All rights reserved.</small>
-                <span>Сервіс та техніка для вашого комфорту</span>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js" defer></script>
+    <script src="js/layout.js" defer></script>
+    <script src="js/common.js" defer></script>
+    <script src="js/shop.js" defer></script>
+    <script src="js/cart.js" defer></script>
 </body>
 
 </html>
