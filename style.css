@@ -292,6 +292,33 @@ button#shop-next.is-touch-active {
 .card-lift.reveal:active, .card-lift.reveal.is-touch-active { transform: translateY(-4px); }
 .button.is-touch-active { transform: translateY(-2px); box-shadow: 0 8px 18px -8px rgb(0 0 0 / .4); }
 
+.step-card-hover {
+  border-radius: var(--radius-card);
+  transition: transform .25s ease-out, box-shadow .25s ease-out, border-color .25s ease-out, background-color .25s ease-out;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.step-card-hover .step-num {
+  display: inline-block;
+  transform-origin: center center;
+  transition: transform .25s ease-out, color .25s ease;
+}
+.step-card-hover .step-img {
+  display: block;
+  transform-origin: center bottom;
+  transition: transform .25s ease-out;
+}
+.step-card-hover:active, .step-card-hover.is-touch-active {
+  transform: translateY(-2px);
+  border-color: rgb(var(--c-accent-text) / .6);
+}
+.step-card-hover:active .step-num, .step-card-hover.is-touch-active .step-num {
+  transform: scale(1.2);
+}
+.step-card-hover:active .step-img, .step-card-hover.is-touch-active .step-img {
+  transform: translateY(-6px);
+}
+
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .5s ease, transform .5s ease; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); transition-delay: calc(var(--i, 0) * 60ms); }
 .scrollbar-none { scrollbar-width: none; }
@@ -357,6 +384,18 @@ button#shop-next.is-touch-active {
   #repair > .container-page > ol > li > article:hover > .process-step-number {
     transform: scale(1.15);
   }
+  .step-card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--c-accent-text) / .7);
+    box-shadow: 0 16px 28px -10px rgb(0 0 0 / .35);
+  }
+  .step-card-hover:hover .step-num {
+    transform: scale(1.25);
+    color: var(--color-accent);
+  }
+  .step-card-hover:hover .step-img {
+    transform: translateY(-8px);
+  }
 }
 
 @media (min-width: 640px) {
@@ -374,6 +413,8 @@ button#shop-next.is-touch-active {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   .reveal { opacity: 1; transform: none; }
   .card-lift:hover, .card-lift:active, .card-lift.is-touch-active,
+  .step-card-hover:hover, .step-card-hover:active, .step-card-hover.is-touch-active,
+  .step-card-hover .step-num, .step-card-hover .step-img,
   .button:hover, .button:active, .button.is-touch-active,
   .product-media img, .about-carousel__slide { transform: none !important; }
 }

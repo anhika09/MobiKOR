@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Безкоштовна діагностика та терміновий ремонт смартфонів, ноутбуків і планшетів. Калькулятор вартості, гарантія 3–12 місяців, ремонт Новою Поштою.">
+    <meta name="description"
+        content="Безкоштовна діагностика та терміновий ремонт смартфонів, ноутбуків і планшетів. Калькулятор вартості, гарантія 3–12 місяців, ремонт Новою Поштою.">
     <meta name="theme-color" content="#0a1020">
     <script>
         try {
@@ -15,10 +16,8 @@
         }
     </script>
     <title>Сервісний центр з онлайн-розрахунком — MobiKOR</title>
-    <!-- Tailwind CSS CDN + Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
-    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
@@ -27,12 +26,16 @@
     <!-- Header: Логотип зліва, бургер + зміна теми + авторизація згруповані справа -->
     <div id="site-header"></div>
 
-    <!-- Основний контент сторінки ремонту за шаблоном із Figma -->
     <main class="site-section" id="main">
         <!-- Breadcrumbs -->
         <nav class="text-sm text-text-muted mb-4" aria-label="Хлібні крихти">
             <ol class="flex items-center gap-1.5 p-0 list-none m-0">
-                <li><a class="hover:text-accent-text transition no-underline" href="index.html">Головна</a></li>
+                <li>
+                    <a class="hover:text-accent-text transition no-underline inline-flex items-center gap-1"
+                        href="index.html">
+                        Головна
+                    </a>
+                </li>
                 <li>/</li>
                 <li class="text-text font-medium" aria-current="page">Сервісний центр</li>
             </ol>
@@ -40,164 +43,249 @@
 
         <!-- Заголовок сторінки -->
         <header class="mb-7">
-            <h1 class="text-h1 font-bold tracking-tight text-text mb-2.5">
+            <h1 class="text-2xl sm:text-3xl lg:text-h1 font-bold tracking-tight text-text mb-2.5">
                 Сервісний центр з онлайн–розрахунком та гарантією
             </h1>
-            <p class="text-base text-text-muted max-w-3xl leading-relaxed m-0">
-                Безкоштовна діагностика та терміновий ремонт смартфонів, ноутбуків і планшетів. Розрахуйте точну вартість у калькуляторі та запишіться онлайн!
+            <p class="text-sm sm:text-base text-text-muted max-w-3xl leading-relaxed m-0">
+                Безкоштовна діагностика та терміновий ремонт смартфонів, ноутбуків і планшетів. Розрахуйте точну
+                вартість у калькуляторі та запишіться онлайн!
             </p>
         </header>
 
-        <!-- 3 Чіпи переваг (як у макеті) -->
-        <section class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-9" aria-label="Переваги сервісу">
-            <div class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
-                <i class="bi bi-upc-scan text-accent-text text-lg" aria-hidden="true"></i>
+        <!-- 3 Чіпи переваг -->
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-8 sm:mb-10" aria-label="Переваги сервісу">
+            <div
+                class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
+                <i class="bi bi-upc-scan text-accent-text text-xl" aria-hidden="true"></i>
                 <span>Безкоштовна діагностика</span>
             </div>
-            <div class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
-                <i class="bi bi-shield-check text-accent-text text-lg" aria-hidden="true"></i>
+            <div
+                class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
+                <i class="bi bi-shield-check text-accent-text text-xl" aria-hidden="true"></i>
                 <span>Гарантія 3–12 місяців</span>
             </div>
-            <div class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
-                <i class="bi bi-truck text-accent-text text-lg" aria-hidden="true"></i>
+            <div
+                class="card-lift flex items-center gap-3 p-4 rounded-xl border border-border bg-surface text-sm font-medium text-text">
+                <i class="bi bi-truck text-accent-text text-xl" aria-hidden="true"></i>
                 <span>Ремонт Новою Поштою</span>
             </div>
         </section>
 
-        <!-- Калькулятор вартості ремонту (Figma block) -->
-        <section id="repair-calc" class="p-6 sm:p-8 rounded-2xl border border-border bg-surface mb-10 shadow-xl" aria-labelledby="calc-title">
+        <!-- 1. Віджет калькулятора -->
+        <section id="repair-calc" class="p-5 sm:p-7 md:p-8 rounded-2xl border border-border bg-surface mb-10 shadow-xl"
+            aria-labelledby="calc-title">
             <header class="mb-6">
-                <h2 class="text-h2 font-bold text-text mb-1" id="calc-title">Розрахуйте вартість ремонту</h2>
-                <p class="text-sm text-text-muted m-0">Оберіть пристрій та послугу — дізнайтеся ціну до візиту в сервіс.</p>
+                <h2 class="text-h2 font-bold text-text mb-1 flex items-center gap-2" id="calc-title">
+                    Розрахуйте вартість ремонту
+                </h2>
+                <p class="text-sm text-text-muted m-0">Оберіть пристрій та послугу — дізнайтеся ціну до візиту в сервіс.
+                </p>
             </header>
 
-            <form class="space-y-6" onsubmit="event.preventDefault(); alert('Дякуємо! Ви записані на ремонт. Менеджер зв\'яжеться з вами для уточнення деталей.');">
-                <!-- 4 випадаючі списки -->
+            <form class="space-y-6" id="calc-form">
+                <!-- 4 поля вибору -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <label for="calc-category" class="block text-sm font-medium text-text mb-2">Категорія</label>
-                        <select id="calc-category" class="field">
-                            <option value="Смартфон">Смартфон</option>
-                            <option value="Ноутбук">Ноутбук</option>
-                            <option value="Планшет">Планшет</option>
-                            <option value="Смарт-годинник">Смарт-годинник</option>
+                        <label for="calc-category"
+                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                            <i class="bi bi-phone text-accent-text" aria-hidden="true"></i> Категорія
+                        </label>
+                        <select id="calc-category" class="field" required>
+                            <!-- options -->
                         </select>
                     </div>
                     <div>
-                        <label for="calc-brand" class="block text-sm font-medium text-text mb-2">Бренд</label>
-                        <select id="calc-brand" class="field">
-                            <option value="Apple">Apple</option>
-                            <option value="Samsung">Samsung</option>
-                            <option value="Xiaomi">Xiaomi</option>
-                            <option value="Google Pixel">Google Pixel</option>
+                        <label for="calc-brand"
+                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                            <i class="bi bi-tag text-accent-text" aria-hidden="true"></i> Бренд
+                        </label>
+                        <select id="calc-brand" class="field" required>
+                            <!-- options -->
                         </select>
                     </div>
                     <div>
-                        <label for="calc-model" class="block text-sm font-medium text-text mb-2">Модель</label>
-                        <select id="calc-model" class="field">
-                            <option value="iPhone 14 Pro">iPhone 14 Pro</option>
-                            <option value="iPhone 13">iPhone 13</option>
-                            <option value="iPhone 12">iPhone 12</option>
-                            <option value="iPhone 11">iPhone 11</option>
-                            <option value="Galaxy S23">Galaxy S23</option>
-                        </select>
+                        <label for="calc-model"
+                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                            <i class="bi bi-cpu text-accent-text" aria-hidden="true"></i> Модель
+                        </label>
+                        <input type="text" id="calc-model" list="models-list" placeholder="Введіть або оберіть модель"
+                            class="field" required autocomplete="off">
+                        <datalist id="models-list">
+                            <!-- options -->
+                        </datalist>
                     </div>
                     <div>
-                        <label for="calc-damage" class="block text-sm font-medium text-text mb-2">Тип пошкодження</label>
-                        <select id="calc-damage" class="field">
-                            <option value="Заміна екрана">Заміна екрана</option>
-                            <option value="Заміна акумулятора">Заміна акумулятора</option>
-                            <option value="Ремонт плати / чистка">Ремонт плати / чистка</option>
-                            <option value="Заміна роз'єму зарядки">Заміна роз'єму зарядки</option>
+                        <label for="calc-damage"
+                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                            <i class="bi bi-tools text-accent-text" aria-hidden="true"></i> Тип пошкодження
+                        </label>
+                        <select id="calc-damage" class="field" required>
+                            <!-- options -->
                         </select>
                     </div>
                 </div>
 
-                <!-- Результат калькулятора (1 800 ₴ + Записатися) -->
-                <div class="p-5 rounded-xl bg-surface-raised border border-border flex flex-col md:flex-row md:items-center justify-between gap-5">
+                <!-- Кнопка розрахунку -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                    <button type="submit" id="btn-calc-submit" class="button button--primary w-full sm:w-auto px-8">
+                        Розрахувати вартість та термін <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                    </button>
+                    <span class="text-sm text-text-muted flex items-center gap-1.5">
+                        <i class="bi bi-info-circle text-accent-text" aria-hidden="true"></i> Безкоштовна діагностика
+                        перед початком будь-яких робіт
+                    </span>
+                </div>
+
+                <!-- Динамічна картка результату (прихована до вибору користувачем) -->
+                <div id="calc-result-container"
+                    class="hidden p-5 rounded-xl bg-surface-raised border border-border flex flex-col md:flex-row md:items-center justify-between gap-5 transition-all">
                     <div>
-                        <h3 id="calc-result-title" class="text-h3 font-bold text-text mb-1">Заміна екрана · iPhone 14 Pro</h3>
-                        <p class="text-sm text-text-muted mb-1">Попередня ціна за обрану послугу без прихованих робіт.</p>
-                        <a href="#contacts" class="text-sm text-accent-text hover:underline inline-block">Не знайшли свою модель? Напишіть нам</a>
+                        <h3 id="calc-result-title" class="text-h3 font-bold text-text mb-1"></h3>
+                        <p class="text-sm text-text-muted mb-1">Орієнтовна ціна за обрану послугу без прихованих робіт.
+                        </p>
+                        <a href="index.html#contacts" class="text-sm text-accent-text hover:underline inline-block">Не
+                            знайшли свою модель? Напишіть нам</a>
                     </div>
                     <div class="flex flex-col sm:flex-row sm:items-center gap-6">
                         <div class="text-left sm:text-right">
-                            <div id="calc-result-price" class="text-2xl sm:text-3xl font-extrabold text-accent-text">1 800 ₴</div>
-                            <div class="text-sm text-text-muted flex items-center sm:justify-end gap-1 mt-0.5">
-                                <i class="bi bi-clock" aria-hidden="true"></i> ~45 хв
+                            <div id="calc-result-price" class="text-2xl sm:text-3xl font-extrabold text-accent-text">—
+                            </div>
+                            <div id="calc-result-time"
+                                class="text-sm text-text-muted flex items-center sm:justify-end gap-1 mt-0.5">
+                                <i class="bi bi-clock" aria-hidden="true"></i> <span>—</span>
                             </div>
                         </div>
-                        <button type="submit" class="button button--primary w-full px-6 md:w-auto">
+                        <button type="button"
+                            onclick="alert('Дякуємо! Ви записані на ремонт. Менеджер зв\'яжеться з вами для уточнення деталей.');"
+                            class="button button--primary w-full px-6 md:w-auto">
                             Записатися на ремонт
                         </button>
                     </div>
                 </div>
 
-                <p class="text-sm text-text-muted leading-relaxed m-0">
-                    Ціна в онлайн-калькуляторі — попередня. Майстер перевіряє стан пристрою та доступність деталей. Ремонт починається лише після вашого погодження фінальної ціни й терміну.
+                <p class="text-xs sm:text-sm text-text-muted leading-relaxed m-0">
+                    Ціна в онлайн-калькуляторі — попередня. Майстер перевіряє стан пристрою та доступність деталей.
+                    Ремонт починається лише після вашого погодження фінальної ціни й терміну.
                 </p>
             </form>
         </section>
 
-        <!-- Дві колонки: Фото зліва + Етапи відправки Новою Поштою справа (Figma block) -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-10" aria-labelledby="delivery-title">
-            <div>
-                <h2 class="text-h2 font-bold text-text mb-2" id="delivery-title">Сервісний центр, що ближче, ніж здається</h2>
-                <p class="text-base text-text-muted mb-5 leading-relaxed">Ремонт телефонів, ноутбуків і планшетів у Калинівці або з будь-якого міста України — через Нову Пошту.</p>
-                <div class="rounded-2xl overflow-hidden border border-border shadow-xl">
-                    <img src="assets/photo3.jpg" alt="Сервісний інженер ремонтує техніку" class="w-full h-auto object-cover max-h-[340px]">
+        <!-- Секція: Сервісний центр з віджетом  та Як надіслати пристрій (timeline) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12" aria-labelledby="delivery-title">
+            <div class="flex flex-col items-center lg:items-start w-full">
+                <h2 class="text-h2 font-bold text-text mb-2 text-center lg:text-left">
+                    Сервісний центр, що ближче, ніж здається
+                </h2>
+                <p class="text-text-muted text-sm sm:text-base mb-6 leading-relaxed text-center lg:text-left max-w-[50ch]">
+                    Ремонт телефонів, ноутбуків і планшетів у Калинівці або з будь-якого міста України — через Нову Пошту.
+                </p>
+                <div class="w-full p-2.5 sm:p-4 bg-surface border-2 border-border/80 rounded-3xl shadow-xl">
+                    <div class="overflow-hidden rounded-2xl bg-black/10">
+                        <video autoplay muted loop playsinline preload="auto" class="w-full h-auto block rounded-2xl"
+                            aria-label="Відео сервісного центру MobiKOR">
+                            <source src="assets/widget.mp4" type="video/mp4">
+                        </video>
+                    </div>
                 </div>
             </div>
 
+            <!-- 2. Timeline: Як надіслати пристрій Новою Поштою -->
             <div>
-                <h2 class="text-h2 font-bold text-text mb-4">Як надіслати пристрій Новою Поштою</h2>
-                <div class="space-y-3.5">
-                    <div class="card-lift p-4 rounded-xl bg-surface-raised border border-border/60">
-                        <h3 class="text-h3 flex items-center font-semibold text-text mb-1">
-                            <span class="text-accent-text font-bold mr-2">01</span> Узгодьте відправлення
-                        </h3>
-                        <p class="text-sm text-text-muted leading-relaxed m-0">
-                            Напишіть у Telegram або зателефонуйте 098 396 41 47. Отримайте дані одержувача й рекомендації щодо пакування.
-                        </p>
-                    </div>
-                    <div class="card-lift p-4 rounded-xl bg-surface-raised border border-border/60">
-                        <h3 class="text-h3 flex items-center font-semibold text-text mb-1">
-                            <span class="text-accent-text font-bold mr-2">02</span> Ми безкоштовно діагностуємо
-                        </h3>
-                        <p class="text-sm text-text-muted leading-relaxed m-0">
-                            Надішліть добре запакований пристрій. Після отримання надамо квитанцію та кошторис в онлайн-трекері.
-                        </p>
-                    </div>
-                    <div class="card-lift p-4 rounded-xl bg-surface-raised border border-border/60">
-                        <h3 class="text-h3 flex items-center font-semibold text-text mb-1">
-                            <span class="text-accent-text font-bold mr-2">03</span> Погодьте ремонт і отримайте гаджет
-                        </h3>
-                        <p class="text-sm text-text-muted leading-relaxed m-0">
-                            Підтвердьте ціну онлайн. Після перевірки повернемо пристрій Новою Поштою; доставку оплачує клієнт за тарифами перевізника.
-                        </p>
-                    </div>
-                </div>
+                <h2 class="text-h2 font-bold text-text mb-2 flex items-center gap-2" id="delivery-title">
+                     Як надіслати пристрій Новою Поштою?
+                </h2>
+                <p class="text-sm sm:text-base text-text-muted mb-6 leading-relaxed">
+                    Простий і надійний процес відправлення техніки на діагностику та ремонт з будь-якого куточка України.
+                </p>
+                <ol class="space-y-4 p-0 list-none m-0">
+                    <li>
+                        <article
+                            class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
+                            <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
+                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">01</span>
+                                <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
+                                    src="assets/icons/01.png" alt="" aria-hidden="true">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-bold text-step-text mb-1 flex items-center gap-2">
+                                   Узгодьте відправлення
+                                </h3>
+                                <p class="text-sm text-step-text-muted leading-relaxed m-0">
+                                    Заповніть форму або зателефонуйте. Отримайте дані одержувача й
+                                    рекомендації щодо надійного пакування.
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article
+                            class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
+                            <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
+                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">02</span>
+                                <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
+                                    src="assets/icons/02.png" alt="" aria-hidden="true">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-bold text-step-text mb-1 flex items-center gap-2">
+                                    Ми безкоштовно діагностуємо
+                                </h3>
+                                <p class="text-sm text-step-text-muted leading-relaxed m-0">
+                                    Надішліть добре запакований пристрій. Після отримання надамо квитанцію та детальний
+                                    кошторис робіт в онлайн-трекері.
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+                    <li>
+                        <article
+                            class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
+                            <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
+                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">03</span>
+                                <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
+                                    src="assets/icons/04.png" alt="" aria-hidden="true">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-base sm:text-lg font-bold text-step-text mb-1 flex items-center gap-2">
+                                     Погодьте ремонт і отримайте гаджет
+                                </h3>
+                                <p class="text-sm text-step-text-muted leading-relaxed m-0">
+                                    Підтвердьте ціну онлайн. Після перевірки повернемо пристрій Новою Поштою; доставку
+                                    оплачує клієнт за тарифами перевізника.
+                                </p>
+                            </div>
+                        </article>
+                    </li>
+                </ol>
             </div>
         </section>
 
-        <!-- 3 Статистичні картки (0 ₴, 3–12 міс, 100%) (Figma block) -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10" aria-label="Переваги сервісу в цифрах">
+        <!-- 4. Статистичні картки з bootstrap icons -->
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10" aria-label="Переваги сервісу в цифрах">
             <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
-                <p class="text-3xl sm:text-4xl font-extrabold text-accent-text mb-1.5">0 ₴</p>
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">0 ₴</p>
+                    <i class="bi bi-wallet2 text-2xl text-accent-text/60" aria-hidden="true"></i>
+                </div>
                 <h3 class="text-h3 font-bold text-text mb-1">Діагностика</h3>
                 <p class="text-sm text-text-muted m-0 leading-relaxed">
                     Визначаємо несправність безкоштовно. Ви вирішуєте, чи продовжувати ремонт.
                 </p>
             </div>
             <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
-                <p class="text-3xl sm:text-4xl font-extrabold text-accent-text mb-1.5">3–12 міс.</p>
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">3–12 міс.</p>
+                    <i class="bi bi-shield-check text-2xl text-accent-text/60" aria-hidden="true"></i>
+                </div>
                 <h3 class="text-h3 font-bold text-text mb-1">Гарантія на ремонт</h3>
                 <p class="text-sm text-text-muted m-0 leading-relaxed">
                     Термін залежить від послуги та встановлених деталей. Умови фіксуємо у квитанції.
                 </p>
             </div>
             <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
-                <p class="text-3xl sm:text-4xl font-extrabold text-accent-text mb-1.5">100%</p>
+                <div class="flex items-center justify-between mb-2">
+                    <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">100%</p>
+                    <i class="bi bi-clipboard-check text-2xl text-accent-text/60" aria-hidden="true"></i>
+                </div>
                 <h3 class="text-h3 font-bold text-text mb-1">Контроль кошторису</h3>
                 <p class="text-sm text-text-muted m-0 leading-relaxed">
                     Жодних додаткових робіт без погодження. Фото та статус ремонту — онлайн.
@@ -205,68 +293,92 @@
             </div>
         </section>
 
-        <!-- FAQ (Питання перед ремонтом) (Figma block) -->
+        <!-- 4. FAQ з bootstrap icons -->
         <section class="mb-10" aria-labelledby="faq-title">
-            <h2 class="text-h2 font-bold text-text mb-4" id="faq-title">Питання перед ремонтом</h2>
+            <h2 class="text-h2 font-bold text-text mb-4 flex items-center gap-2" id="faq-title">
+                 Питання перед ремонтом
+            </h2>
             <div class="space-y-3">
-                <details class="group p-4 rounded-xl border border-border bg-surface" open>
+                <details class="group p-4 rounded-xl border border-border bg-surface transition-colors" open>
                     <summary class="flex items-center justify-between cursor-pointer font-semibold text-text list-none">
-                        <span class="text-sm sm:text-base">Як працює ремонт з доставкою?</span>
+                        <span class="text-sm sm:text-base flex items-center gap-2">
+                            <i class="bi bi-truck text-accent-text" aria-hidden="true"></i> Як працює ремонт з
+                            доставкою?
+                        </span>
                         <span class="text-lg text-text-muted group-open:hidden">+</span>
                         <span class="text-lg text-accent-text hidden group-open:inline">—</span>
                     </summary>
                     <p class="text-sm text-text-muted mt-3 pt-3 border-t border-border leading-relaxed m-0">
-                        Узгодьте відправлення з сервісом, запакуйте пристрій і надішліть Новою Поштою. Після діагностики отримайте кошторис та погодьте його онлайн. Відремонтований гаджет повернемо після перевірки; доставка — за тарифами перевізника.
+                        Узгодьте відправлення з сервісом, запакуйте пристрій і надішліть Новою Поштою. Після діагностики
+                        отримайте кошторис та погодьте його онлайн. Відремонтований гаджет повернемо після перевірки;
+                        доставка — за тарифами перевізника.
                     </p>
                 </details>
-                <details class="group p-4 rounded-xl border border-border bg-surface">
+                <details class="group p-4 rounded-xl border border-border bg-surface transition-colors">
                     <summary class="flex items-center justify-between cursor-pointer font-semibold text-text list-none">
-                        <span class="text-sm sm:text-base">Чи справді діагностика безкоштовна?</span>
+                        <span class="text-sm sm:text-base flex items-center gap-2">
+                            <i class="bi bi-check-circle text-accent-text" aria-hidden="true"></i> Чи справді
+                            діагностика безкоштовна?
+                        </span>
                         <span class="text-lg text-text-muted group-open:hidden">+</span>
                         <span class="text-lg text-accent-text hidden group-open:inline">—</span>
                     </summary>
                     <p class="text-sm text-text-muted mt-3 pt-3 border-t border-border leading-relaxed m-0">
-                        Так. Ми визначаємо несправність безкоштовно, а ви вирішуєте, чи продовжувати ремонт. Оплата — лише за погоджені роботи та деталі.
+                        Так. Ми визначаємо несправність безкоштовно, а ви вирішуєте, чи продовжувати ремонт. Оплата —
+                        лише за погоджені роботи та деталі.
                     </p>
                 </details>
-                <details class="group p-4 rounded-xl border border-border bg-surface">
+                <details class="group p-4 rounded-xl border border-border bg-surface transition-colors">
                     <summary class="flex items-center justify-between cursor-pointer font-semibold text-text list-none">
-                        <span class="text-sm sm:text-base">Чи зміниться ціна після розрахунку?</span>
+                        <span class="text-sm sm:text-base flex items-center gap-2">
+                            <i class="bi bi-cash-stack text-accent-text" aria-hidden="true"></i> Чи зміниться ціна після
+                            розрахунку?
+                        </span>
                         <span class="text-lg text-text-muted group-open:hidden">+</span>
                         <span class="text-lg text-accent-text hidden group-open:inline">—</span>
                     </summary>
                     <p class="text-sm text-text-muted mt-3 pt-3 border-t border-border leading-relaxed m-0">
-                        Ціна в калькуляторі попередня. Після діагностики майстер надішле остаточний кошторис, і ремонт почнеться лише після вашого погодження ціни й терміну.
+                        Ціна в калькуляторі попередня. Після діагностики майстер надішле остаточний кошторис, і ремонт
+                        почнеться лише після вашого погодження ціни й терміну.
                     </p>
                 </details>
-                <details class="group p-4 rounded-xl border border-border bg-surface">
+                <details class="group p-4 rounded-xl border border-border bg-surface transition-colors">
                     <summary class="flex items-center justify-between cursor-pointer font-semibold text-text list-none">
-                        <span class="text-sm sm:text-base">Яка гарантія на послуги та деталі?</span>
+                        <span class="text-sm sm:text-base flex items-center gap-2">
+                            <i class="bi bi-patch-check text-accent-text" aria-hidden="true"></i> Яка гарантія на
+                            послуги та деталі?
+                        </span>
                         <span class="text-lg text-text-muted group-open:hidden">+</span>
                         <span class="text-lg text-accent-text hidden group-open:inline">—</span>
                     </summary>
                     <p class="text-sm text-text-muted mt-3 pt-3 border-t border-border leading-relaxed m-0">
-                        Гарантія 3–12 місяців залежно від послуги та встановлених деталей. Конкретний термін фіксуємо у квитанції.
+                        Гарантія 3–12 місяців залежно від послуги та встановлених деталей. Конкретний термін фіксуємо у
+                        квитанції.
                     </p>
                 </details>
             </div>
         </section>
 
-        <!-- Нижня плашка CTA (Пристрій уже в сервісі?) (Figma block) -->
-        <section class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4" aria-labelledby="cta-title">
+        <!-- Нижня плашка CTA (Пристрій уже в сервісі?) -->
+        <section
+            class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4"
+            aria-labelledby="cta-title">
             <div>
-                <h2 class="text-h2 font-bold text-text mb-1" id="cta-title">Пристрій уже в сервісі?</h2>
-                <p class="text-sm text-text-muted m-0">Перевіряйте статус ремонту за квитанцією, дивіться фото та погоджуйте кошторис без дзвінків.</p>
+                <h2 class="text-h2 font-bold text-text mb-1 flex items-center gap-2" id="cta-title">
+                    Пристрій уже в сервісі?
+                </h2>
+                <p class="text-sm text-text-muted m-0">Перевіряйте статус ремонту за квитанцією, дивіться фото та
+                    погоджуйте кошторис без дзвінків.</p>
             </div>
-            <a class="button button--secondary whitespace-nowrap shrink-0" href="account.html">
-                Відстежити квитанцію
+            <a class="button button--secondary whitespace-nowrap shrink-0 w-full md:w-auto inline-flex items-center justify-center gap-2"
+                href="account.html">
+                <i class="bi bi-search" aria-hidden="true"></i> Відстежити квитанцію
             </a>
         </section>
     </main>
 
-    <!-- Footer: Сині посилання (#367ab6) з помаранчевим підкресленням при наведенні + HR на всю ширину -->
+    <!-- Footer-->
     <div id="site-footer"></div>
-
     <script src="js/layout.js" defer></script>
     <script src="js/common.js" defer></script>
     <script src="js/cart.js" defer></script>

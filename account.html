@@ -16,10 +16,8 @@
         }
     </script>
     <title>Особистий кабінет та трекер квитанцій — MobiKOR</title>
-    <!-- Tailwind CSS CDN + Config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
-    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
@@ -29,7 +27,6 @@
     <div id="site-header"></div>
 
     <main class="site-section" id="main">
-        <!-- Breadcrumbs -->
         <nav class="text-sm text-text-muted mb-4" aria-label="Хлібні крихти">
             <ol class="flex items-center gap-1.5 p-0 list-none m-0">
                 <li><a class="hover:text-accent-text transition no-underline" href="index.html">Головна</a></li>
@@ -45,7 +42,7 @@
 
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Форми авторизації та відстеження">
             <!-- Блок 1: Авторизація / Вхід -->
-            <article class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col justify-between">
+            <article class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col h-full justify-between">
                 <div>
                     <div class="flex items-center gap-3.5 mb-5">
                         <div class="w-11 h-11 rounded-xl bg-accent-text/15 border border-border text-accent-text flex items-center justify-center text-xl">
@@ -56,35 +53,43 @@
                             <p class="text-sm text-text-muted m-0">Для постійних клієнтів сервісу та покупців</p>
                         </div>
                     </div>
+                </div>
 
-                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Авторизація успішна!');">
+                <form class="flex-1 flex flex-col justify-between" onsubmit="event.preventDefault(); alert('Авторизація успішна!');">
+                    <div class="space-y-4">
                         <div>
                             <label for="auth-login" class="block text-sm font-medium text-text mb-2">Номер телефону або Email</label>
                             <input id="auth-login" name="login" type="text" placeholder="+380... або name@example.com" required autocomplete="username" class="field">
+                            <small class="block mt-1 text-xs text-text-muted">Введіть телефон або пошту вашого акаунту</small>
                         </div>
                         <div>
-                            <div class="flex items-center justify-between mb-1.5">
-                                <label for="auth-password" class="block text-sm font-medium text-text mb-2">Пароль</label>
+                            <div class="flex items-center justify-between mb-2">
+                                <label for="auth-password" class="block text-sm font-medium text-text m-0">Пароль</label>
                                 <a href="#" class="text-sm text-accent-text hover:underline">Забули пароль?</a>
                             </div>
                             <input id="auth-password" name="password" type="password" placeholder="Введіть пароль" required autocomplete="current-password" class="field">
+                            <small class="block mt-1 text-xs text-text-muted">Пароль із SMS або вказаний при реєстрації</small>
                         </div>
-                        <label class="flex items-center gap-2 cursor-pointer text-sm text-text-muted pt-1">
-                            <input type="checkbox" id="remember-me" name="remember" class="accent-accent w-4 h-4 rounded">
-                            Запам'ятати мене на цьому пристрої
-                        </label>
-                        <button class="button button--primary w-full py-2.5 mt-2" type="submit">
-                            Увійти до акаунту <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-                <p class="text-sm text-text-muted text-center mt-4 mb-0">
+                        <div class="pt-1">
+                            <label class="flex items-center gap-2 cursor-pointer text-sm text-text-muted">
+                                <input type="checkbox" id="remember-me" name="remember" class="accent-accent w-4 h-4 rounded">
+                                <span>Запам'ятати мене на цьому пристрої</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button class="button button--primary w-full py-2.5 mt-5" type="submit">
+                        Увійти до акаунту <i class="bi bi-box-arrow-in-right ml-1" aria-hidden="true"></i>
+                    </button>
+                </form>
+
+                <p class="text-xs sm:text-sm text-text-muted text-center mt-4 mb-0 flex items-center justify-center min-h-[20px]">
                     Не маєте пароля? Він надходить у SMS після створення першої квитанції.
                 </p>
             </article>
 
             <!-- Блок 2: Швидка перевірка квитанції -->
-            <article class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col justify-between">
+            <article class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col h-full justify-between">
                 <div>
                     <div class="flex items-center gap-3.5 mb-5">
                         <div class="w-11 h-11 rounded-xl bg-success/15 border border-border text-success flex items-center justify-center text-xl">
@@ -95,31 +100,41 @@
                             <p class="text-sm text-text-muted m-0">Миттєва перевірка без повної авторизації</p>
                         </div>
                     </div>
+                </div>
 
-                    <form class="space-y-5" onsubmit="event.preventDefault(); alert('Квитанція знайдена! Статус: Діагностика завершена, погодження вартості.');">
+                <form class="flex-1 flex flex-col justify-between" onsubmit="event.preventDefault(); alert('Квитанція знайдена! Статус: Діагностика завершена, погодження вартості.');">
+                    <div class="space-y-4">
                         <div>
                             <label for="track-number" class="block text-sm font-medium text-text mb-2">Номер квитанції *</label>
                             <input id="track-number" name="receipt" type="text" placeholder="наприклад: MK-2026-4892" required class="field">
-                            <small class="block mt-1 text-sm text-text-muted">Вказаний у паперовій квитанції або SMS</small>
+                            <small class="block mt-1 text-xs text-text-muted">Вказаний у паперовій квитанції або SMS</small>
                         </div>
                         <div>
-                            <label for="track-phone" class="block text-sm font-medium text-text mb-2">Номер телефону власника *</label>
+                            <div class="flex items-center justify-between mb-2">
+                                <label for="track-phone" class="block text-sm font-medium text-text m-0">Номер телефону власника *</label>
+                            </div>
                             <input id="track-phone" name="phone" type="tel" placeholder="+380 __ ___ __ __" required class="field">
-                            <small class="block mt-1 text-sm text-text-muted">Номер, вказаний при оформленні ремонту</small>
+                            <small class="block mt-1 text-xs text-text-muted">Номер, вказаний при оформленні ремонту</small>
                         </div>
-                        <button class="button button--secondary w-full py-2.5 text-success border-success/60 hover:border-success hover:text-success mt-2" type="submit">
-                            Перевірити статус ремонту <i class="bi bi-search" aria-hidden="true"></i>
-                        </button>
-                    </form>
-                </div>
-                <p class="text-sm text-text-muted text-center mt-4 mb-0 flex items-center justify-center gap-1.5">
+                        <div class="pt-1">
+                            <p class="flex items-center gap-1.5 text-sm text-text-muted m-0">
+                                <i class="bi bi-shield-check text-success text-base" aria-hidden="true"></i>
+                                <span>Миттєвий онлайн-пошук у базі сервісу</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="button button--secondary w-full py-2.5 text-success border-success/60 hover:border-success hover:text-success mt-5" type="submit">
+                        Перевірити статус ремонту <i class="bi bi-search ml-1" aria-hidden="true"></i>
+                    </button>
+                </form>
+
+                <p class="text-xs sm:text-sm text-text-muted text-center mt-4 mb-0 flex items-center justify-center gap-1.5 min-h-[20px]">
                     <i class="bi bi-shield-check text-success" aria-hidden="true"></i> Захищений доступ до персонального звіту
                 </p>
             </article>
         </section>
     </main>
-
-    <!-- Footer: Сині посилання (#367ab6) з помаранчевим підкресленням при наведенні + HR на всю ширину -->
     <div id="site-footer"></div>
 
     <script src="js/layout.js" defer></script>

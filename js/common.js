@@ -167,7 +167,7 @@
 
 // ---------- 3. Динаміка карток для мобільних пристроїв (Touch Tactile Dynamics) ----------
 (function () {
-  document.querySelectorAll('.card-lift, .button, .product-item').forEach(function (el) {
+  document.querySelectorAll('.card-lift, .step-card-hover, .button, .product-item').forEach(function (el) {
     el.addEventListener('touchstart', function () {
       el.classList.add('is-touch-active');
     }, { passive: true });

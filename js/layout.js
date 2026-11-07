@@ -9,7 +9,7 @@
       about: 'index.html#about',
       shop: 'shop.html',
       repair: 'repair.html',
-      contacts: '#footer-contacts',
+      contacts: 'index.html#contacts',
     };
 
     headerHost.innerHTML = `
@@ -71,7 +71,7 @@
                 <li><a href="repair.html">Послуги ремонту</a></li>
                 <li><a href="shop.html">Магазин техніки</a></li>
                 <li><a href="account.html">Відстежити квитанцію</a></li>
-                <li><a href="#footer-contacts">Контакти / Зворотний зв'язок</a></li>
+                <li><a href="index.html#contacts">Контакти / Зворотний зв'язок</a></li>
               </ul>
             </div>
             <div>

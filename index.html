@@ -16,21 +16,17 @@
         }
     </script>
     <title>MobiKOR — сервісний центр і магазин оригінальних гаджетів</title>
-
-    <!-- Tailwind CSS CDN + Конфігурація токенів першої ітерації -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
-    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
 
 <body class="bg-page text-text min-h-dvh" data-page="home">
-    <!-- Header: точні розміри першої ітерації (висота 76px, логотип 52px, відступи) -->
     <div id="site-header"></div>
 
     <main id="home">
-        <!-- 1. Hero: Розміри та пропорції як у першій ітерації (clamp висота, h1, опис 52ch, кнопки 480px) -->
+        <!-- 1. Hero: Розміри та пропорції (clamp висота, h1, опис 52ch, кнопки 480px) -->
         <header class="hero relative isolate flex min-h-[clamp(520px,60vw,760px)] items-center overflow-hidden bg-page px-4 py-10 text-text sm:px-6 md:min-h-[680px] lg:px-8" id="hero">
             <article class="hero__content relative z-10 max-w-[640px]" id="hero-text">
                 <h1 class="text-display font-bold leading-tight tracking-tight mb-4 text-text" id="hero-title">
@@ -63,7 +59,7 @@
 
             <!-- Відео на фоні -->
             <figure class="absolute inset-0 -z-10 m-0">
-                <video muted loop playsinline preload="metadata" poster="assets/photo1.jpg" aria-label="Відео діагностики пристрою" class="w-full h-full object-cover">
+                <video muted loop playsinline preload="metadata"  aria-label="Відео діагностики пристрою" class="w-full h-full object-cover">
                     <source src="assets/hero_loop_light.mp4" type="video/mp4">
                     Ваш браузер не підтримує відтворення відео.
                 </video>
@@ -71,7 +67,7 @@
             </figure>
         </header>
 
-        <!-- 2. Про нас: сітка 1.15fr до 1fr, як у першій ітерації -->
+        <!-- 2. Про нас: сітка 1.15fr до 1fr -->
         <section id="about" class="bg-section py-12 md:py-16 lg:py-20 border-t border-b border-border" aria-labelledby="about-title">
             <div class="container-page">
             <h2 class="text-sm font-semibold uppercase tracking-wider text-accent-text mb-2" id="about-title">Про нас</h2>
@@ -91,7 +87,7 @@
                         </p>
                     </div>
 
-                    <!-- Зелені плашки переваг (перша ітерація) -->
+                    <!-- Зелені плашки переваг -->
                     <aside class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6" aria-label="Наші переваги">
                         <article class="card-lift p-4 rounded-control bg-success/15 border border-success/40 flex flex-col justify-center min-h-[100px]">
                             <h4 class="text-sm font-bold uppercase tracking-wider text-success mb-1 flex items-center gap-1.5">
@@ -157,7 +153,7 @@
                     </div>
         </section>
 
-        <!-- 3. Як ми працюємо: світлі картки, точні розміри першої ітерації -->
+        <!-- 3. Як ми працюємо: світлі картки -->
         <section id="repair" class="bg-page py-12 md:py-16 lg:py-20" aria-labelledby="repair-title">
             <div class="container-page">
             <h2 class="text-sm font-semibold uppercase tracking-wider text-accent-text mb-2" id="repair-title">Як ми працюємо?</h2>
@@ -237,7 +233,7 @@
                     </div>
         </section>
 
-        <!-- 4. Два швидкі способи: точні розміри першої ітерації -->
+        <!-- 4. Два швидкі способи -->
         <section data-section="quick-actions" class="bg-section py-12 md:py-16 lg:py-20 border-t border-b border-border" aria-labelledby="quick-actions-title">
             <div class="container-page">
             <h2 class="text-h2 font-bold text-text mb-2" id="quick-actions-title">Два швидкі способи отримати потрібну інформацію</h2>
@@ -277,7 +273,7 @@
                     </div>
         </section>
 
-        <!-- 5. Магазин: розміри карток, медіа, відступи як у першій ітерації -->
+        <!-- 5. Магазин: розміри карток, медіа -->
         <section id="shop" class="bg-page py-12 md:py-16 lg:py-20" aria-labelledby="shop-title">
             <div class="container-page">
             <header class="flex justify-between items-end gap-4 mb-6">
@@ -461,9 +457,8 @@
         </section>
     </main>
 
-    <!-- Footer: точна структура та сині посилання (#367ab6) з першої ітерації -->
+    <!-- Footer -->
     <div id="site-footer"></div>
-
     <script src="js/layout.js" defer></script>
     <script src="js/common.js" defer></script>
     <script src="js/home.js" defer></script>
