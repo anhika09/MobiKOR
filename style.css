@@ -186,6 +186,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible {
 input:disabled, select:disabled, textarea:disabled { cursor: not-allowed; opacity: .55; }
 input:user-invalid, select:user-invalid, textarea:user-invalid { border-color: #d04432; color: #d04432; }
 .field-error { display: block; margin-top: .375rem; color: #d04432; font-size: .875rem; line-height: 1.4; }
+.form-success { margin-top: .75rem; color: var(--color-success); font-size: .875rem; line-height: 1.4; }
 textarea { min-height: 128px; padding-block: 12px; resize: vertical; }
 select {
   padding-right: 40px;

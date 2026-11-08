@@ -5,7 +5,9 @@
 // ---------- Form validation feedback ----------
 (function () {
   var fieldSelector = 'input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]), select, textarea';
+  var contactFormSelector = '#contacts form';
   var errorElements = new WeakMap();
+  var successElements = new WeakMap();
   var errorSequence = 0;
 
   function getErrorMessage(field) {
@@ -18,7 +20,27 @@
     return 'Перевірте коректність введених даних.';
   }
 
-  function removeError(field) {
+  function showError(field, message) {
+    var error = errorElements.get(field);
+    if (!error) {
+      error = document.createElement('span');
+      error.id = field.id ? field.id + '-error' : 'field-error-' + (++errorSequence);
+      error.className = 'field-error';
+      error.setAttribute('role', 'alert');
+      errorElements.set(field, error);
+
+      var anchor = field.matches('input[type="checkbox"]') ? field.closest('label') : field;
+      anchor.insertAdjacentElement('afterend', error);
+    }
+
+    error.textContent = message;
+    field.setAttribute('aria-invalid', 'true');
+    var descriptions = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+    if (descriptions.indexOf(error.id) === -1) descriptions.push(error.id);
+    field.setAttribute('aria-describedby', descriptions.join(' '));
+  }
+
+  function clearError(field) {
     var error = errorElements.get(field);
     if (!error) return;
 
@@ -33,39 +55,115 @@
     else field.removeAttribute('aria-describedby');
   }
 
+  function clearSuccess(form) {
+    var success = successElements.get(form);
+    if (!success) return;
+
+    success.remove();
+    successElements.delete(form);
+  }
+
+  function showSuccess(form) {
+    clearSuccess(form);
+    var success = document.createElement('p');
+    success.className = 'form-success';
+    success.setAttribute('role', 'status');
+    success.textContent = 'Дякуємо! Ваша заявка прийнята.';
+    form.insertAdjacentElement('afterend', success);
+    successElements.set(form, success);
+  }
+
+  function validateField(field) {
+    return field.validity.valid ? '' : getErrorMessage(field);
+  }
+
+  function validateRequestType(field) {
+    return validateField(field);
+  }
+
+  function validateName(field) {
+    return validateField(field);
+  }
+
+  function validateEmail(field) {
+    return validateField(field);
+  }
+
+  function validatePhone(field) {
+    return validateField(field);
+  }
+
+  function validateMessage(field) {
+    return validateField(field);
+  }
+
+  function validateAgreement(field) {
+    return validateField(field);
+  }
+
   document.addEventListener('invalid', function (event) {
     var field = event.target;
     if (!(field instanceof Element) || !field.matches(fieldSelector)) return;
-
-    var error = errorElements.get(field);
-    if (!error) {
-      error = document.createElement('span');
-      error.id = field.id ? field.id + '-error' : 'field-error-' + (++errorSequence);
-      error.className = 'field-error';
-      error.setAttribute('role', 'alert');
-      errorElements.set(field, error);
-      field.insertAdjacentElement('afterend', error);
-    }
-
-    error.textContent = getErrorMessage(field);
-    field.setAttribute('aria-invalid', 'true');
-    var descriptions = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
-    if (descriptions.indexOf(error.id) === -1) descriptions.push(error.id);
-    field.setAttribute('aria-describedby', descriptions.join(' '));
+    showError(field, getErrorMessage(field));
   }, true);
 
   function clearValidFieldError(event) {
     var field = event.target;
-    if (!(field instanceof Element) || !field.matches(fieldSelector)) return;
-    if (field.validity.valid) removeError(field);
-    else {
-      var error = errorElements.get(field);
-      if (error) error.textContent = getErrorMessage(field);
+    if (!(field instanceof Element)) return;
+
+    var isContactAgreement = field.matches('input[type="checkbox"]') &&
+      field.closest(contactFormSelector);
+    if (!field.matches(fieldSelector) && !isContactAgreement) return;
+
+    if (field.validity.valid) clearError(field);
+    else if (errorElements.has(field)) {
+      showError(field, getErrorMessage(field));
     }
+
+    var form = field.closest(contactFormSelector);
+    if (form) clearSuccess(form);
   }
 
   document.addEventListener('input', clearValidFieldError, true);
   document.addEventListener('change', clearValidFieldError, true);
+
+  var contactForm = document.querySelector(contactFormSelector);
+  if (!contactForm) return;
+
+  var phoneField = contactForm.querySelector('[name="phone"]');
+  phoneField.addEventListener('blur', function () {
+    var message = validatePhone(phoneField);
+    if (message) showError(phoneField, message);
+    else clearError(phoneField);
+  });
+
+  var validations = [
+    { field: contactForm.querySelector('[name="request-type"]'), validate: validateRequestType },
+    { field: contactForm.querySelector('[name="name"]'), validate: validateName },
+    { field: contactForm.querySelector('[name="email"]'), validate: validateEmail },
+    { field: contactForm.querySelector('[name="phone"]'), validate: validatePhone },
+    { field: contactForm.querySelector('[name="message"]'), validate: validateMessage },
+    { field: contactForm.querySelector('[name="consent"]'), validate: validateAgreement }
+  ];
+
+  contactForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearSuccess(contactForm);
+
+    var firstInvalidField = null;
+    validations.forEach(function (validation) {
+      var message = validation.validate(validation.field);
+      if (message) {
+        showError(validation.field, message);
+        if (!firstInvalidField) firstInvalidField = validation.field;
+      } else {
+        clearError(validation.field);
+      }
+    });
+
+    if (firstInvalidField) firstInvalidField.focus();
+    else showSuccess(contactForm);
+  });
 })();
 
 // ---------- 1. Перемикач теми (Dark / Light) ----------

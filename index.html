@@ -419,15 +419,21 @@
                     <p class="text-sm text-text-muted leading-relaxed">Опишіть проблему та вкажіть контактний номер. Так спеціаліст зможе підготувати відповідь саме для вашого запиту.</p>
                 </header>
 
-                <form class="p-6 sm:p-7 rounded-card bg-surface border border-border grid grid-cols-1 sm:grid-cols-2 gap-5" onsubmit="event.preventDefault(); alert('Дякуємо! Ваша заявка прийнята.');">
-                    <div class="sm:col-span-2">
+                <form class="p-6 sm:p-7 rounded-card bg-surface border border-border grid grid-cols-1 sm:grid-cols-2 gap-5" novalidate>
+                    <div>
                         <label for="request-type" class="block text-sm font-medium text-text mb-2">Тип звернення *</label>
                         <select id="request-type" name="request-type" required class="field">
                             <option value="">Оберіть тип звернення</option>
                             <option value="repair">Консультація щодо ремонту</option>
                             <option value="shop">Питання щодо товару</option>
+                            <option value="other">Інше</option>
                         </select>
                         <small class="block mt-1 text-sm text-text-muted">Ремонт / Купівля / Гарантія / Інше</small>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-text mb-2">Електронна пошта *</label>
+                        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="name@example.com" required class="field">
+                        <small class="block mt-1 text-sm text-text-muted">Вкажіть вашу електронну пошту</small>
                     </div>
                     <div>
                         <label for="name" class="block text-sm font-medium text-text mb-2">Ім’я</label>
@@ -435,8 +441,8 @@
                     </div>
                     <div>
                         <label for="phone" class="block text-sm font-medium text-text mb-2">Телефон *</label>
-                        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required pattern="^\+380[\s\(\)\-]*(\d[\s\(\)\-]*){9}$" title="Номер у форматі +380XXXXXXXXX" class="field">
-                        <small class="block mt-1 text-sm text-text-muted">Вкажіть номер у форматі +380...</small>
+                        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+380 __ ___ __ __" required pattern="^(?:\+380[\s\(\)\-]*(\d[\s\(\)\-]*){9}|0[\s\(\)\-]*(\d[\s\(\)\-]*){9})$" title="Введіть номер повністю: 0XXXXXXXXX або +380XXXXXXXXX." class="field">
+                        <small class="block mt-1 text-sm text-text-muted">Формат: (+380)XXXXXXXXX </small>
                     </div>
                     <div class="sm:col-span-2">
                         <label for="message" class="block text-sm font-medium text-text mb-2">Опис проблеми</label>
