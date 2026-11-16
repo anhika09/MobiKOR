@@ -178,3 +178,48 @@
   if (btnResetEmpty) btnResetEmpty.addEventListener('click', resetAll);
   filterAndSort();
 })();
+
+// ---------- 8. Swiper промо-банерів магазину (з покращеним свайпінгом) ----------
+(function () {
+  var promoEl = document.querySelector('.shop-promo-swiper');
+  if (!promoEl || typeof Swiper === 'undefined') return;
+
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  new Swiper(promoEl, {
+    loop: true,
+    speed: 600,
+    effect: 'slide',
+    simulateTouch: true,
+    allowTouchMove: true,
+    grabCursor: true,
+    touchRatio: 1,
+    touchAngle: 45,
+    threshold: 5,
+    resistance: true,
+    resistanceRatio: 0.85,
+    preventClicks: true,
+    preventClicksPropagation: true,
+    mousewheel: {
+      forceToAxis: true,
+      releaseOnEdges: true,
+    },
+    autoplay: motionQuery.matches ? false : {
+      delay: 5000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    pagination: {
+      el: '.shop-promo-pagination',
+      clickable: true,
+    },
+    keyboard: {
+      enabled: true,
+    },
+    a11y: {
+      prevSlideMessage: 'Попередній банер',
+      nextSlideMessage: 'Наступний банер',
+      paginationBulletMessage: 'Перейти до банеру {{index}}',
+    },
+  });
+})();

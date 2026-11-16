@@ -143,27 +143,11 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .footer-divider { width: 100%; margin-block: 1.5rem; border: 0; border-top: 1px solid var(--color-border); }
 small { font-size: .875rem; }
 
-:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
-select, textarea).field,
-input.field,
-select.field,
-textarea.field {
-  display: block;
-  width: 100%;
-  min-height: 48px;
-  padding: 0 16px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
-  color: var(--color-text);
-  background-color: var(--color-page);
-  font-size: 16px;
-  line-height: 1.5;
-  transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-}
-
+.field,
 input:is([type="text"], [type="tel"], [type="email"], [type="password"], [type="search"], [type="number"]),
 select,
 textarea {
+  display: block;
   width: 100%;
   min-height: 48px;
   padding: 0 16px;
@@ -336,6 +320,140 @@ button#shop-next.is-touch-active {
 .filter-details[open] > summary { list-style: none; }
 .filter-details > summary::-webkit-details-marker { display: none; }
 
+/* ==========================================================================
+   Swiper.js Plugins Custom Styling (MobiKOR)
+   ========================================================================== */
+.swiper {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  --swiper-theme-color: var(--color-accent);
+  --swiper-pagination-color: var(--color-accent);
+}
+
+.swiper-wrapper,
+.swiper-slide {
+  touch-action: pan-y;
+}
+
+.swiper-slide {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.swiper-slide img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: none;
+}
+
+.swiper-slide a,
+.swiper-slide button {
+  user-select: auto;
+}
+
+.products-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.products-swiper .swiper-slide article {
+  width: 100%;
+}
+
+.products-swiper .card-lift {
+  touch-action: pan-y;
+}
+
+.products-swiper .card-lift:active,
+.products-swiper .card-lift.is-touch-active {
+  transform: none;
+}
+
+.shop-promo-swiper {
+  position: relative;
+}
+
+.shop-promo-swiper .swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.shop-promo-swiper .swiper-slide {
+  height: auto;
+  min-height: 220px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+/* Позиціонування пагінації промо-каруселі у правому нижньому кутку */
+.shop-promo-swiper .shop-promo-pagination {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1rem;
+  left: auto;
+  top: auto;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.375rem;
+  z-index: 20;
+}
+
+.swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.45);
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  transition: width .25s ease-out, background-color .25s ease-out;
+}
+
+:root[data-theme="light"] .swiper .swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.swiper .swiper-pagination-bullet-active {
+  background: var(--color-accent);
+  width: 24px;
+  border-radius: 9999px;
+}
+
+.swiper-button-disabled {
+  opacity: .35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.shop-promo-swiper .button {
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.shop-promo-swiper .button:hover,
+.shop-promo-swiper .button--primary:hover,
+.shop-promo-swiper .button:active,
+.shop-promo-swiper .button--primary:active {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Кнопки каруселі */
+button#about-photo-prev,
+button#about-photo-next {
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease;
+}
+
+button#about-photo-prev:hover,
+button#about-photo-next:hover,
+button#about-photo-prev:active,
+button#about-photo-next:active {
+  transform: translateY(-50%);
+  box-shadow: none;
+}
+
 .hero video { width: 100%; height: 100%; object-fit: cover; object-position: 80% center; }
 .hero figure::after {
   position: absolute;
@@ -346,16 +464,6 @@ button#shop-next.is-touch-active {
     linear-gradient(0deg, var(--color-page) 0%, transparent 28%);
 }
 
-.about-carousel__slide {
-  position: absolute;
-  inset: 0;
-  visibility: hidden;
-  opacity: 0;
-  transform: scale(1.02);
-  transition: opacity .5s ease, transform .5s ease, visibility .5s ease;
-}
-.about-carousel__slide.is-active { visibility: visible; opacity: 1; transform: scale(1); }
-.about-carousel__dot.is-active { width: 22px; background-color: var(--color-accent); }
 
 @media (hover: hover) and (pointer: fine) {
   .site-header nav a:not(.mobile-account-link):hover::after { transform: scaleX(1); }
@@ -413,9 +521,15 @@ button#shop-next.is-touch-active {
   html { scroll-behavior: auto; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   .reveal { opacity: 1; transform: none; }
+  [data-aos] {
+    transition-property: none !important;
+    transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
   .card-lift:hover, .card-lift:active, .card-lift.is-touch-active,
   .step-card-hover:hover, .step-card-hover:active, .step-card-hover.is-touch-active,
   .step-card-hover .step-num, .step-card-hover .step-img,
   .button:hover, .button:active, .button.is-touch-active,
-  .product-media img, .about-carousel__slide { transform: none !important; }
+  .product-media img { transform: none !important; }
 }

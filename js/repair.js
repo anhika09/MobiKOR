@@ -1,86 +1,112 @@
-// ---------- Калькулятор вартості ремонту на repair.html ----------
+// =====================================================================
+// Калькулятор ремонту MobiKOR.
+// Число ціни рахує ЦЕЙ КОД за data/pricing.json.
+// ШІ (функція explain) лише пояснює вже порахований результат.
+// =====================================================================
 (function () {
-  var form = document.getElementById('calc-form') || document.querySelector('#repair-calc form');
-  var catSelect = document.getElementById('calc-category');
-  var brandSelect = document.getElementById('calc-brand');
-  var modelSelect = document.getElementById('calc-model');
-  var damageSelect = document.getElementById('calc-damage');
-  var resultContainer = document.getElementById('calc-result-container');
-  var resultTitle = document.getElementById('calc-result-title');
-  var resultPrice = document.getElementById('calc-result-price');
-  var resultTime = document.getElementById('calc-result-time');
+  'use strict';
 
-  if (!damageSelect) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $('calc-form'), categorySel = $('calc-category'), brandIn = $('calc-brand'),
+      modelIn = $('calc-model'), partSel = $('calc-damage'), status = $('calc-status'),
+      box = $('calc-result-container'), titleEl = $('calc-result-title'), priceEl = $('calc-result-price'),
+      timeEl = $('calc-result-time').querySelector('span'), breakdownEl = $('calc-result-breakdown'),
+      aiEl = $('calc-ai'), linkProm = $('link-prom'), linkAli = $('link-ali'), shops = $('calc-shops');
 
-  var priceMap = {
-    'Заміна екрана': { price: '1 800 ₴', time: '~45 хв' },
-    'Заміна акумулятора': { price: '950 ₴', time: '~30 хв' },
-    'Ремонт плати / чистка': { price: '1 200 ₴', time: '1–2 дні' },
-    'Заміна роз\'єму зарядки': { price: '650 ₴', time: '~40 хв' },
-    'Відновлення після води': { price: '1 400 ₴', time: '1–3 дні' },
-    'Комплексна діагностика': { price: '0 ₴ (Безкоштовно)', time: '~20 хв' }
-  };
+  var pricing = null;
 
-  function updateCalc(showResult) {
-    var damage = damageSelect.value;
-    var model = modelSelect ? modelSelect.value.trim() : '';
-    var brand = brandSelect ? brandSelect.value : '';
+  function say(text) { status.textContent = text || ''; status.hidden = !text; }
+  function money(n) { return Number(n).toLocaleString('uk-UA') + ' ₴'; }
+  function roundTo(n) { var s = pricing.rounding || 50; return Math.round(n / s) * s; }
 
-    if (!damage) {
-      if (resultContainer && !showResult) resultContainer.classList.add('hidden');
+  // 1) Вантажимо таблицю цін
+  fetch('data/pricing.json')
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) { pricing = data; })
+    .catch(function () {
+      say('Не вдалося завантажити дані калькулятора. Напишіть нам — порахуємо вручну.');
+      categorySel.disabled = true;
+    });
+
+  // 2) Крок «категорія»: вмикаємо бренд/модель і наповнюємо список ремонтів
+  categorySel.addEventListener('change', function () {
+    hideResult();
+    var cat = pricing && pricing.categories[categorySel.value];
+    brandIn.value = modelIn.value = '';
+    partSel.innerHTML = '<option value="" disabled selected>Оберіть тип пошкодження</option>';
+    if (!cat) {
+      brandIn.disabled = modelIn.disabled = partSel.disabled = true;
+      say('Для цієї категорії напишіть нам — розрахуємо індивідуально.');
       return;
     }
-
-    var info = priceMap[damage] || { price: '1 500 ₴', time: '~1 год' };
-    var titleText = damage;
-    if (model) {
-      titleText += ' · ' + model;
-    } else if (brand) {
-      titleText += ' · ' + brand;
-    }
-
-    if (resultTitle) resultTitle.textContent = titleText;
-    if (resultPrice) resultPrice.textContent = info.price;
-    if (resultTime) {
-      resultTime.innerHTML = '<i class="bi bi-clock" aria-hidden="true"></i> <span>' + info.time + '</span>';
-    }
-
-    if (resultContainer && showResult) {
-      resultContainer.classList.remove('hidden');
-    }
-  }
-
-  [catSelect, brandSelect, damageSelect].forEach(function (el) {
-    if (el) {
-      el.addEventListener('change', function () {
-        if (damageSelect.value) {
-          updateCalc(true);
-        }
-      });
-    }
+    say('');
+    brandIn.disabled = modelIn.disabled = partSel.disabled = false;
+    cat.parts.forEach(function (id) {
+      var o = document.createElement('option');
+      o.value = id; o.textContent = pricing.parts[id].name;
+      partSel.appendChild(o);
+    });
   });
 
-  if (modelSelect) {
-    modelSelect.addEventListener('input', function () {
-      if (damageSelect.value) {
-        updateCalc(true);
-      }
-    });
+  // Змінили будь-що — старий результат ховаємо
+  [brandIn, modelIn, partSel].forEach(function (el) { el.addEventListener('input', hideResult); });
+  function hideResult() { box.classList.add('hidden'); }
+
+  // 3) Рахуємо
+  function estimate(catId, partId) {
+    var cat = pricing.categories[catId], part = pricing.parts[partId];
+    if (part.free) return { free: true, part: part };
+    var range = part.price[catId];
+    var labor = part.hours * pricing.hourlyRate * (cat.hoursFactor || 1);
+    return {
+      part: part, partMin: range[0], partMax: range[1], hours: part.hours, labor: roundTo(labor),
+      min: roundTo(range[0] + labor), max: roundTo(range[1] + labor)
+    };
   }
 
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (!damageSelect.value) {
-        alert('Будь ласка, оберіть тип пошкодження для розрахунку.');
-        damageSelect.focus();
-        return;
-      }
-      updateCalc(true);
-      if (resultContainer) {
-        resultContainer.classList.remove('hidden');
-        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
+  // 4) Посилання на пошук деталі
+  function slug(s) { return s.toLowerCase().trim().split(/\s+/).map(encodeURIComponent).join('-'); }
+  function buildLinks(brand, model, part) {
+    var qUa = encodeURIComponent((brand + ' ' + model + ' ' + part.ua).trim());
+    var qEn = slug(brand + ' ' + model + ' ' + part.en);
+    linkProm.href = pricing.marketplaces.prom.replace('{q}', qUa);
+    linkAli.href = pricing.marketplaces.ali.replace('{q}', qEn);
   }
+
+  // 5) Пояснення від ШІ (необов'язкове: якщо не вийшло — заглушка)
+  var FALLBACK = 'Це орієнтовна оцінка: ціна деталі залежить від якості й наявності, а робота — від часу майстра. Точну суму майстер назве після безкоштовної діагностики.';
+  function askAI(payload) {
+    aiEl.textContent = 'Готуємо пояснення…';
+    return fetch('/.netlify/functions/explain', { method: 'POST', body: JSON.stringify(payload) })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (d) { aiEl.textContent = d.text || FALLBACK; })
+      .catch(function () { aiEl.textContent = FALLBACK; });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!pricing) return;
+    var brand = brandIn.value.trim(), model = modelIn.value.trim();
+    if (!categorySel.value || !brand || !model || !partSel.value) { say('Заповніть усі поля.'); return; }
+    say('');
+    var est = estimate(categorySel.value, partSel.value);
+    var device = brand + ' ' + model;
+
+    titleEl.textContent = est.part.name + ' · ' + device;
+    timeEl.textContent = 'Термін: ' + est.part.time;
+    if (est.free) {
+      priceEl.textContent = 'Безкоштовно';
+      breakdownEl.textContent = 'Діагностика перед будь-яким ремонтом не коштує нічого.';
+      shops.classList.add('hidden');
+      aiEl.textContent = '';
+    } else {
+      priceEl.textContent = money(est.min) + ' – ' + money(est.max);
+      breakdownEl.textContent = 'Деталь ' + money(est.partMin) + '–' + money(est.partMax) + ' + робота ' + money(est.labor) + ' (' + est.hours + ' год майстра).';
+      buildLinks(brand, model, est.part);
+      shops.classList.remove('hidden');
+      askAI({ device: device, part: est.part.name, partMin: est.partMin, partMax: est.partMax,
+              hours: est.hours, rate: pricing.hourlyRate, labor: est.labor, min: est.min, max: est.max });
+    }
+    box.classList.remove('hidden');
+  });
 })();

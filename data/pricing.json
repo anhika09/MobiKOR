@@ -1,0 +1,201 @@
+{
+  "_note": "Усі цифри — навчальні. Підкоригуй їх після огляду 2–3 пропозицій на Prom (ціна деталі) і своїх годин майстра.",
+  "hourlyRate": 400,
+  "rounding": 50,
+  "marketplaces": {
+    "prom": "https://prom.ua/ua/search?search_term={q}",
+    "ali": "https://www.aliexpress.com/w/wholesale-{q}.html"
+  },
+  "categories": {
+    "phone": {
+      "name": "Смартфон",
+      "hoursFactor": 1,
+      "parts": [
+        "screen",
+        "camera",
+        "case",
+        "battery",
+        "charge-port",
+        "diagnostics"
+      ]
+    },
+    "tablet": {
+      "name": "Планшет",
+      "hoursFactor": 1.2,
+      "parts": [
+        "screen",
+        "camera",
+        "case",
+        "battery",
+        "charge-port",
+        "diagnostics"
+      ]
+    },
+    "laptop": {
+      "name": "Ноутбук",
+      "hoursFactor": 1.5,
+      "parts": [
+        "screen",
+        "case",
+        "battery",
+        "charge-port",
+        "diagnostics"
+      ]
+    },
+    "audio": {
+      "name": "Навушники",
+      "hoursFactor": 0.7,
+      "parts": [
+        "case",
+        "battery",
+        "charge-port",
+        "diagnostics"
+      ]
+    },
+    "smart-watch": {
+      "name": "Смарт-годинник",
+      "hoursFactor": 1.2,
+      "parts": [
+        "screen",
+        "case",
+        "battery",
+        "diagnostics"
+      ]
+    }
+  },
+  "parts": {
+    "screen": {
+      "name": "Заміна екрана",
+      "ua": "екран",
+      "en": "screen",
+      "hours": 1,
+      "time": "30–60 хв",
+      "price": {
+        "phone": [
+          1500,
+          9000
+        ],
+        "tablet": [
+          1500,
+          8000
+        ],
+        "laptop": [
+          2500,
+          9000
+        ],
+        "smart-watch": [
+          1000,
+          5000
+        ]
+      }
+    },
+    "camera": {
+      "name": "Заміна камери",
+      "ua": "камера",
+      "en": "camera",
+      "hours": 0.7,
+      "time": "~1 год",
+      "price": {
+        "phone": [
+          400,
+          3500
+        ],
+        "tablet": [
+          300,
+          2000
+        ]
+      }
+    },
+    "case": {
+      "name": "Заміна корпусу",
+      "ua": "корпус",
+      "en": "housing",
+      "hours": 2,
+      "time": "1–2 дні",
+      "price": {
+        "phone": [
+          800,
+          4500
+        ],
+        "tablet": [
+          900,
+          4500
+        ],
+        "laptop": [
+          1200,
+          5000
+        ],
+        "audio": [
+          200,
+          1000
+        ],
+        "smart-watch": [
+          400,
+          2000
+        ]
+      }
+    },
+    "battery": {
+      "name": "Заміна батареї",
+      "ua": "акумулятор",
+      "en": "battery",
+      "hours": 0.5,
+      "time": "20–40 хв",
+      "price": {
+        "phone": [
+          350,
+          2500
+        ],
+        "tablet": [
+          500,
+          2500
+        ],
+        "laptop": [
+          900,
+          3500
+        ],
+        "audio": [
+          150,
+          700
+        ],
+        "smart-watch": [
+          250,
+          1200
+        ]
+      }
+    },
+    "charge-port": {
+      "name": "Заміна роз'єму зарядки",
+      "ua": "роз'єм зарядки",
+      "en": "charging port",
+      "hours": 1,
+      "time": "~1 год",
+      "price": {
+        "phone": [
+          100,
+          900
+        ],
+        "tablet": [
+          150,
+          900
+        ],
+        "laptop": [
+          150,
+          1200
+        ],
+        "audio": [
+          80,
+          400
+        ]
+      }
+    },
+    "diagnostics": {
+      "name": "Діагностика",
+      "ua": "",
+      "en": "",
+      "hours": 0,
+      "time": "до 30 хв",
+      "free": true
+    }
+  }
+}

@@ -18,6 +18,7 @@
     <title>Сервісний центр з онлайн-розрахунком — MobiKOR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
 </head>
@@ -84,43 +85,42 @@
 
             <form class="space-y-6" id="calc-form">
                 <!-- 4 поля вибору -->
+                <p id="calc-status" class="text-sm text-text-muted m-0" role="status" aria-live="polite" hidden></p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
-                        <label for="calc-category"
-                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                        <label for="calc-category" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
                             <i class="bi bi-phone text-accent-text" aria-hidden="true"></i> Категорія
                         </label>
                         <select id="calc-category" class="field" required>
-                            <!-- options -->
+                            <option value="" disable selected>Оберіть категорію</option>
+                            <option value="phone">Смартфон</option>
+                            <option value="tablet">Планшет</option>
+                            <option value="laptop">Ноутбук</option>
+                            <option value="audio">Навушники</option>
+                            <option value="smart-watch">Смарт-годинник</option>
+                            <option value="other">Інші пристрої</option>
                         </select>
                     </div>
                     <div>
-                        <label for="calc-brand"
-                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                        <label for="calc-brand" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
                             <i class="bi bi-tag text-accent-text" aria-hidden="true"></i> Бренд
                         </label>
-                        <select id="calc-brand" class="field" required>
-                            <!-- options -->
-                        </select>
+                        <input type="text" id="calc-brand" class="field" required disabled list="brand-list"
+                            autocomplete="off" placeholder="Apple">
                     </div>
                     <div>
-                        <label for="calc-model"
-                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                        <label for="calc-model" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
                             <i class="bi bi-cpu text-accent-text" aria-hidden="true"></i> Модель
                         </label>
-                        <input type="text" id="calc-model" list="models-list" placeholder="Введіть або оберіть модель"
-                            class="field" required autocomplete="off">
-                        <datalist id="models-list">
-                            <!-- options -->
-                        </datalist>
+                        <input type="text" id="calc-model" class="field" required disabled list="model-list"
+                            autocomplete="off" placeholder="iPhone 17 Pro">
                     </div>
                     <div>
-                        <label for="calc-damage"
-                            class="block text-sm font-medium text-text mb-2 flex items-center gap-1.5">
+                        <label for="calc-damage" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
                             <i class="bi bi-tools text-accent-text" aria-hidden="true"></i> Тип пошкодження
                         </label>
-                        <select id="calc-damage" class="field" required>
-                            <!-- options -->
+                        <select id="calc-damage" class="field" required disabled>
+                            <option value="" disabled selected>Оберіть тип пошкодження</option>
                         </select>
                     </div>
                 </div>
@@ -138,13 +138,15 @@
 
                 <!-- Динамічна картка результату (прихована до вибору користувачем) -->
                 <div id="calc-result-container"
-                    class="hidden p-5 rounded-xl bg-surface-raised border border-border flex flex-col md:flex-row md:items-center justify-between gap-5 transition-all">
+                    class="hidden p-5 rounded-xl bg-surface-raised border border-border flex flex-col md:flex-row md:items-center justify-between gap-5"
+                    aria-live="polite">
                     <div>
                         <h3 id="calc-result-title" class="text-h3 font-bold text-text mb-1"></h3>
-                        <p class="text-sm text-text-muted mb-1">Орієнтовна ціна за обрану послугу без прихованих робіт.
+                        <p id="calc-result-breakdown" class="text-sm text-text-muted mb-1">Орієнтовна ціна за обрану
+                            послугу без прихованих робіт.
                         </p>
-                        <a href="index.html#contacts" class="text-sm text-accent-text hover:underline inline-block">Не
-                            знайшли свою модель? Напишіть нам</a>
+                        <a href="index.html#contacts" class="text-sm text-accent-text hover:underline inline-block">Ціна
+                            не підходить або немає вашої моделі? Напишіть нам — розрахуємо точно під ваші параметри.</a>
                     </div>
                     <div class="flex flex-col sm:flex-row sm:items-center gap-6">
                         <div class="text-left sm:text-right">
@@ -155,11 +157,8 @@
                                 <i class="bi bi-clock" aria-hidden="true"></i> <span>—</span>
                             </div>
                         </div>
-                        <button type="button"
-                            onclick="alert('Дякуємо! Ви записані на ремонт. Менеджер зв\'яжеться з вами для уточнення деталей.');"
-                            class="button button--primary w-full px-6 md:w-auto">
-                            Записатися на ремонт
-                        </button>
+                        <a href="index.html#contacts" class="button button--primary w-full px-6 md:w-auto">Записатися на
+                            ремонт</a>
                     </div>
                 </div>
 
@@ -171,13 +170,16 @@
         </section>
 
         <!-- Секція: Сервісний центр з віджетом  та Як надіслати пристрій (timeline) -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12" aria-labelledby="delivery-title">
-            <div class="flex flex-col items-center lg:items-start w-full">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-12"
+            aria-labelledby="delivery-title">
+            <div class="flex flex-col items-center lg:items-start w-full" data-aos="fade-right">
                 <h2 class="text-h2 font-bold text-text mb-2 text-center lg:text-left">
                     Сервісний центр, що ближче, ніж здається
                 </h2>
-                <p class="text-text-muted text-sm sm:text-base mb-6 leading-relaxed text-center lg:text-left max-w-[50ch]">
-                    Ремонт телефонів, ноутбуків і планшетів у Калинівці або з будь-якого міста України — через Нову Пошту.
+                <p
+                    class="text-text-muted text-sm sm:text-base mb-6 leading-relaxed text-center lg:text-left max-w-[50ch]">
+                    Ремонт телефонів, ноутбуків і планшетів у Калинівці або з будь-якого міста України — через Нову
+                    Пошту.
                 </p>
                 <div class="w-full p-2.5 sm:p-4 bg-surface border-2 border-border/80 rounded-3xl shadow-xl">
                     <div class="overflow-hidden rounded-2xl bg-black/10">
@@ -190,25 +192,27 @@
             </div>
 
             <!-- 2. Timeline: Як надіслати пристрій Новою Поштою -->
-            <div>
+            <div data-aos="fade-left">
                 <h2 class="text-h2 font-bold text-text mb-2 flex items-center gap-2" id="delivery-title">
-                     Як надіслати пристрій Новою Поштою?
+                    Як надіслати пристрій Новою Поштою?
                 </h2>
                 <p class="text-sm sm:text-base text-text-muted mb-6 leading-relaxed">
-                    Простий і надійний процес відправлення техніки на діагностику та ремонт з будь-якого куточка України.
+                    Простий і надійний процес відправлення техніки на діагностику та ремонт з будь-якого куточка
+                    України.
                 </p>
                 <ol class="space-y-4 p-0 list-none m-0">
-                    <li>
+                    <li data-aos="fade-up" data-aos-delay="100">
                         <article
                             class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
                             <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
-                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">01</span>
+                                <span
+                                    class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">01</span>
                                 <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
                                     src="assets/icons/01.png" alt="" aria-hidden="true">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="text-base sm:text-lg font-bold text-step-text mb-1 flex items-center gap-2">
-                                   Узгодьте відправлення
+                                    Узгодьте відправлення
                                 </h3>
                                 <p class="text-sm text-step-text-muted leading-relaxed m-0">
                                     Заповніть форму або зателефонуйте. Отримайте дані одержувача й
@@ -217,11 +221,12 @@
                             </div>
                         </article>
                     </li>
-                    <li>
+                    <li data-aos="fade-up" data-aos-delay="200">
                         <article
                             class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
                             <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
-                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">02</span>
+                                <span
+                                    class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">02</span>
                                 <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
                                     src="assets/icons/02.png" alt="" aria-hidden="true">
                             </div>
@@ -236,17 +241,18 @@
                             </div>
                         </article>
                     </li>
-                    <li>
+                    <li data-aos="fade-up" data-aos-delay="300">
                         <article
                             class="step-card-hover group relative p-5 rounded-card bg-step-surface text-step-text border border-step-border flex items-start gap-4 sm:gap-5 transition-all duration-300">
                             <div class="flex flex-col items-center gap-2 flex-none pt-0.5">
-                                <span class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">03</span>
+                                <span
+                                    class="step-num text-2xl sm:text-3xl font-extrabold text-accent transition-transform duration-300 group-hover:scale-125 inline-block select-none leading-none">03</span>
                                 <img class="step-img w-12 h-12 object-contain transition-transform duration-300 group-hover:-translate-y-2 select-none"
                                     src="assets/icons/04.png" alt="" aria-hidden="true">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <h3 class="text-base sm:text-lg font-bold text-step-text mb-1 flex items-center gap-2">
-                                     Погодьте ремонт і отримайте гаджет
+                                    Погодьте ремонт і отримайте гаджет
                                 </h3>
                                 <p class="text-sm text-step-text-muted leading-relaxed m-0">
                                     Підтвердьте ціну онлайн. Після перевірки повернемо пристрій Новою Поштою; доставку
@@ -260,8 +266,10 @@
         </section>
 
         <!-- 4. Статистичні картки з bootstrap icons -->
-        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10" aria-label="Переваги сервісу в цифрах">
-            <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
+        <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10" aria-label="Переваги сервісу в цифрах"
+            data-aos="fade-up">
+            <div class="card-lift p-6 rounded-2xl border border-border bg-surface" data-aos="zoom-in"
+                data-aos-delay="100">
                 <div class="flex items-center justify-between mb-2">
                     <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">0 ₴</p>
                     <i class="bi bi-wallet2 text-2xl text-accent-text/60" aria-hidden="true"></i>
@@ -271,7 +279,8 @@
                     Визначаємо несправність безкоштовно. Ви вирішуєте, чи продовжувати ремонт.
                 </p>
             </div>
-            <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
+            <div class="card-lift p-6 rounded-2xl border border-border bg-surface" data-aos="zoom-in"
+                data-aos-delay="200">
                 <div class="flex items-center justify-between mb-2">
                     <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">3–12 міс.</p>
                     <i class="bi bi-shield-check text-2xl text-accent-text/60" aria-hidden="true"></i>
@@ -281,7 +290,8 @@
                     Термін залежить від послуги та встановлених деталей. Умови фіксуємо у квитанції.
                 </p>
             </div>
-            <div class="card-lift p-6 rounded-2xl border border-border bg-surface">
+            <div class="card-lift p-6 rounded-2xl border border-border bg-surface" data-aos="zoom-in"
+                data-aos-delay="300">
                 <div class="flex items-center justify-between mb-2">
                     <p class="text-3xl sm:text-4xl font-extrabold text-accent-text m-0">100%</p>
                     <i class="bi bi-clipboard-check text-2xl text-accent-text/60" aria-hidden="true"></i>
@@ -294,9 +304,9 @@
         </section>
 
         <!-- 4. FAQ з bootstrap icons -->
-        <section class="mb-10" aria-labelledby="faq-title">
+        <section class="mb-10" aria-labelledby="faq-title" data-aos="fade-up">
             <h2 class="text-h2 font-bold text-text mb-4 flex items-center gap-2" id="faq-title">
-                 Питання перед ремонтом
+                Питання перед ремонтом
             </h2>
             <div class="space-y-3">
                 <details class="group p-4 rounded-xl border border-border bg-surface transition-colors" open>
@@ -362,7 +372,7 @@
         <!-- Нижня плашка CTA (Пристрій уже в сервісі?) -->
         <section
             class="card-lift p-6 sm:p-8 rounded-2xl border border-border bg-surface flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4"
-            aria-labelledby="cta-title">
+            aria-labelledby="cta-title" data-aos="fade-up">
             <div>
                 <h2 class="text-h2 font-bold text-text mb-1 flex items-center gap-2" id="cta-title">
                     Пристрій уже в сервісі?
@@ -376,9 +386,9 @@
             </a>
         </section>
     </main>
-
-    <!-- Footer-->
     <div id="site-footer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="js/layout.js" defer></script>
     <script src="js/common.js" defer></script>
     <script src="js/cart.js" defer></script>

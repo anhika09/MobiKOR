@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MobiKOR — Scripts (Navigation, Theme, Carousels, Filters, Calculator, Cart)
+   MobiKOR — Scripts (Navigation, Theme, Carousels, Filters, Cart)
    ========================================================================== */
 
 // ---------- Form validation feedback ----------
@@ -71,6 +71,7 @@
     success.textContent = 'Дякуємо! Ваша заявка прийнята.';
     form.insertAdjacentElement('afterend', success);
     successElements.set(form, success);
+    alert("Дякуємо! Ваша заявка прийнята. Чекайте на зворотній зв'язок від нашого менеджера на вказаний номер телефону або електронну пошту. ");
   }
 
   function validateField(field) {
@@ -329,4 +330,35 @@
   syncPlayback();
   if (motionQuery.addEventListener) motionQuery.addEventListener('change', syncPlayback);
   else motionQuery.addListener(syncPlayback);
+})();
+
+// ---------- 6. Ініціалізація плагіна AOS.js (Animate On Scroll) ----------
+(function () {
+  function initAOS() {
+    if (typeof AOS === 'undefined') return;
+    var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    AOS.init({
+      duration: 650,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 50,
+      disable: motionQuery.matches ? true : false,
+    });
+
+    if (motionQuery.addEventListener) {
+      motionQuery.addEventListener('change', function (e) {
+        if (e.matches) {
+          document.querySelectorAll('[data-aos]').forEach(function (el) {
+            el.classList.add('aos-animate');
+          });
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAOS);
+  } else {
+    initAOS();
+  }
 })();

@@ -9,7 +9,7 @@
       about: 'index.html#about',
       shop: 'shop.html',
       repair: 'repair.html',
-      contacts: 'index.html#contacts',
+      contacts: 'index.html#footer-contacts',
     };
 
     headerHost.innerHTML = `

@@ -1,116 +1,125 @@
-// ---------- 5. Карусель фото у розділі "Про нас" ----------
+// ==========================================================================
+// MobiKOR — Swiper.js Carousels with Enhanced Swipe & Touch (Home Page)
+// ==========================================================================
+
+// 1. Swiper фото майстерні у розділі "Про нас"
 (function () {
-  var carousel = document.querySelector('.about-carousel');
-  if (!carousel) return;
+  var aboutEl = document.querySelector('.about-swiper');
+  if (!aboutEl || typeof Swiper === 'undefined') return;
 
-  var slides = carousel.querySelectorAll('.about-carousel__slide');
-  var dots = carousel.querySelectorAll('.about-carousel__dot');
-  var prevBtn = document.getElementById('about-photo-prev');
-  var nextBtn = document.getElementById('about-photo-next');
-  if (!slides.length) return;
-
-  var currentIndex = 0;
-  var timer = null;
-  var intervalMs = 4500;
   var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  function showSlide(index) {
-    if (index < 0) index = slides.length - 1;
-    if (index >= slides.length) index = 0;
-    currentIndex = index;
-
-    slides.forEach(function (slide, i) {
-      var isActive = i === currentIndex;
-      slide.classList.toggle('is-active', isActive);
-      slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-    });
-
-    dots.forEach(function (dot, i) {
-      var isActive = i === currentIndex;
-      dot.classList.toggle('is-active', isActive);
-      dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
-  }
-
-  function nextSlide() { showSlide(currentIndex + 1); }
-  function prevSlide() { showSlide(currentIndex - 1); }
-
-  function startAutoPlay() {
-    stopAutoPlay();
-    if (!motionQuery.matches) timer = setInterval(nextSlide, intervalMs);
-  }
-
-  function stopAutoPlay() {
-    if (timer) { clearInterval(timer); timer = null; }
-  }
-
-  if (motionQuery.addEventListener) motionQuery.addEventListener('change', function (event) {
-    if (event.matches) stopAutoPlay();
-    else startAutoPlay();
+  new Swiper(aboutEl, {
+    loop: true,
+    effect: 'slide',
+    speed: 600,
+    simulateTouch: true,
+    allowTouchMove: true,
+    grabCursor: true,
+    touchRatio: 1,
+    touchAngle: 45,
+    threshold: 5,
+    resistance: true,
+    resistanceRatio: 0.85,
+    preventClicks: true,
+    preventClicksPropagation: true,
+    mousewheel: {
+      forceToAxis: true,
+      releaseOnEdges: true,
+    },
+    autoplay: motionQuery.matches ? false : {
+      delay: 4500,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: '#about-photo-next',
+      prevEl: '#about-photo-prev',
+    },
+    pagination: {
+      el: '.about-swiper-pagination',
+      clickable: true,
+    },
+    keyboard: {
+      enabled: true,
+    },
+    a11y: {
+      prevSlideMessage: 'Попереднє фото',
+      nextSlideMessage: 'Наступне фото',
+      paginationBulletMessage: 'Перейти до слайду {{index}}',
+    },
   });
-  else motionQuery.addListener(function (event) {
-    if (event.matches) stopAutoPlay();
-    else startAutoPlay();
-  });
-
-  if (nextBtn) nextBtn.addEventListener('click', function () { nextSlide(); startAutoPlay(); });
-  if (prevBtn) prevBtn.addEventListener('click', function () { prevSlide(); startAutoPlay(); });
-
-  dots.forEach(function (dot, i) {
-    dot.addEventListener('click', function () {
-      showSlide(i);
-      startAutoPlay();
-    });
-  });
-
-  carousel.addEventListener('mouseenter', stopAutoPlay);
-  carousel.addEventListener('mouseleave', startAutoPlay);
-
-  var touchStartX = 0;
-  carousel.addEventListener('touchstart', function (e) {
-    touchStartX = e.touches[0].clientX;
-    stopAutoPlay();
-  }, { passive: true });
-
-  carousel.addEventListener('touchend', function (e) {
-    var diffX = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(diffX) > 40) {
-      if (diffX < 0) nextSlide();
-      else prevSlide();
-    }
-    startAutoPlay();
-  }, { passive: true });
-
-  showSlide(0);
-  startAutoPlay();
 })();
 
-// ---------- 6. Карусель товарів у магазині (Головна) ----------
+// 2. Swiper популярних товарів у розділі "Магазин" (Головна)
 (function () {
-  var track = document.querySelector('#shop .products');
-  var prev = document.getElementById('shop-prev');
-  var next = document.getElementById('shop-next');
-  var status = document.querySelector('#shop .carousel-status');
-  if (!track || !prev || !next) return;
-  var items = track.children;
+  var productsEl = document.querySelector('.products-swiper');
+  var statusEl = document.querySelector('#shop .carousel-status');
+  if (!productsEl || typeof Swiper === 'undefined') return;
 
-  function step() {
-    var gap = 20;
-    return (items[0] ? items[0].getBoundingClientRect().width : 280) + gap;
-  }
-
-  function update() {
-    prev.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-    if (status && items.length) {
-      var i = Math.min(Math.round(track.scrollLeft / step()) + 1, items.length);
-      status.textContent = 'Товар ' + i + ' із ' + items.length;
-    }
-  }
-
-  prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
-  next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
-  track.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  var productsSwiper = new Swiper(productsEl, {
+    slidesPerView: 1.15,
+    spaceBetween: 16,
+    simulateTouch: true,
+    allowTouchMove: true,
+    grabCursor: true,
+    touchRatio: 1,
+    touchAngle: 45,
+    threshold: 5,
+    resistance: true,
+    resistanceRatio: 0.85,
+    preventClicks: true,
+    preventClicksPropagation: true,
+    watchOverflow: true,
+    mousewheel: {
+      forceToAxis: true,
+      releaseOnEdges: true,
+    },
+    navigation: {
+      nextEl: '#shop-next',
+      prevEl: '#shop-prev',
+    },
+    pagination: {
+      el: '.products-swiper-pagination',
+      clickable: true,
+      dynamicBullets: true,
+    },
+    keyboard: {
+      enabled: true,
+    },
+    breakpoints: {
+      480: {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+    },
+    on: {
+      init: function (swiper) {
+        if (statusEl) {
+          statusEl.textContent = 'Товар 1 із ' + swiper.slides.length;
+        }
+      },
+      slideChange: function (swiper) {
+        if (statusEl) {
+          statusEl.textContent = 'Товар ' + (swiper.activeIndex + 1) + ' із ' + swiper.slides.length;
+        }
+      },
+    },
+    a11y: {
+      prevSlideMessage: 'Попередній товар',
+      nextSlideMessage: 'Наступний товар',
+    },
+  });
 })();
