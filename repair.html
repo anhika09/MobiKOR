@@ -106,14 +106,14 @@
                             <i class="bi bi-tag text-accent-text" aria-hidden="true"></i> Бренд
                         </label>
                         <input type="text" id="calc-brand" class="field" required disabled list="brand-list"
-                            autocomplete="off" placeholder="Apple">
+                            autocomplete="off" placeholder="Формат: Apple">
                     </div>
                     <div>
                         <label for="calc-model" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
                             <i class="bi bi-cpu text-accent-text" aria-hidden="true"></i> Модель
                         </label>
                         <input type="text" id="calc-model" class="field" required disabled list="model-list"
-                            autocomplete="off" placeholder="iPhone 17 Pro">
+                            autocomplete="off" placeholder="Формат: iPhone 17 Pro">
                     </div>
                     <div>
                         <label for="calc-damage" class="flex items-center gap-1.5 text-sm font-medium text-text mb-2">
@@ -136,19 +136,14 @@
                     </span>
                 </div>
 
-                <!-- Динамічна картка результату (прихована до вибору користувачем) -->
+                <!-- Результат: орієнтовна ціна + пояснення ШІ + 3 дії -->
                 <div id="calc-result-container"
-                    class="hidden p-5 rounded-xl bg-surface-raised border border-border flex flex-col md:flex-row md:items-center justify-between gap-5"
-                    aria-live="polite">
-                    <div>
-                        <h3 id="calc-result-title" class="text-h3 font-bold text-text mb-1"></h3>
-                        <p id="calc-result-breakdown" class="text-sm text-text-muted mb-1">Орієнтовна ціна за обрану
-                            послугу без прихованих робіт.
-                        </p>
-                        <a href="index.html#contacts" class="text-sm text-accent-text hover:underline inline-block">Ціна
-                            не підходить або немає вашої моделі? Напишіть нам — розрахуємо точно під ваші параметри.</a>
-                    </div>
-                    <div class="flex flex-col sm:flex-row sm:items-center gap-6">
+                    class="hidden p-5 rounded-xl bg-surface-raised border border-border space-y-4" aria-live="polite">
+                    <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                        <div>
+                            <h3 id="calc-result-title" class="text-h3 font-bold text-text mb-1"></h3>
+                            <p id="calc-result-breakdown" class="text-sm text-text-muted m-0"></p>
+                        </div>
                         <div class="text-left sm:text-right">
                             <div id="calc-result-price" class="text-2xl sm:text-3xl font-extrabold text-accent-text">—
                             </div>
@@ -157,8 +152,28 @@
                                 <i class="bi bi-clock" aria-hidden="true"></i> <span>—</span>
                             </div>
                         </div>
-                        <a href="index.html#contacts" class="button button--primary w-full px-6 md:w-auto">Записатися на
-                            ремонт</a>
+                    </div>
+
+                    <!-- Пояснення від ШІ (або заглушка, якщо ШІ недоступний) -->
+                    <p id="calc-ai" class="text-sm text-text m-0 p-3 rounded-lg border border-border"></p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- Кнопка 2: ціни на деталь (ховається для діагностики) -->
+                        <div id="calc-shops" class="flex flex-col sm:flex-row gap-3">
+                            <a id="link-prom" href="#" target="_blank" rel="noopener noreferrer"
+                                class="button w-full sm:w-auto px-6">
+                                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Prom
+                            </a>
+                            <a id="link-ali" href="#" target="_blank" rel="noopener noreferrer"
+                                class="button w-full sm:w-auto px-6">
+                                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> AliExpress
+                            </a>
+                        </div>
+                        <!-- Кнопка 3: форма -->
+                        <a id="link-form" href="index.html#contacts"
+                            class="button button--primary w-full sm:w-auto px-6 sm:ml-auto">
+                            Не влаштовує ціна? Залишити заявку
+                        </a>
                     </div>
                 </div>
 

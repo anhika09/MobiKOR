@@ -1,6 +1,3 @@
-// Серверна функція Netlify: ховає ключ LLM від браузера.
-// Змінні середовища (Netlify → Site settings → Environment variables):
-//   LLM_KEY, LLM_BASE_URL (напр. https://api.groq.com/openai/v1), LLM_MODEL
 exports.handler = async (event) => {
   const reply = (text) => ({ statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text }) });
   try {
