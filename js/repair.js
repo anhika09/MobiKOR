@@ -1,6 +1,6 @@
 // =====================================================================
 // Калькулятор ремонту MobiKOR.
-// Число ціни рахує ЦЕЙ КОД за data/pricing.json.
+// Число ціни рахує ЦЕЙ КОД за data/pricing.json (без вигадок).
 // ШІ (функція explain) лише пояснює вже порахований результат.
 // =====================================================================
 (function () {
@@ -11,9 +11,12 @@
       modelIn = $('calc-model'), partSel = $('calc-damage'), status = $('calc-status'),
       box = $('calc-result-container'), titleEl = $('calc-result-title'), priceEl = $('calc-result-price'),
       timeEl = $('calc-result-time').querySelector('span'), breakdownEl = $('calc-result-breakdown'),
-      aiEl = $('calc-ai'), linkProm = $('link-prom'), linkAli = $('link-ali'), shops = $('calc-shops');
+      aiEl = $('calc-ai'), btnAI = $('btn-ai'), linkProm = $('link-prom'),
+      linkAli = $('link-ali'), shops = $('calc-shops');
 
   var pricing = null;
+  var currentAIRequest = null;
+  var aiRequestInProgress = false;
 
   function say(text) { status.textContent = text || ''; status.hidden = !text; }
   function money(n) { return Number(n).toLocaleString('uk-UA') + ' ₴'; }
@@ -73,15 +76,41 @@
     linkAli.href = pricing.marketplaces.ali.replace('{q}', qEn);
   }
 
-  // 5) Пояснення від ШІ
+  // 5) Пояснення від ШІ (необов'язкове: якщо не вийшло — заглушка)
   var FALLBACK = 'Це орієнтовна оцінка: ціна деталі залежить від якості й наявності, а робота — від часу майстра. Точну суму майстер назве після безкоштовної діагностики.';
   function askAI(payload) {
-    aiEl.textContent = 'Готуємо пояснення…';
-    return fetch('/.netlify/functions/explain', { method: 'POST', body: JSON.stringify(payload) })
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(function (d) { aiEl.textContent = d.text || FALLBACK; })
-      .catch(function () { aiEl.textContent = FALLBACK; });
+    if (!payload || aiRequestInProgress) return;
+    aiRequestInProgress = true;
+    btnAI.disabled = true;
+    btnAI.setAttribute('aria-busy', 'true');
+
+    return fetch('/.netlify/functions/explain', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function (d) {
+        if (currentAIRequest !== payload) return;
+        aiEl.textContent = d.text || FALLBACK;
+      })
+      .catch(function (error) {
+        console.error('AI explanation request failed.', error);
+        if (currentAIRequest === payload) aiEl.textContent = FALLBACK;
+      })
+      .then(function () {
+        aiRequestInProgress = false;
+        btnAI.disabled = false;
+        btnAI.removeAttribute('aria-busy');
+      });
   }
+
+  btnAI.addEventListener('click', function () {
+    askAI(currentAIRequest);
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -98,14 +127,27 @@
       priceEl.textContent = 'Безкоштовно';
       breakdownEl.textContent = 'Діагностика перед будь-яким ремонтом не коштує нічого.';
       shops.classList.add('hidden');
-      aiEl.textContent = '';
+      btnAI.classList.add('hidden');
+      currentAIRequest = null;
+      aiEl.textContent = 'Діагностика безкоштовна. Щоб дізнатися вартість ремонту, потрібна діагностика пристрою майстром.';
     } else {
       priceEl.textContent = money(est.min) + ' – ' + money(est.max);
       breakdownEl.textContent = 'Деталь ' + money(est.partMin) + '–' + money(est.partMax) + ' + робота ' + money(est.labor) + ' (' + est.hours + ' год майстра).';
       buildLinks(brand, model, est.part);
       shops.classList.remove('hidden');
-      askAI({ device: device, part: est.part.name, partMin: est.partMin, partMax: est.partMax,
-              hours: est.hours, rate: pricing.hourlyRate, labor: est.labor, min: est.min, max: est.max });
+      btnAI.classList.remove('hidden');
+      aiEl.textContent = FALLBACK;
+      currentAIRequest = {
+        device: device,
+        part: est.part.name,
+        partMin: est.partMin,
+        partMax: est.partMax,
+        hours: est.hours,
+        rate: pricing.hourlyRate,
+        labor: est.labor,
+        min: est.min,
+        max: est.max
+      };
     }
     box.classList.remove('hidden');
   });
